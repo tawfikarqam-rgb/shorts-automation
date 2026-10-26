@@ -1,0 +1,23 @@
+
+name: Shorts Automation - Cloud Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 17 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  cloud-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Confirm cloud execution
+        run: |
+          echo "Cloud automation is running"
+          date -u
+          python --version
+          ffmpeg -version || true
