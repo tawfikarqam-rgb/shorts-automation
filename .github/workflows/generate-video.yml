@@ -17,15 +17,19 @@ jobs:
   generate:
     name: Generate ${{ matrix.channel }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
+
     strategy:
       fail-fast: false
       matrix:
         include:
           - channel: secrets-mysteries
+            channel_id: secrets-mysteries
             artifact: secrets-mysteries-short
             prompt: "A cinematic historical mystery documentary scene showing an ancient lost civilization, weathered stone ruins, dramatic torchlight, atmospheric fog, realistic textures, slow cinematic camera movement, vertical composition, no text, no logos"
+
           - channel: money-power-stories
+            channel_id: money-power-stories
             artifact: money-power-short
             prompt: "A cinematic business history documentary scene showing a powerful financial district at dusk, towering corporate skyscrapers, dramatic lighting, realistic documentary style, slow cinematic camera movement, vertical composition, no text, no logos"
 
@@ -41,9 +45,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install gradio_client requests
+          pip install gradio_client requests edge-tts
 
-      - name: Generate video
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Generate AI scene
         env:
           VIDEO_PROMPT: ${{ matrix.prompt }}
           VIDEO_SEED: ${{ inputs.seed }}
@@ -51,26 +60,33 @@ jobs:
           mkdir -p output
           python scripts/generate_video.py
 
-      - name: Validate generated files
+      - name: Assemble narrated vertical Short
+        env:
+          CHANNEL_ID: ${{ matrix.channel_id }}
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          files = [
-              p for p in Path("output").rglob("*")
-              if p.is_file() and p.stat().st_size > 1024
-          ]
-          if not files:
-              raise SystemExit(
-                  "ERROR: No non-empty generated file larger than 1 KB."
-              )
-          for p in files:
-              print(f"OUTPUT_FILE={p} SIZE={p.stat().st_size}")
-          PY
+          python scripts/assemble_short.py
+
+      - name: Validate final video
+        run: |
+          test -f output/final_short.mp4
+          test -s output/final_short.mp4
+
+          ffprobe -v error \
+            -select_streams v:0 \
+            -show_entries stream=codec_name,width,height \
+            -of default=noprint_wrappers=1 \
+            output/final_short.mp4
+
+          ffprobe -v error \
+            -select_streams a:0 \
+            -show_entries stream=codec_name \
+            -of default=noprint_wrappers=1 \
+            output/final_short.mp4
 
       - name: Upload channel artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
-          path: output/
+          path: output/final_short.mp4
           if-no-files-found: error
           retention-days: 3
