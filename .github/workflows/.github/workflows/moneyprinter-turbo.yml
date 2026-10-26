@@ -1,0 +1,130 @@
+
+name: MoneyPrinterTurbo - Cloud Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout automation repository
+        uses: actions/checkout@v4
+
+      - name: Check required secret
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          if [ -z "$PEXELS_API_KEY" ]; then
+            echo "::error::Add PEXELS_API_KEY in GitHub repository secrets."
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Download MoneyPrinterTurbo
+        run: |
+          git clone --depth 1 \
+            https://github.com/harry0703/MoneyPrinterTurbo.git \
+            MoneyPrinterTurbo
+
+      - name: Install MoneyPrinterTurbo dependencies
+        working-directory: MoneyPrinterTurbo
+        run: uv sync --frozen
+
+      - name: Configure free stock footage source
+        working-directory: MoneyPrinterTurbo
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          cp config.example.toml config.toml
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path("config.toml")
+          config = path.read_text(encoding="utf-8")
+          old = "pexels_api_keys = []"
+          new = "pexels_api_keys = " + json.dumps(
+              [os.environ["PEXELS_API_KEY"]]
+          )
+
+          if old not in config:
+              raise SystemExit("Could not find Pexels setting in config.toml")
+
+          path.write_text(
+              config.replace(old, new, 1),
+              encoding="utf-8"
+          )
+          print("Pexels configuration created.")
+          PY
+
+      - name: Generate English historical mystery Short
+        working-directory: MoneyPrinterTurbo
+        run: |
+          uv run python cli.py \
+            --video-script "In 1587, more than one hundred English settlers arrived on Roanoke Island. Three years later, a supply ship returned to find the settlement deserted. The only clue was the word CROATOAN carved into a wooden post. No clear evidence explained what happened to the colonists. Some historians believe they joined nearby Indigenous communities, while other theories remain debated. The mystery became one of America's most enduring historical puzzles. What do you think happened to the Lost Colony?" \
+            --video-terms "Roanoke Island, abandoned colonial settlement, historic wooden fort, Atlantic coast aerial" \
+            --video-source pexels \
+            --video-language en-US \
+            --video-aspect 9:16 \
+            --voice-name en-US-AndrewNeural \
+            --bgm-type none \
+            --video-count 1 \
+            --subtitle-enabled \
+            --subtitle-position bottom
+
+      - name: Collect generated video
+        working-directory: MoneyPrinterTurbo
+        run: |
+          mkdir -p ../output
+
+          VIDEO="$(find storage/tasks \
+            -type f -name '*.mp4' \
+            -not -path '*/materials/*' \
+            -printf '%T@ %p\n' 2>/dev/null \
+            | sort -nr \
+            | head -n 1 \
+            | cut -d' ' -f2-)"
+
+          if [ -z "$VIDEO" ]; then
+            echo "::error::No generated MP4 found. Check the generation logs."
+            exit 1
+          fi
+
+          cp "$VIDEO" ../output/final_short.mp4
+          test -s ../output/final_short.mp4
+
+          ffprobe -v error \
+            -show_entries stream=codec_type,width,height \
+            -of default=noprint_wrappers=1 \
+            ../output/final_short.mp4
+
+      - name: Upload test video
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moneyprinter-turbo-test
+          path: output/final_short.mp4
+          if-no-files-found: warn
+          retention-days: 3
