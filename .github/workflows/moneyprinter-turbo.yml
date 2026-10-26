@@ -164,6 +164,7 @@ jobs:
           print(f"Downloaded {len(downloaded)} licensed images.")
           PY
 
+                   python -m pip install requests
           python /tmp/get_images.py
 
       - name: Generate English Short
