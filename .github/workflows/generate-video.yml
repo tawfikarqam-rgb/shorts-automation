@@ -1,14 +1,9 @@
 
-name: Generate AI Short
+name: Generate Shorts for Both Channels
 
 on:
   workflow_dispatch:
     inputs:
-      prompt:
-        description: "Describe the video scene"
-        required: true
-        type: string
-        default: "A tiny orange kitten exploring a futuristic neon city at night, cinematic lighting, smooth camera movement"
       seed:
         description: "Random seed (-1 for random)"
         required: true
@@ -20,8 +15,19 @@ permissions:
 
 jobs:
   generate:
+    name: Generate ${{ matrix.channel }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - channel: secrets-mysteries
+            artifact: secrets-mysteries-short
+            prompt: "A cinematic historical mystery documentary scene showing an ancient lost civilization, weathered stone ruins, dramatic torchlight, atmospheric fog, realistic textures, slow cinematic camera movement, vertical composition, no text, no logos"
+          - channel: money-power-stories
+            artifact: money-power-short
+            prompt: "A cinematic business history documentary scene showing a powerful financial district at dusk, towering corporate skyscrapers, dramatic lighting, realistic documentary style, slow cinematic camera movement, vertical composition, no text, no logos"
 
     steps:
       - name: Checkout repository
@@ -39,17 +45,32 @@ jobs:
 
       - name: Generate video
         env:
-          VIDEO_PROMPT: ${{ inputs.prompt }}
+          VIDEO_PROMPT: ${{ matrix.prompt }}
           VIDEO_SEED: ${{ inputs.seed }}
         run: |
           mkdir -p output
           python scripts/generate_video.py
 
-      - name: Upload generated video
-        if: always()
+      - name: Validate generated files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          files = [
+              p for p in Path("output").rglob("*")
+              if p.is_file() and p.stat().st_size > 1024
+          ]
+          if not files:
+              raise SystemExit(
+                  "ERROR: No non-empty generated file larger than 1 KB."
+              )
+          for p in files:
+              print(f"OUTPUT_FILE={p} SIZE={p.stat().st_size}")
+          PY
+
+      - name: Upload channel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: generated-short
+          name: ${{ matrix.artifact }}
           path: output/
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 3
