@@ -1,4 +1,3 @@
-
 name: Generate Shorts for Both Channels
 
 on:
@@ -21,6 +20,7 @@ jobs:
 
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         include:
           - channel: secrets-mysteries
@@ -52,13 +52,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: Generate AI scene
+      - name: Generate AI scenes
+        continue-on-error: true
         env:
+          CHANNEL_ID: ${{ matrix.channel_id }}
           VIDEO_PROMPT: ${{ matrix.prompt }}
           VIDEO_SEED: ${{ inputs.seed }}
         run: |
           mkdir -p output
           python scripts/generate_video.py
+
+      - name: Report generated scenes
+        if: always()
+        run: |
+          echo "Generated scene files:"
+          find output -maxdepth 1 -type f -name 'scene_*' -printf '%f (%s bytes)\n' || true
 
       - name: Assemble narrated vertical Short
         env:
@@ -68,7 +76,6 @@ jobs:
 
       - name: Validate final video
         run: |
-          test -f output/final_short.mp4
           test -s output/final_short.mp4
 
           ffprobe -v error \
@@ -84,9 +91,19 @@ jobs:
             output/final_short.mp4
 
       - name: Upload channel artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
           path: output/final_short.mp4
           if-no-files-found: error
+          retention-days: 3
+
+      - name: Upload generated scenes for recovery
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.channel_id }}-generated-scenes
+          path: output/scene_*
+          if-no-files-found: ignore
           retention-days: 3
