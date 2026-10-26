@@ -21,10 +21,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install system dependencies
+      - name: Verify system dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          ffmpeg -version
+          ffprobe -version
+          fc-list | head -n 5
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
