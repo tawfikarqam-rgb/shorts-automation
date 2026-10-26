@@ -1,40 +1,23 @@
-name: Generate Shorts for Both Channels
+
+name: MoneyPrinterTurbo - Cloud Test
 
 on:
   workflow_dispatch:
-    inputs:
-      seed:
-        description: "Random seed (-1 for random)"
-        required: true
-        type: string
-        default: "-1"
 
 permissions:
   contents: read
 
+concurrency:
+  group: moneyprinter-turbo-cloud-test
+  cancel-in-progress: false
+
 jobs:
   generate:
-    name: Generate ${{ matrix.channel }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
-    strategy:
-      fail-fast: false
-      max-parallel: 1
-      matrix:
-        include:
-          - channel: secrets-mysteries
-            channel_id: secrets-mysteries
-            artifact: secrets-mysteries-short
-            prompt: "A cinematic historical mystery documentary scene showing an ancient lost civilization, weathered stone ruins, dramatic torchlight, atmospheric fog, realistic textures, slow cinematic camera movement, vertical composition, no text, no logos"
-
-          - channel: money-power-stories
-            channel_id: money-power-stories
-            artifact: money-power-short
-            prompt: "A cinematic business history documentary scene showing a powerful financial district at dusk, towering corporate skyscrapers, dramatic lighting, realistic documentary style, slow cinematic camera movement, vertical composition, no text, no logos"
+    timeout-minutes: 45
 
     steps:
-      - name: Checkout repository
+      - name: Checkout automation repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -42,68 +25,254 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Check and install system dependencies
+        timeout-minutes: 8
         run: |
-          python -m pip install --upgrade pip
-          pip install gradio_client requests edge-tts
+          set -euo pipefail
 
-      - name: Install FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          if ! command -v ffmpeg >/dev/null 2>&1 || \
+             ! command -v ffprobe >/dev/null 2>&1 || \
+             ! command -v fc-list >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends \
+              ffmpeg fontconfig fonts-dejavu-core
+          fi
 
-      - name: Generate AI scenes
-        continue-on-error: true
-        env:
-          CHANNEL_ID: ${{ matrix.channel_id }}
-          VIDEO_PROMPT: ${{ matrix.prompt }}
-          VIDEO_SEED: ${{ inputs.seed }}
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+          fc-list | head -n 5 || true
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: false
+
+      - name: Download MoneyPrinterTurbo
+        timeout-minutes: 3
         run: |
+          set -euo pipefail
+
+          git clone --depth 1 \
+            https://github.com/harry0703/MoneyPrinterTurbo.git \
+            MoneyPrinterTurbo
+
+          test -f MoneyPrinterTurbo/pyproject.toml
+          test -f MoneyPrinterTurbo/cli.py
+          test -f MoneyPrinterTurbo/config.example.toml
+
+      - name: Install MoneyPrinterTurbo dependencies
+        working-directory: MoneyPrinterTurbo
+        timeout-minutes: 18
+        run: |
+          set -euo pipefail
+
+          uv sync --frozen
+          cp config.example.toml config.toml
+
+          uv run python cli.py --help
+
+      - name: Download reusable public-domain images
+        timeout-minutes: 6
+        run: |
+          set -euo pipefail
+
+          mkdir -p MoneyPrinterTurbo/storage/local_videos
+
+          python -m pip install --disable-pip-version-check requests
+
+          cat > /tmp/get_images.py <<'PY'
+          import json
+          import time
+          import requests
+          from pathlib import Path
+
+          out = Path("MoneyPrinterTurbo/storage/local_videos")
+          out.mkdir(parents=True, exist_ok=True)
+
+          session = requests.Session()
+          session.headers.update({
+              "User-Agent": "ShortsAutomation/1.0 (educational video project)"
+          })
+
+          searches = [
+              "historic map North Carolina public domain",
+              "Atlantic coast historical map public domain",
+              "old sailing ship public domain",
+              "Roanoke Island historical public domain",
+              "old map Virginia public domain",
+          ]
+
+          downloaded = []
+          seen = set()
+
+          for term in searches:
+              if len(downloaded) >= 4:
+                  break
+
+              try:
+                  response = session.get(
+                      "https://commons.wikimedia.org/w/api.php",
+                      params={
+                          "action": "query",
+                          "format": "json",
+                          "generator": "search",
+                          "gsrsearch": term,
+                          "gsrnamespace": 6,
+                          "gsrlimit": 15,
+                          "prop": "imageinfo",
+                          "iiprop": "url|extmetadata",
+                          "iiurlwidth": 1200,
+                      },
+                      timeout=20,
+                  )
+                  response.raise_for_status()
+                  pages = response.json().get("query", {}).get("pages", {})
+              except Exception as exc:
+                  print(f"Search failed for {term}: {exc}")
+                  continue
+
+              for page in pages.values():
+                  if len(downloaded) >= 4:
+                      break
+
+                  info = (page.get("imageinfo") or [{}])[0]
+                  meta = info.get("extmetadata") or {}
+                  license_name = (
+                      meta.get("LicenseShortName", {}).get("value", "")
+                  ).lower()
+                  title = page.get("title", "")
+
+                  if not (
+                      "public domain" in license_name
+                      or license_name.strip() == "cc0"
+                      or "cc0" in license_name
+                  ):
+                      continue
+
+                  url = info.get("thumburl") or info.get("url")
+                  if not url or url in seen:
+                      continue
+
+                  seen.add(url)
+
+                  try:
+                      image = session.get(url, timeout=25)
+                      image.raise_for_status()
+
+                      content_type = image.headers.get(
+                          "Content-Type", ""
+                      ).lower()
+
+                      if not content_type.startswith("image/"):
+                          continue
+
+                      if "png" in content_type:
+                          ext = ".png"
+                      elif "webp" in content_type:
+                          ext = ".webp"
+                      else:
+                          ext = ".jpg"
+
+                      path = out / f"history_{len(downloaded) + 1}{ext}"
+                      path.write_bytes(image.content)
+
+                      if path.stat().st_size < 10000:
+                          path.unlink(missing_ok=True)
+                          continue
+
+                      downloaded.append(str(path.resolve()))
+
+                      print(f"Downloaded: {title}")
+                      print(f"License: {license_name}")
+                      print(f"Source: {url}")
+
+                      time.sleep(0.3)
+
+                  except Exception as exc:
+                      print(f"Image download failed: {exc}")
+
+          if len(downloaded) < 2:
+              raise SystemExit(
+                  "Could not find at least 2 public-domain/CC0 images. "
+                  "Check the Wikimedia search logs."
+              )
+
+          manifest = out / "image_manifest.json"
+          manifest.write_text(
+              json.dumps(downloaded, indent=2),
+              encoding="utf-8",
+          )
+
+          print(f"Downloaded {len(downloaded)} licensed images.")
+          print(f"Manifest: {manifest}")
+          PY
+
+          python /tmp/get_images.py
+
+      - name: Generate English Short
+        working-directory: MoneyPrinterTurbo
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+
+          MATERIALS="$(python -c \
+            'import json; print(",".join(json.load(open("storage/local_videos/image_manifest.json"))))')"
+
+          test -n "$MATERIALS"
+
+          uv run python cli.py \
+            --video-script "In 1587, more than one hundred English settlers arrived on Roanoke Island. When a supply ship returned three years later, the settlement was deserted. The famous clue was the word CROATOAN carved into a post. No single explanation has been proven. Some researchers believe the colonists joined nearby Indigenous communities, while other theories remain debated. The Lost Colony remains one of early America's most enduring mysteries. What do you think happened?" \
+            --video-source local \
+            --video-materials "$MATERIALS" \
+            --video-language en-US \
+            --video-aspect 9:16 \
+            --voice-name en-US-AndrewNeural \
+            --bgm-type none \
+            --video-count 1 \
+            --subtitle-enabled \
+            --subtitle-position bottom
+
+      - name: Find and validate output
+        timeout-minutes: 3
+        run: |
+          set -euo pipefail
+
           mkdir -p output
-          python scripts/generate_video.py
 
-      - name: Report generated scenes
-        if: always()
-        run: |
-          echo "Generated scene files:"
-          find output -maxdepth 1 -type f -name 'scene_*' -printf '%f (%s bytes)\n' || true
+          VIDEO="$(
+            find MoneyPrinterTurbo/storage/tasks \
+              -type f -name '*.mp4' \
+              -printf '%T@ %p\n' 2>/dev/null \
+              | sort -nr \
+              | head -n 1 \
+              | cut -d' ' -f2-
+          )"
 
-      - name: Assemble narrated vertical Short
-        env:
-          CHANNEL_ID: ${{ matrix.channel_id }}
-        run: |
-          python scripts/assemble_short.py
+          if [ -z "$VIDEO" ] || [ ! -s "$VIDEO" ]; then
+            echo "::error::No generated MP4 was found."
+            echo "Recent task files:"
+            find MoneyPrinterTurbo/storage/tasks \
+              -maxdepth 4 -type f 2>/dev/null | tail -n 50 || true
+            exit 1
+          fi
 
-      - name: Validate final video
-        run: |
+          cp "$VIDEO" output/final_short.mp4
+
+          ffprobe -v error \
+            -show_entries stream=codec_type,width,height \
+            -of default=noprint_wrappers=1 \
+            output/final_short.mp4
+
           test -s output/final_short.mp4
 
-          ffprobe -v error \
-            -select_streams v:0 \
-            -show_entries stream=codec_name,width,height \
-            -of default=noprint_wrappers=1 \
-            output/final_short.mp4
+          echo "Video generated successfully:"
+          ls -lh output/final_short.mp4
 
-          ffprobe -v error \
-            -select_streams a:0 \
-            -show_entries stream=codec_name \
-            -of default=noprint_wrappers=1 \
-            output/final_short.mp4
-
-      - name: Upload channel artifact
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifact }}
-          path: output/final_short.mp4
-          if-no-files-found: error
-          retention-days: 3
-
-      - name: Upload generated scenes for recovery
+      - name: Upload generated video
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.channel_id }}-generated-scenes
-          path: output/scene_*
-          if-no-files-found: ignore
+          name: moneyprinter-turbo-test
+          path: output/final_short.mp4
+          if-no-files-found: warn
           retention-days: 3
