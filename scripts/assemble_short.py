@@ -47,9 +47,60 @@ def run(command):
     subprocess.run(command, check=True)
 
 
+
 async def make_voice(text, destination, voice):
-    communicator = edge_tts.Communicate(text, voice)
-    await communicator.save(str(destination))
+    import asyncio
+    import edge_tts
+
+    voices = [
+        voice,
+        "en-US-EmmaNeural",
+        "en-US-AriaNeural",
+    ]
+
+    last_error = None
+
+    for attempt in range(3):
+        selected_voice = voices[attempt]
+
+        try:
+            destination = Path(destination)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+
+            if destination.exists():
+                destination.unlink()
+
+            communicator = edge_tts.Communicate(
+                text=text,
+                voice=selected_voice,
+            )
+
+            await asyncio.wait_for(
+                communicator.save(str(destination)),
+                timeout=90,
+            )
+
+            if not destination.exists() or destination.stat().st_size < 1000:
+                raise RuntimeError("Audio file is missing or too small")
+
+            print(f"AUDIO_OK voice={selected_voice}")
+            return
+
+        except Exception as exc:
+            last_error = exc
+            print(
+                f"AUDIO_ATTEMPT_FAILED "
+                f"attempt={attempt + 1} "
+                f"voice={selected_voice} "
+                f"error={type(exc).__name__}: {exc}"
+            )
+
+            await asyncio.sleep(2 * (attempt + 1))
+
+    raise RuntimeError(
+        f"Audio generation failed after 3 attempts: {last_error}"
+    )
+
 
 
 def make_srt(text, destination, total_seconds):
