@@ -37,12 +37,12 @@ channel = "history" if day % 2 == 1 else "business"
 channel_stories = stories[:history_count] if channel == "history" else stories[history_count:]
 title, video_script, image_searches = channel_stories[((day - 1) // 2) % len(channel_stories)]
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
-    env.write("CHANNEL_NAME=" + channel + "\\n")
-    env.write("STORY_TOPIC=" + title + "\\n")
-    env.write("IMAGE_SEARCHES=" + image_searches + "\\n")
-    env.write("VIDEO_SCRIPT<<STORY_SCRIPT_EOF\\n")
-    env.write(video_script + "\\n")
-    env.write("STORY_SCRIPT_EOF\\n")
+    env.write("CHANNEL_NAME=" + channel + "\n")
+    env.write("STORY_TOPIC=" + title + "\n")
+    env.write("IMAGE_SEARCHES=" + image_searches + "\n")
+    env.write("VIDEO_SCRIPT<<STORY_SCRIPT_EOF\n")
+    env.write(video_script + "\n")
+    env.write("STORY_SCRIPT_EOF\n")
 print("Today's channel: " + channel)
 print("Today's topic: " + title)
 print("Topic rotation: " + str(((day - 1) // 2) % len(channel_stories) + 1) + "/" + str(len(channel_stories)))
