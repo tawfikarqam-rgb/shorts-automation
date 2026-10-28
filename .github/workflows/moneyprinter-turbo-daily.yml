@@ -335,7 +335,11 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
 
-      - name: Upload business Short to YouTube as PRIVATE
+      - name: Install YouTube upload dependencies
+        if: ${{ success() && matrix.channel == 'business' }}
+        run: python -m pip install --disable-pip-version-check google-api-python-client google-auth
+
+      - name: Upload business Short to YouTube as PUBLIC
         if: ${{ success() && matrix.channel == 'business' }}
         env:
           VIDEO_PATH: output/final_short.mp4
