@@ -1,0 +1,53 @@
+name: YouTube Upload Test (Private)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Run ID of a successful MoneyPrinterTurbo - Daily Shorts run"
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  upload-private-test:
+    name: Upload business Short as private
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout automation repository
+        uses: actions/checkout@v4
+
+      - name: Download business video artifact from selected run
+        uses: actions/download-artifact@v4
+        with:
+          name: daily-short-business-${{ inputs.source_run_id }}
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ github.token }}
+          path: upload-input
+
+      - name: Validate downloaded video
+        run: |
+          set -euo pipefail
+          test -s upload-input/final_short.mp4
+          ls -lh upload-input/final_short.mp4
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 upload-input/final_short.mp4 || true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install YouTube upload dependencies
+        run: python -m pip install --disable-pip-version-check google-api-python-client google-auth
+
+      - name: Upload as PRIVATE
+        env:
+          VIDEO_PATH: upload-input/final_short.mp4
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: python scripts/upload_youtube_private.py
