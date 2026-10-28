@@ -33,9 +33,11 @@ stories = [
 ]
 day = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
 history_count = 14
-channel = "history" if day % 2 == 1 else "business"
+channel = os.environ.get("CHANNEL_NAME", "history").strip().lower()
+if channel not in ("history", "business"):
+    raise SystemExit("CHANNEL_NAME must be history or business")
 channel_stories = stories[:history_count] if channel == "history" else stories[history_count:]
-title, video_script, image_searches = channel_stories[((day - 1) // 2) % len(channel_stories)]
+title, video_script, image_searches = channel_stories[(day - 1) % len(channel_stories)]
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("CHANNEL_NAME=" + channel + "\n")
     env.write("STORY_TOPIC=" + title + "\n")
