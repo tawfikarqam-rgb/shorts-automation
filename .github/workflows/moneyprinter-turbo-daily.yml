@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        channel: [history, business]
+        channel: [business]
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -344,9 +344,11 @@ jobs:
         if: ${{ success() && matrix.channel == 'business' }}
         env:
           VIDEO_PATH: output/final_short.mp4
-          VIDEO_TITLE: ${{ env.STORY_TOPIC }} | Money & Business Stories
           STORY_TOPIC: ${{ env.STORY_TOPIC }}
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
-        run: python scripts/upload_youtube_public.py
+        run: |
+          set -euo pipefail
+          : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
+          VIDEO_TITLE="${STORY_TOPIC} | Money & Business Stories" python scripts/upload_youtube_public.py
