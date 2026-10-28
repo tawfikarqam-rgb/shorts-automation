@@ -30,10 +30,10 @@ def main():
     )
     youtube = build("youtube", "v3", credentials=credentials, cache_discovery=False)
 
-    title = "Private Upload Test - Money & Business Stories"
+    title = os.environ.get("VIDEO_TITLE", "Money & Business Stories").strip()
     description = (
-        "Private test upload from the Shorts Automation workflow. "
-        "This video is intentionally private and is not published to viewers."
+        "Automatically generated Short from Money & Business Stories. "
+        "This video is uploaded as PUBLIC."
     )
     body = {
         "snippet": {
@@ -43,7 +43,7 @@ def main():
             "defaultLanguage": "en",
         },
         "status": {
-            "privacyStatus": "private",
+            "privacyStatus": "public",
             "selfDeclaredMadeForKids": False,
         },
     }
@@ -59,10 +59,10 @@ def main():
     video_id = response.get("id")
     if not video_id:
         raise SystemExit("Upload response did not include a video ID.")
-    print("Private test upload succeeded.")
+    print("Public YouTube upload succeeded.")
     print(f"Video ID: {video_id}")
     print(f"Studio URL: https://studio.youtube.com/video/{video_id}/edit")
-    print("Privacy status requested: private")
+    print("Privacy status requested: public")
 
 if __name__ == "__main__":
     main()
