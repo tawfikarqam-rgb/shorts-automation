@@ -33,7 +33,7 @@ def main():
     title = os.environ.get("VIDEO_TITLE", "Money & Business Stories").strip()
     description = (
         "Automatically generated Short from Money & Business Stories. "
-        "This video is uploaded as PUBLIC."
+        "This video is uploaded as a private test."
     )
     body = {
         "snippet": {
@@ -43,7 +43,7 @@ def main():
             "defaultLanguage": "en",
         },
         "status": {
-            "privacyStatus": "public",
+            "privacyStatus": "private",
             "selfDeclaredMadeForKids": False,
         },
     }
@@ -59,10 +59,10 @@ def main():
     video_id = response.get("id")
     if not video_id:
         raise SystemExit("Upload response did not include a video ID.")
-    print("Public YouTube upload succeeded.")
+    print("Private YouTube test upload succeeded.")
     print(f"Video ID: {video_id}")
     print(f"Studio URL: https://studio.youtube.com/video/{video_id}/edit")
-    print("Privacy status requested: public")
+    print("Privacy status requested: private")
 
 if __name__ == "__main__":
     main()
