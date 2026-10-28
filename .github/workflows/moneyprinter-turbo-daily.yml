@@ -113,7 +113,8 @@ jobs:
           seen = set()
 
           for term in searches:
-              if len(downloaded) >= 4:
+              # Keep one image per scene query so one broad search cannot dominate the whole video.
+              if len(downloaded) >= len(searches):
                   break
 
               try:
@@ -194,6 +195,8 @@ jobs:
                       print(f"Source: {url}")
 
                       time.sleep(0.3)
+                      # Move to the next scene-specific query after one successful image.
+                      break
 
                   except Exception as exc:
                       print(f"Image download failed: {exc}")
