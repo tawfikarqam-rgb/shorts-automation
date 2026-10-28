@@ -15,8 +15,15 @@ concurrency:
 
 jobs:
   generate:
+    name: Generate ${{ matrix.channel }} Short
+    strategy:
+      fail-fast: false
+      matrix:
+        channel: [history, business]
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      CHANNEL_NAME: ${{ matrix.channel }}
 
     steps:
       - name: Checkout automation repository
@@ -290,7 +297,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: daily-short-${{ github.run_id }}
+          name: daily-short-${{ matrix.channel }}-${{ github.run_id }}
           path: output/final_short.mp4
           if-no-files-found: warn
           retention-days: 3
