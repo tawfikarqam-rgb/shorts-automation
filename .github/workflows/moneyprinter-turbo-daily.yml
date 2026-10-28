@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        channel: [business]
+        channel: [business, history]
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -351,3 +351,20 @@ jobs:
           set -euo pipefail
           : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
           VIDEO_TITLE="${STORY_TOPIC} | Money & Business Stories" python scripts/upload_youtube_public.py
+
+      - name: Install history YouTube upload dependencies
+        if: ${{ success() && matrix.channel == 'history' }}
+        run: python -m pip install --disable-pip-version-check google-api-python-client google-auth
+
+      - name: Upload history Short to its YouTube channel as PUBLIC
+        if: ${{ success() && matrix.channel == 'history' }}
+        env:
+          CHANNEL_NAME: history
+          VIDEO_PATH: output/final_short.mp4
+          YOUTUBE_CLIENT_ID: ${{ secrets.HISTORY_YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.HISTORY_YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.HISTORY_YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
+          VIDEO_TITLE="${STORY_TOPIC} | History Shorts" python scripts/upload_youtube_public.py
