@@ -31,13 +31,24 @@ stories = [
 ("The Difference Between Revenue and Profit", "Revenue is the money a business earns from sales before expenses are deducted. Profit is what remains after relevant costs. A company can report impressive revenue while making little or no profit if costs are high. That is why sales figures alone do not tell the full story of a business's financial health.", "business financial statements;shop owner counting sales;profit and loss spreadsheet"),
 ("Why Customer Retention Matters", "Finding new customers often takes marketing and sales effort, while keeping existing customers depends on continued value and service. Retention can support repeat purchases and recommendations, but it should be measured rather than assumed. Businesses study why customers leave, then improve the product or experience instead of relying only on more advertising.", "customer service team office;loyalty program retail;customer feedback laptop"),
 ]
-day = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
 history_count = 14
 channel = os.environ.get("CHANNEL_NAME", "history").strip().lower()
 if channel not in ("history", "business"):
     raise SystemExit("CHANNEL_NAME must be history or business")
 channel_stories = stories[:history_count] if channel == "history" else stories[history_count:]
-title, video_script, image_searches = channel_stories[(day - 1) % len(channel_stories)]
+
+# Select by workflow run number, not calendar day. Manual runs on the same day
+# must produce different scripts. Fall back to UTC day only for local execution.
+run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
+if run_number.isdigit() and int(run_number) > 0:
+    rotation_index = (int(run_number) - 1) % len(channel_stories)
+    rotation_source = "workflow run " + run_number
+else:
+    day = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
+    rotation_index = (day - 1) % len(channel_stories)
+    rotation_source = "UTC day fallback"
+
+title, video_script, image_searches = channel_stories[rotation_index]
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("CHANNEL_NAME=" + channel + "\n")
     env.write("STORY_TOPIC=" + title + "\n")
@@ -47,4 +58,6 @@ with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("STORY_SCRIPT_EOF\n")
 print("Today's channel: " + channel)
 print("Today's topic: " + title)
-print("Topic rotation: " + str(((day - 1) // 2) % len(channel_stories) + 1) + "/" + str(len(channel_stories)))
+print("Topic rotation: " + str(rotation_index + 1) + "/" + str(len(channel_stories)))
+print("Rotation source: " + rotation_source)
+print("Script characters: " + str(len(video_script)))
