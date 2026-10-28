@@ -4,7 +4,8 @@ name: MoneyPrinterTurbo - Daily Shorts
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 16 * * *"
+    - cron: "15 19 * * *"
+      timezone: "Africa/Cairo"
 
 permissions:
   contents: read
