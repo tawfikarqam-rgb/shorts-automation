@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload the generated business Short to YouTube with public visibility and metadata."""
+"""Upload a generated channel Short to YouTube with channel-specific metadata."""
 import os
 from pathlib import Path
 
@@ -8,7 +8,9 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
-CHANNEL_NAME = "Money & Business Stories"
+CHANNEL_NAME = os.environ.get("CHANNEL_NAME", "business").strip().lower()
+IS_HISTORY = CHANNEL_NAME == "history"
+CHANNEL_LABEL = "History Shorts" if IS_HISTORY else "Money & Business Stories"
 
 
 def main() -> None:
@@ -21,22 +23,34 @@ def main() -> None:
     if missing:
         raise SystemExit("UPLOAD_FAILED: missing GitHub Actions secrets: " + ", ".join(missing))
 
-    title = os.environ.get("VIDEO_TITLE", CHANNEL_NAME).strip()
+    title = os.environ.get("VIDEO_TITLE", CHANNEL_LABEL).strip()
     if not title:
-        title = CHANNEL_NAME
+        title = CHANNEL_LABEL
     title = title[:100]
 
     topic = os.environ.get("STORY_TOPIC", "").strip()
-    description_lines = [
-        "Short business stories, explained clearly.",
-        "",
-        "We break down business decisions, company stories, money concepts, and lessons entrepreneurs can learn.",
-        "",
-        "What do you think about this story? Share your take in the comments.",
-        "Subscribe to Money & Business Stories for more short business explainers.",
-        "",
-        "#Business #Entrepreneurship #Shorts",
-    ]
+    if IS_HISTORY:
+        description_lines = [
+            "History's mysteries, turning points, and remarkable stories explained in short videos.",
+            "",
+            "Discover historical events, ancient civilizations, scientific mysteries, and the people who shaped our world.",
+            "",
+            "What do you think about this story? Share your take in the comments.",
+            "Subscribe for more history stories and mysteries.",
+            "",
+            "#History #HistoricalFacts #Shorts",
+        ]
+    else:
+        description_lines = [
+            "Short business stories, explained clearly.",
+            "",
+            "We break down business decisions, company stories, money concepts, and lessons entrepreneurs can learn.",
+            "",
+            "What do you think about this story? Share your take in the comments.",
+            "Subscribe to Money & Business Stories for more short business explainers.",
+            "",
+            "#Business #Entrepreneurship #Shorts",
+        ]
     if topic:
         description_lines.insert(1, f"Today's topic: {topic}.")
     description = "\n".join(description_lines)
@@ -55,12 +69,11 @@ def main() -> None:
         "snippet": {
             "title": title,
             "description": description,
-            "tags": [
-                "business", "business stories", "entrepreneurship",
-                "business strategy", "money explained", "financial literacy",
-                "company history", "business lessons", "small business",
-                "economics", "shorts",
-            ],
+            "tags": (
+                ["history", "historical facts", "ancient history", "history mysteries", "historical events", "civilizations", "shorts"]
+                if IS_HISTORY else
+                ["business", "business stories", "entrepreneurship", "business strategy", "money explained", "financial literacy", "company history", "business lessons", "small business", "economics", "shorts"]
+            ),
             "categoryId": "27",
             "defaultLanguage": "en",
         },
