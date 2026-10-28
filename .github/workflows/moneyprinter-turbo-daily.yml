@@ -322,6 +322,7 @@ jobs:
             output/final_short.mp4
 
           test -s output/final_short.mp4
+          python scripts/validate_short.py output/final_short.mp4
 
           echo "Video generated successfully:"
           ls -lh output/final_short.mp4
