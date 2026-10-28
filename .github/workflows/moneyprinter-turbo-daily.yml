@@ -209,11 +209,21 @@ jobs:
 
           python /tmp/get_images.py
 
+      - name: Install readable subtitle font
+        run: |
+          set -euo pipefail
+          mkdir -p MoneyPrinterTurbo/resource/fonts
+          cp /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf MoneyPrinterTurbo/resource/fonts/DejaVuSans-Bold.ttf
+          test -s MoneyPrinterTurbo/resource/fonts/DejaVuSans-Bold.ttf
+
       - name: Generate English Short
         working-directory: MoneyPrinterTurbo
         timeout-minutes: 12
         run: |
           set -euo pipefail
+
+          echo "Generating channel: $CHANNEL_NAME"
+          echo "Generating topic: $STORY_TOPIC"
 
           MATERIALS="$(python -c \
             'import json; print(",".join(json.load(open("storage/local_videos/image_manifest.json"))))')"
@@ -230,7 +240,15 @@ jobs:
             --bgm-type none \
             --video-count 1 \
             --subtitle-enabled \
-            --subtitle-position bottom
+            --subtitle-position bottom \
+            --font-name DejaVuSans-Bold.ttf \
+            --font-size 76 \
+            --text-fore-color "#FFFFFF" \
+            --stroke-color "#000000" \
+            --stroke-width 4 \
+            --subtitle-background-enabled \
+            --subtitle-background-color "#000000" \
+            --rounded-subtitle-background
 
       - name: Find and validate output
         timeout-minutes: 3
