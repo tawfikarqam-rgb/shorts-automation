@@ -334,3 +334,13 @@ jobs:
           path: output/final_short.mp4
           if-no-files-found: warn
           retention-days: 3
+
+      - name: Upload business Short to YouTube as PRIVATE
+        if: ${{ success() && matrix.channel == 'business' }}
+        env:
+          VIDEO_PATH: output/final_short.mp4
+          VIDEO_TITLE: ${{ env.STORY_TOPIC }} | Money & Business Stories
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: python scripts/upload_youtube_private.py
