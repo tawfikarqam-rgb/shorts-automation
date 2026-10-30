@@ -95,157 +95,172 @@ jobs:
 
           cat > /tmp/get_images.py <<'PY'
           import json
+          import os
+          import re
           import time
           import requests
           from pathlib import Path
 
           out = Path("MoneyPrinterTurbo/storage/local_videos")
           out.mkdir(parents=True, exist_ok=True)
-
           session = requests.Session()
           session.headers.update({
-              "User-Agent": "ShortsAutomation/1.0 (educational video project)"
+              "User-Agent": "ShortsAutomation/1.1 (open-license educational video project)"
           })
 
-          import os
           searches = [q.strip() for q in os.environ.get("IMAGE_SEARCHES", "").split(";") if q.strip()]
-
           downloaded = []
+          sources = []
           seen = set()
 
-          for term in searches:
-              # Keep one image per scene query so one broad search cannot dominate the whole video.
-              if len(downloaded) >= len(searches):
-                  break
+          def save_image(url, title, license_name, attribution, landing_url, provider):
+              if not url or url in seen or len(downloaded) >= 4:
+                  return False
+              seen.add(url)
+              try:
+                  response = session.get(url, timeout=30)
+                  response.raise_for_status()
+                  content_type = response.headers.get("Content-Type", "").lower()
+                  if not content_type.startswith("image/"):
+                      print(f"Skipped non-image response for {title}: {content_type}")
+                      return False
+                  ext = ".png" if "png" in content_type else ".webp" if "webp" in content_type else ".jpg"
+                  path = out / f"scene_{len(downloaded) + 1}{ext}"
+                  path.write_bytes(response.content)
+                  if path.stat().st_size < 10000:
+                      path.unlink(missing_ok=True)
+                      return False
+                  downloaded.append(str(path.resolve()))
+                  sources.append({
+                      "file": str(path),
+                      "title": title,
+                      "license": license_name,
+                      "attribution": attribution,
+                      "source_url": landing_url,
+                      "provider": provider
+                  })
+                  print(f"Downloaded ({provider}): {title} [{license_name}]")
+                  return True
+              except Exception as exc:
+                  print(f"Image download failed for {title}: {exc}")
+                  return False
 
+          # Primary source: Openverse. Commercial-use licenses only; CC BY/ BY-SA
+          # results retain their creator and attribution details in image_sources.json.
+          for term in searches:
+              if len(downloaded) >= 4:
+                  break
               try:
                   response = session.get(
-                      "https://commons.wikimedia.org/w/api.php",
+                      "https://api.openverse.org/v1/images/",
                       params={
-                          "action": "query",
-                          "format": "json",
-                          "generator": "search",
-                          "gsrsearch": term,
-                          "gsrnamespace": 6,
-                          "gsrlimit": 15,
-                          "prop": "imageinfo",
-                          "iiprop": "url|extmetadata",
-                          "iiurlwidth": 2560,
+                          "q": term,
+                          "license": "cc0,pdm,by,by-sa",
+                          "license_type": "commercial",
+                          "size": "large",
+                          "page_size": 20,
+                          "mature": "false",
+                          "filter_dead": "true"
                       },
-                      timeout=20,
+                      timeout=25
                   )
                   response.raise_for_status()
-                  pages = response.json().get("query", {}).get("pages", {})
+                  results = response.json().get("results", [])
               except Exception as exc:
-                  print(f"Search failed for {term}: {exc}")
+                  print(f"Openverse search failed for '{term}': {exc}")
                   continue
 
-              # For business videos, reject loosely related Commons results.
-              # Score the file title against the current scene query before downloading.
-              import re
-              query_tokens = {
-                  token.lower() for token in re.findall(r"[a-zA-Z0-9]+", term)
-                  if len(token) >= 4
-              }
-
-              candidates = []
-              for page in pages.values():
-                  info = (page.get("imageinfo") or [{}])[0]
-                  meta = info.get("extmetadata") or {}
-                  license_name = (
-                      meta.get("LicenseShortName", {}).get("value", "")
-                  ).lower()
-                  title = page.get("title", "")
-                  title_tokens = {
-                      token.lower() for token in re.findall(r"[a-zA-Z0-9]+", title)
-                      if len(token) >= 4
-                  }
-                  overlap = len(query_tokens & title_tokens)
-
-                  if not (
-                      "public domain" in license_name
-                      or license_name.strip() == "cc0"
-                      or "cc0" in license_name
-                  ):
-                      continue
-
-                  # History is already working well; apply stricter title matching
-                  # only to business scenes, where visual relevance matters most.
-                  if os.environ.get("CHANNEL_NAME", "").lower() == "business":
-                      if overlap < 1:
-                          continue
-                  candidates.append((overlap, page))
-
-              candidates.sort(key=lambda item: item[0], reverse=True)
-              for _, page in candidates:
+              for item in results:
                   if len(downloaded) >= 4:
                       break
+                  if item.get("license") not in {"cc0", "pdm", "by", "by-sa"}:
+                      continue
+                  save_image(
+                      item.get("url") or item.get("thumbnail"),
+                      item.get("title", term),
+                      f'{item.get("license", "").upper()} {item.get("license_version", "")}'.strip(),
+                      item.get("attribution", ""),
+                      item.get("foreign_landing_url", ""),
+                      f'Openverse/{item.get("provider", "unknown")}'
+                  )
+              time.sleep(0.25)
 
-                  info = (page.get("imageinfo") or [{}])[0]
-                  meta = info.get("extmetadata") or {}
-                  license_name = (
-                      meta.get("LicenseShortName", {}).get("value", "")
-                  ).lower()
-                  title = page.get("title", "")
-
-                  url = info.get("thumburl") or info.get("url")
-                  if not url or url in seen:
+          # Fallback source: Wikimedia Commons, also restricted to public-domain/CC0.
+          if len(downloaded) < 2:
+              print("Openverse returned fewer than 2 usable images; trying Wikimedia Commons.")
+              for term in searches:
+                  if len(downloaded) >= 4:
+                      break
+                  try:
+                      response = session.get(
+                          "https://commons.wikimedia.org/w/api.php",
+                          params={
+                              "action": "query", "format": "json",
+                              "generator": "search", "gsrsearch": term,
+                              "gsrnamespace": 6, "gsrlimit": 20,
+                              "prop": "imageinfo", "iiprop": "url|extmetadata",
+                              "iiurlwidth": 2560
+                          },
+                          timeout=25
+                      )
+                      response.raise_for_status()
+                      pages = response.json().get("query", {}).get("pages", {})
+                  except Exception as exc:
+                      print(f"Wikimedia search failed for '{term}': {exc}")
                       continue
 
-                  seen.add(url)
-
-                  try:
-                      image = session.get(url, timeout=25)
-                      image.raise_for_status()
-
-                      content_type = image.headers.get(
-                          "Content-Type", ""
-                      ).lower()
-
-                      if not content_type.startswith("image/"):
+                  query_tokens = {
+                      token.lower() for token in re.findall(r"[a-zA-Z0-9]+", term)
+                      if len(token) >= 4
+                  }
+                  candidates = []
+                  for page in pages.values():
+                      info = (page.get("imageinfo") or [{}])[0]
+                      meta = info.get("extmetadata") or {}
+                      license_name = meta.get("LicenseShortName", {}).get("value", "")
+                      normalized = license_name.lower()
+                      if not ("public domain" in normalized or normalized.strip() == "cc0" or "cc0" in normalized):
                           continue
+                      title = page.get("title", "")
+                      title_tokens = {
+                          token.lower() for token in re.findall(r"[a-zA-Z0-9]+", title)
+                          if len(token) >= 4
+                      }
+                      overlap = len(query_tokens & title_tokens)
+                      candidates.append((overlap, page))
 
-                      if "png" in content_type:
-                          ext = ".png"
-                      elif "webp" in content_type:
-                          ext = ".webp"
-                      else:
-                          ext = ".jpg"
-
-                      path = out / f"history_{len(downloaded) + 1}{ext}"
-                      path.write_bytes(image.content)
-
-                      if path.stat().st_size < 10000:
-                          path.unlink(missing_ok=True)
-                          continue
-
-                      downloaded.append(str(path.resolve()))
-
-                      print(f"Downloaded: {title}")
-                      print(f"License: {license_name}")
-                      print(f"Source: {url}")
-
-                      time.sleep(0.3)
-                      # Move to the next scene-specific query after one successful image.
-                      break
-
-                  except Exception as exc:
-                      print(f"Image download failed: {exc}")
+                  candidates.sort(key=lambda item: item[0], reverse=True)
+                  for _, page in candidates:
+                      if len(downloaded) >= 4:
+                          break
+                      info = (page.get("imageinfo") or [{}])[0]
+                      meta = info.get("extmetadata") or {}
+                      title = page.get("title", "")
+                      license_name = meta.get("LicenseShortName", {}).get("value", "Public domain")
+                      save_image(
+                          info.get("thumburl") or info.get("url"),
+                          title,
+                          license_name,
+                          meta.get("Artist", {}).get("value", ""),
+                          meta.get("ImageDescription", {}).get("value", ""),
+                          "Wikimedia Commons"
+                      )
+                  time.sleep(0.25)
 
           if len(downloaded) < 2:
               raise SystemExit(
-                  "Could not find at least 2 public-domain/CC0 images. "
-                  "Check the Wikimedia search logs."
+                  f"Could not find at least 2 usable openly licensed images; found {len(downloaded)}. "
+                  "See Openverse and Wikimedia search logs."
               )
 
-          manifest = out / "image_manifest.json"
-          manifest.write_text(
-              json.dumps(downloaded, indent=2),
-              encoding="utf-8",
+          (out / "image_manifest.json").write_text(
+              json.dumps(downloaded, indent=2), encoding="utf-8"
           )
-
-          print(f"Downloaded {len(downloaded)} licensed images.")
-          print(f"Manifest: {manifest}")
+          (out / "image_sources.json").write_text(
+              json.dumps(sources, indent=2, ensure_ascii=False), encoding="utf-8"
+          )
+          print(f"Downloaded {len(downloaded)} openly licensed images.")
+          print(f"Image source and attribution manifest: {out / 'image_sources.json'}")
           PY
 
           python /tmp/get_images.py
