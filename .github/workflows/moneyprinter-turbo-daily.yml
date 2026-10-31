@@ -35,6 +35,14 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Restore channel analytics history
+        uses: actions/cache/restore@v4
+        with:
+          path: analytics_data
+          key: shorts-analytics-${{ matrix.channel }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            shorts-analytics-${{ matrix.channel }}-
+
       - name: Select today's story
         run: python scripts/daily_story.py
 
@@ -404,3 +412,31 @@ jobs:
           set -euo pipefail
           : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
           VIDEO_TITLE="${STORY_TOPIC} | History Shorts" python scripts/upload_youtube_public.py
+
+      - name: Collect optional YouTube Analytics
+        if: ${{ success() }}
+        env:
+          CHANNEL_NAME: ${{ matrix.channel }}
+          YOUTUBE_CLIENT_ID: ${{ matrix.channel == 'history' && secrets.HISTORY_YOUTUBE_CLIENT_ID || secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ matrix.channel == 'history' && secrets.HISTORY_YOUTUBE_CLIENT_SECRET || secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_ANALYTICS_REFRESH_TOKEN: ${{ matrix.channel == 'history' && secrets.HISTORY_YOUTUBE_ANALYTICS_REFRESH_TOKEN || secrets.YOUTUBE_ANALYTICS_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check google-api-python-client google-auth
+          python scripts/collect_youtube_analytics.py --channel "$CHANNEL_NAME" --days 28
+
+      - name: Save channel analytics history
+        if: ${{ always() && hashFiles('analytics_data/*.jsonl') != '' }}
+        uses: actions/cache/save@v4
+        with:
+          path: analytics_data
+          key: shorts-analytics-${{ matrix.channel }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Upload analytics snapshot
+        if: ${{ always() && hashFiles('analytics_data/*.jsonl') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: analytics-${{ matrix.channel }}-${{ github.run_id }}
+          path: analytics_data/*.jsonl
+          if-no-files-found: ignore
+          retention-days: 90
