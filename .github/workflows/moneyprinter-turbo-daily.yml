@@ -288,7 +288,7 @@ jobs:
 
           # Give Edge TTS more time on GitHub-hosted runners. Keep Edge subtitles
           # enabled so their timestamps remain aligned with the selected voice.
-          printf '\\nedge_tts_timeout = 90\\nsubtitle_provider = "edge"\\n' >> config.toml
+          printf '\nedge_tts_timeout = 90\nsubtitle_provider = "edge"\n' >> config.toml
 
           GENERATED=0
           for VOICE in en-US-AndrewNeural en-US-GuyNeural en-US-BrianNeural en-US-AriaNeural; do
