@@ -46,6 +46,17 @@ jobs:
       - name: Select today's story
         run: python scripts/daily_story.py
 
+      - name: Generate researched script with OxionAI (optional)
+        env:
+          OXIONAI_RESEARCH_API_KEY: ${{ secrets.OXIONAI_RESEARCH_API_KEY }}
+          OXIONAI_WRITER_API_KEY: ${{ secrets.OXIONAI_WRITER_API_KEY }}
+          OXIONAI_RESEARCH_MODEL: gemini-3.7-flash
+          OXIONAI_WRITER_MODEL: deepseek-v4-flash-0731
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check requests
+          python scripts/oxion_content.py
+
       - name: Check and install system dependencies
         timeout-minutes: 8
         run: |
@@ -379,6 +390,15 @@ jobs:
           path: output/final_short.mp4
           if-no-files-found: warn
           retention-days: 3
+
+      - name: Upload AI research and token audit
+        if: ${{ always() && hashFiles('output/ai_content_audit.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-content-audit-${{ matrix.channel }}-${{ github.run_id }}
+          path: output/ai_content_audit.json
+          if-no-files-found: ignore
+          retention-days: 90
 
       - name: Install YouTube upload dependencies
         if: ${{ success() && matrix.channel == 'business' }}
