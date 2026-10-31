@@ -274,7 +274,7 @@ jobs:
 
       - name: Generate English Short
         working-directory: MoneyPrinterTurbo
-        timeout-minutes: 12
+        timeout-minutes: 20
         run: |
           set -euo pipefail
 
@@ -286,25 +286,45 @@ jobs:
 
           test -n "$MATERIALS"
 
-          uv run python cli.py \
-            --video-script "$VIDEO_SCRIPT" \
-            --video-source local \
-            --video-materials "$MATERIALS" \
-            --video-language en-US \
-            --video-aspect 9:16 \
-            --voice-name en-US-AndrewNeural \
-            --bgm-type none \
-            --video-count 1 \
-            --subtitle-enabled \
-            --subtitle-position bottom \
-            --font-name DejaVuSans-Bold.ttf \
-            --font-size 76 \
-            --text-fore-color "#FFFFFF" \
-            --stroke-color "#000000" \
-            --stroke-width 4 \
-            --subtitle-background-enabled \
-            --subtitle-background-color "#000000" \
-            --rounded-subtitle-background
+          # Give Edge TTS more time on GitHub-hosted runners. Keep Edge subtitles
+          # enabled so their timestamps remain aligned with the selected voice.
+          printf '\\nedge_tts_timeout = 90\\nsubtitle_provider = "edge"\\n' >> config.toml
+
+          GENERATED=0
+          for VOICE in en-US-AndrewNeural en-US-GuyNeural en-US-BrianNeural en-US-AriaNeural; do
+            echo "::group::Trying narration voice: $VOICE"
+            if uv run python cli.py \
+              --video-script "$VIDEO_SCRIPT" \
+              --video-source local \
+              --video-materials "$MATERIALS" \
+              --video-language en-US \
+              --video-aspect 9:16 \
+              --voice-name "$VOICE" \
+              --bgm-type none \
+              --video-count 1 \
+              --subtitle-enabled \
+              --subtitle-position bottom \
+              --font-name DejaVuSans-Bold.ttf \
+              --font-size 76 \
+              --text-fore-color "#FFFFFF" \
+              --stroke-color "#000000" \
+              --stroke-width 4 \
+              --subtitle-background-enabled \
+              --subtitle-background-color "#000000" \
+              --rounded-subtitle-background; then
+              GENERATED=1
+              echo "Narration succeeded with $VOICE"
+              echo "::endgroup::"
+              break
+            fi
+            echo "Voice $VOICE failed; trying the next free Edge voice."
+            echo "::endgroup::"
+          done
+
+          if [ "$GENERATED" -ne 1 ]; then
+            echo "::error::All configured free Edge TTS voices failed. No video will be uploaded."
+            exit 1
+          fi
 
       - name: Find and validate output
         timeout-minutes: 3
