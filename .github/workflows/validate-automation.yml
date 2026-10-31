@@ -1,0 +1,25 @@
+name: Validate Shorts automation changes
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, "feature/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  python-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile automation scripts
+        run: python -m py_compile scripts/*.py
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
