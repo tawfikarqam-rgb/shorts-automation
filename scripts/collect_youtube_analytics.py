@@ -9,9 +9,6 @@ import sys
 from datetime import date, timedelta, datetime, timezone
 from pathlib import Path
 
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-
 ANALYTICS_SCOPE = "https://www.googleapis.com/auth/yt-analytics.readonly"
 METRICS = "views,engagedViews,averageViewDuration,averageViewPercentage,likes,comments,shares,subscribersGained"
 
@@ -31,6 +28,9 @@ def main() -> int:
 
     if not 7 <= args.days <= 90:
         raise SystemExit("--days must be between 7 and 90")
+
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
 
     credentials = Credentials(
         token=None,
