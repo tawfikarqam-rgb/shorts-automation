@@ -13,7 +13,7 @@ class OxionContentTests(unittest.TestCase):
         self.assertEqual(module.parse_object('{"ok":true}'), {"ok": True})
 
     def test_fenced_json(self):
-        self.assertEqual(module.parse_object(chr(96)*3 + 'json\\n{"ok":true}\\n' + chr(96)*3), {"ok": True})
+        self.assertEqual(module.parse_object(chr(96)*3 + 'json' + chr(10) + '{"ok":true}' + chr(10) + chr(96)*3), {"ok": True})
 
     def test_reject_array(self):
         with self.assertRaises(ValueError):
