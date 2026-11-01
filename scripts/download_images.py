@@ -190,7 +190,7 @@ if len(downloaded) < MAX_IMAGES:
                 break
             info = (page.get("imageinfo") or [{}])[0]
             meta = info.get("extmetadata") or {}
-            save_image(
+            if save_image(
                 info.get("thumburl") or info.get("url"), page.get("title", term),
                 meta.get("LicenseShortName", {}).get("value", "Public domain"),
                 meta.get("Artist", {}).get("value", ""),
