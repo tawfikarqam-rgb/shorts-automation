@@ -141,7 +141,7 @@ SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
     Path("output/ai_content_audit.json").write_text(
         json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8")
     export_env({"STORY_TOPIC": title.strip(), "VIDEO_SCRIPT": narration.strip(),
-                "IMAGE_SEARCHES": ";".join(str(x).strip() for x in images[:4] if str(x).strip())})
+                "IMAGE_SEARCHES": ";".join(str(x).strip() for x in images[:8] if str(x).strip())})
     print("OXIONAI_STATUS=SUCCESS")
     print("OXIONAI_RESEARCH_MODEL=" + research_usage["model"])
     print("OXIONAI_WRITER_MODEL=" + writer_usage["model"])
