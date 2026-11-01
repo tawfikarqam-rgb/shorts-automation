@@ -214,11 +214,9 @@ jobs:
       - name: Append spoken like, subscribe, and story-specific comment CTA
         working-directory: MoneyPrinterTurbo
         timeout-minutes: 5
-        env:
-          CTA_COMMENT_QUESTION: ${{ env.CTA_COMMENT_QUESTION }}
-          CHANNEL_NAME: ${{ matrix.channel }}
         run: |
           set -euo pipefail
+          uv run python -m py_compile ../scripts/append_cta.py
           uv run python ../scripts/append_cta.py ../output/final_short.mp4
           python ../scripts/validate_short.py ../output/final_short.mp4
 
