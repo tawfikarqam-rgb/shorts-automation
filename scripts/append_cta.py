@@ -97,7 +97,7 @@ def main():
             "LIKE  •  SUBSCRIBE",
             "COMMENT BELOW",
             "",
-            *textwrap.wrap(question, width=30),
+            *textwrap.wrap(question, width=24),
         ])
         textfile.write_text(overlay, encoding="utf-8")
 
@@ -105,7 +105,7 @@ def main():
         drawtext = (
             "drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
             f":textfile={textfile.resolve()}"
-            ":fontcolor=white:fontsize=h*0.043"
+            ":fontcolor=white:fontsize=h*0.036"
             ":x=(w-text_w)/2:y=(h-text_h)/2"
             ":line_spacing=20:box=1:boxcolor=black@0.68:boxborderw=48"
         )
@@ -145,11 +145,16 @@ def main():
         print(f"CTA_DURATION={outro_duration:.2f}")
         print(f"FINAL_VIDEO={video}")
     finally:
-        for temporary in (frame, audio, textfile, rendered, backup):
+        # Restore the original if the final rename failed after moving it.
+        if backup.exists() and not video.exists():
+            backup.replace(video)
+        for temporary in (frame, audio, textfile, rendered):
             try:
                 temporary.unlink(missing_ok=True)
             except OSError:
                 pass
+        if backup.exists() and video.exists():
+            backup.unlink()
 
 
 if __name__ == "__main__":
