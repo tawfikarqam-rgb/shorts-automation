@@ -61,16 +61,15 @@ def main():
         raise ValueError(f"Unsupported channel: {CHANNEL}")
     if not video.is_file() or video.stat().st_size == 0:
         raise FileNotFoundError(f"Rendered Short not found: {video}")
-    if not QUESTION:
-        QUESTION = (
-            "What do you think really happened in this story?"
-            if CHANNEL == "history" else
-            "Would you have made the same decision?"
-        )
+    question = QUESTION or (
+        "What do you think really happened in this story?"
+        if CHANNEL == "history" else
+        "Would you have made the same decision?"
+    )
 
     # Keep the displayed question concise and readable on a phone.
-    QUESTION = QUESTION[:150].rstrip()
-    spoken = f"Like and subscribe for more. Tell us in the comments: {QUESTION}"
+    question = question[:150].rstrip()
+    spoken = f"Like and subscribe for more. Tell us in the comments: {question}"
     work = video.parent
     frame = work / "cta_last_frame.jpg"
     audio = work / "cta_voice.mp3"
@@ -98,7 +97,7 @@ def main():
             "LIKE  •  SUBSCRIBE",
             "COMMENT BELOW",
             "",
-            *textwrap.wrap(QUESTION, width=30),
+            *textwrap.wrap(question, width=30),
         ])
         textfile.write_text(overlay, encoding="utf-8")
 
@@ -142,7 +141,7 @@ def main():
         rendered.replace(video)
         backup.unlink()
         print(f"CTA_OUTRO=SUCCESS")
-        print(f"CTA_QUESTION={QUESTION}")
+        print(f"CTA_QUESTION={question}")
         print(f"CTA_DURATION={outro_duration:.2f}")
         print(f"FINAL_VIDEO={video}")
     finally:
