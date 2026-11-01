@@ -120,7 +120,7 @@ for term in SEARCHES:
         if item.get("license") not in {"cc0", "pdm", "by", "by-sa"}:
             continue
         tag_text = " ".join(
-            tag.get("name", "") for tag in item.get("tags", [])
+            tag.get("name", "") for tag in (item.get("tags") or [])
             if isinstance(tag, dict)
         )
         score = relevance(term, " ".join([
