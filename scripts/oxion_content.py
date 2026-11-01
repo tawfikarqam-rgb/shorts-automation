@@ -125,8 +125,8 @@ SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
         raise ValueError("Generated narration word count outside 65-120: " + str(words))
     if not isinstance(title, str) or not title.strip() or len(title) > 80:
         raise ValueError("Generated title missing or too long")
-    if not isinstance(images, list) or len(images) < 6:
-        raise ValueError("Need at least six distinct ordered scene image searches")
+    if not isinstance(images, list) or len(images) < 4:
+        raise ValueError("Need at least four distinct ordered scene image searches")
 
     Path("output").mkdir(exist_ok=True)
     audit = {
