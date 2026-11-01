@@ -108,6 +108,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
+          python -m py_compile scripts/download_images.py scripts/oxion_content.py
           python scripts/download_images.py
 
       - name: Install readable subtitle font
