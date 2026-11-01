@@ -103,11 +103,12 @@ jobs:
 
           uv run python cli.py --help
 
-      - name: Download reusable public-domain images
+      - name: Download diverse relevant openly licensed scene images
         timeout-minutes: 10
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
+          python -m py_compile scripts/download_images.py scripts/oxion_content.py
           python scripts/download_images.py
 
       - name: Install readable subtitle font
@@ -144,6 +145,8 @@ jobs:
               --video-materials "$MATERIALS" \
               --video-language en-US \
               --video-aspect 9:16 \
+              --video-concat-mode sequential \
+              --image-motion zoom \
               --voice-name "$VOICE" \
               --bgm-type none \
               --video-count 1 \
