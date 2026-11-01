@@ -103,7 +103,11 @@ Target 75-105 spoken words. Structure: immediate hook, clear progression, satisf
 Use ONLY the supplied facts. No invented details, dialogue, numbers or unsupported claims.
 Qualify uncertainty. Return JSON only:
 {{"title":"accurate title under 65 characters","narration":"65-120 spoken words",
-"image_searches":["3-4 specific visual searches in story order"]}}
+"image_searches":["6-8 distinct, specific visual searches in narration order"]}}
+For image_searches, plan different visual beats across the whole narration, not synonyms
+for the same subject. Mix relevant people, places, products, archival objects, settings,
+and close-up details when supported by the facts. Every query must match a distinct
+moment or detail in the narration; avoid generic stock-photo phrases and repeated angles.
 FACTS: {json.dumps(facts, ensure_ascii=False)}
 UNCERTAINTY: {json.dumps(research.get("uncertain_or_disputed", []), ensure_ascii=False)}
 SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
@@ -121,8 +125,8 @@ SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
         raise ValueError("Generated narration word count outside 65-120: " + str(words))
     if not isinstance(title, str) or not title.strip() or len(title) > 80:
         raise ValueError("Generated title missing or too long")
-    if not isinstance(images, list) or len(images) < 3:
-        raise ValueError("Need at least three ordered image searches")
+    if not isinstance(images, list) or len(images) < 6:
+        raise ValueError("Need at least six distinct ordered scene image searches")
 
     Path("output").mkdir(exist_ok=True)
     audit = {
