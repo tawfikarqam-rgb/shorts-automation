@@ -103,6 +103,7 @@ Target 75-105 spoken words. Structure: immediate hook, clear progression, satisf
 Use ONLY the supplied facts. No invented details, dialogue, numbers or unsupported claims.
 Qualify uncertainty. Return JSON only:
 {{"title":"accurate title under 65 characters","narration":"65-120 spoken words",
+"comment_question":"one natural, story-specific question that invites viewers to comment, 8-16 words",
 "image_searches":["6-8 distinct, specific visual searches in narration order"]}}
 For image_searches, plan different visual beats across the whole narration, not synonyms
 for the same subject. Mix relevant people, places, products, archival objects, settings,
@@ -120,6 +121,7 @@ SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
     narration = result.get("narration")
     title = result.get("title")
     images = result.get("image_searches")
+    comment_question = result.get("comment_question")
     words = len(re.findall(r"\b[\w’'-]+\b", narration)) if isinstance(narration, str) else 0
     if not isinstance(narration, str) or not 65 <= words <= 120:
         raise ValueError("Generated narration word count outside 65-120: " + str(words))
@@ -140,7 +142,17 @@ SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
     }
     Path("output/ai_content_audit.json").write_text(
         json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8")
+    if not isinstance(comment_question, str):
+        comment_question = ""
+    comment_question = " ".join(comment_question.split()).strip()
+    if not (8 <= len(comment_question.split()) <= 20) or not comment_question.endswith("?"):
+        comment_question = (
+            f"What do you think really happened in {title.strip()}?"
+            if channel == "history" else
+            f"Would you have made the same decision in {title.strip()}?"
+        )
     export_env({"STORY_TOPIC": title.strip(), "VIDEO_SCRIPT": narration.strip(),
+                "CTA_COMMENT_QUESTION": comment_question,
                 "IMAGE_SEARCHES": ";".join(str(x).strip() for x in images[:8] if str(x).strip())})
     print("OXIONAI_STATUS=SUCCESS")
     print("OXIONAI_RESEARCH_MODEL=" + research_usage["model"])
