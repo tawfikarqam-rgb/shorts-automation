@@ -113,6 +113,13 @@ title, video_script, image_searches = channel_stories[rotation_index]
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("CHANNEL_NAME=" + channel + "\n")
     env.write("STORY_TOPIC=" + title + "\n")
+    # Local fallback if optional AI writing is unavailable.
+    fallback_question = (
+        f"What do you think really happened in {title}?"
+        if channel == "history" else
+        f"Would you have made the same decision in {title}?"
+    )
+    env.write("CTA_COMMENT_QUESTION=" + fallback_question + "\n")
     env.write("IMAGE_SEARCHES=" + image_searches + "\n")
     env.write("VIDEO_SCRIPT<<STORY_SCRIPT_EOF\n")
     env.write(video_script + "\n")
