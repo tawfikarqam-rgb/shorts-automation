@@ -15,6 +15,34 @@ SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": "ShortsAutomation/1.2 (open-license educational video project; contact: repository maintainer)"})
 SEARCHES = [q.strip() for q in os.environ.get("IMAGE_SEARCHES", "").split(";") if q.strip()]
 downloaded, sources, seen = [], [], set()
+seen_titles = set()
+MAX_IMAGES = 8
+MAX_PER_QUERY = 2
+STOP_WORDS = {
+    "about", "after", "before", "from", "into", "with", "without",
+    "that", "this", "their", "there", "then", "they", "when", "where",
+    "what", "why", "how", "the", "and", "for", "was", "were", "are",
+    "its", "his", "her", "over", "under", "early", "late", "historic",
+    "historical", "vintage", "photo", "photograph", "image", "images"
+}
+
+
+def tokens(value):
+    return {
+        word.lower() for word in re.findall(r"[A-Za-z0-9]+", str(value or ""))
+        if len(word) >= 3 and word.lower() not in STOP_WORDS
+    }
+
+
+def relevance(query, description):
+    query_tokens = tokens(query)
+    if not query_tokens:
+        return 0
+    return len(query_tokens & tokens(description))
+
+
+def minimum_overlap(query):
+    return 2 if len(tokens(query)) >= 3 else 1
 
 
 def request_with_retry(url, *, params=None, timeout=(15, 60), attempts=3):
@@ -35,10 +63,15 @@ def request_with_retry(url, *, params=None, timeout=(15, 60), attempts=3):
     raise last
 
 
-def save_image(url, title, license_name, attribution, landing_url, provider):
-    if not url or url in seen or len(downloaded) >= 4:
+def save_image(url, title, license_name, attribution, landing_url, provider, query=""):
+    normalized_title = re.sub(r"[^a-z0-9]+", " ", str(title or "").lower()).strip()
+    url_key = str(url or "").split("?", 1)[0]
+    if (not url or url_key in seen or len(downloaded) >= MAX_IMAGES
+            or (normalized_title and normalized_title in seen_titles)):
         return False
-    seen.add(url)
+    seen.add(url_key)
+    if normalized_title:
+        seen_titles.add(normalized_title)
     try:
         response = request_with_retry(url, timeout=(15, 45), attempts=2)
         content_type = response.headers.get("Content-Type", "").lower()
@@ -55,7 +88,7 @@ def save_image(url, title, license_name, attribution, landing_url, provider):
         sources.append({
             "file": str(path), "title": title, "license": license_name,
             "attribution": unescape(attribution or ""),
-            "source_url": landing_url, "provider": provider
+            "source_url": landing_url, "provider": provider, "matched_query": query
         })
         print(f"Downloaded ({provider}): {title} [{license_name}]")
         return True
@@ -66,7 +99,7 @@ def save_image(url, title, license_name, attribution, landing_url, provider):
 
 # Primary: Openverse. Retry transient network errors and 429/5xx responses.
 for term in SEARCHES:
-    if len(downloaded) >= 4:
+    if len(downloaded) >= MAX_IMAGES:
         break
     try:
         response = request_with_retry(
@@ -82,35 +115,39 @@ for term in SEARCHES:
     except Exception as exc:
         print(f"Openverse search failed for '{term}' after retries: {exc}")
         continue
+    ranked = []
     for item in results:
-        if len(downloaded) >= 4:
-            break
         if item.get("license") not in {"cc0", "pdm", "by", "by-sa"}:
             continue
-        save_image(
+        tag_text = " ".join(
+            tag.get("name", "") for tag in item.get("tags", [])
+            if isinstance(tag, dict)
+        )
+        score = relevance(term, " ".join([
+            item.get("title", ""), tag_text, item.get("description", "")
+        ]))
+        if score >= minimum_overlap(term):
+            ranked.append((score, item))
+    ranked.sort(key=lambda pair: pair[0], reverse=True)
+
+    accepted_for_query = 0
+    for _, item in ranked:
+        if len(downloaded) >= MAX_IMAGES or accepted_for_query >= MAX_PER_QUERY:
+            break
+        if save_image(
             item.get("url") or item.get("thumbnail"), item.get("title", term),
             f'{item.get("license", "").upper()} {item.get("license_version", "")}'.strip(),
             item.get("attribution", ""), item.get("foreign_landing_url", ""),
-            f'Openverse/{item.get("provider", "unknown")}'
-        )
+            f'Openverse/{item.get("provider", "unknown")}', query=term
+        ):
+            accepted_for_query += 1
     time.sleep(0.5)
 
-# Fallback: broaden Commons searches without relaxing the public-domain/CC0 rule.
-if len(downloaded) < 2:
-    print("Openverse returned fewer than 2 usable images; trying Wikimedia Commons with retries.")
-    commons_terms = []
+# Fallback: use the same specific scene queries; never broaden to vague single words.
+if len(downloaded) < MAX_IMAGES:
+    print(f"Openverse supplied {len(downloaded)} relevant images; topping up with Wikimedia Commons.")
     for term in SEARCHES:
-        commons_terms.append(term)
-        words = [w for w in re.findall(r"[A-Za-z0-9]+", term) if len(w) >= 4]
-        if len(words) >= 2:
-            commons_terms.append(" ".join(words[:2]))
-        if words:
-            commons_terms.append(words[0])
-    # Preserve order while removing duplicate terms.
-    commons_terms = list(dict.fromkeys(commons_terms))
-
-    for term in commons_terms:
-        if len(downloaded) >= 4:
+        if len(downloaded) >= MAX_IMAGES:
             break
         try:
             response = request_with_retry(
@@ -130,7 +167,6 @@ if len(downloaded) < 2:
             continue
 
         candidates = []
-        query_tokens = {t.lower() for t in re.findall(r"[a-zA-Z0-9]+", term) if len(t) >= 4}
         for page in pages.values():
             info = (page.get("imageinfo") or [{}])[0]
             meta = info.get("extmetadata") or {}
@@ -139,13 +175,18 @@ if len(downloaded) < 2:
             if not ("public domain" in normalized or normalized.strip() == "cc0" or "cc0" in normalized):
                 continue
             title = page.get("title", "")
-            title_tokens = {t.lower() for t in re.findall(r"[a-zA-Z0-9]+", title) if len(t) >= 4}
-            overlap = len(query_tokens & title_tokens)
-            candidates.append((overlap, page))
+            description = re.sub(
+                r"<[^>]+>", " ",
+                meta.get("ImageDescription", {}).get("value", "")
+            )
+            overlap = relevance(term, title + " " + description)
+            if overlap >= minimum_overlap(term):
+                candidates.append((overlap, page))
 
         candidates.sort(key=lambda pair: pair[0], reverse=True)
+        accepted_for_query = 0
         for _, page in candidates:
-            if len(downloaded) >= 4:
+            if len(downloaded) >= MAX_IMAGES or accepted_for_query >= MAX_PER_QUERY:
                 break
             info = (page.get("imageinfo") or [{}])[0]
             meta = info.get("extmetadata") or {}
@@ -154,8 +195,9 @@ if len(downloaded) < 2:
                 meta.get("LicenseShortName", {}).get("value", "Public domain"),
                 meta.get("Artist", {}).get("value", ""),
                 "https://commons.wikimedia.org/wiki/" + page.get("title", "").replace(" ", "_"),
-                "Wikimedia Commons"
-            )
+                "Wikimedia Commons", query=term
+            ):
+                accepted_for_query += 1
         time.sleep(0.4)
 
 if len(downloaded) < 2:
@@ -166,5 +208,7 @@ if len(downloaded) < 2:
 
 (OUT / "image_manifest.json").write_text(json.dumps(downloaded, indent=2), encoding="utf-8")
 (OUT / "image_sources.json").write_text(json.dumps(sources, indent=2, ensure_ascii=False), encoding="utf-8")
-print(f"Downloaded {len(downloaded)} openly licensed images.")
+print(f"Downloaded {len(downloaded)} relevant openly licensed images (target: {MAX_IMAGES}).")
+if len(downloaded) < 6:
+    print("WARNING: Fewer than 6 distinct scene images were found; visual variety may be limited.")
 print(f"Image source and attribution manifest: {OUT / 'image_sources.json'}")
