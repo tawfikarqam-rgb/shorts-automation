@@ -217,6 +217,8 @@ jobs:
         run: |
           set -euo pipefail
           uv run python -m py_compile ../scripts/append_cta.py
+          uv run python -c "import edge_tts; print('EDGE_TTS_IMPORT=PASS')"
+          ffmpeg -hide_banner -filters 2>/dev/null | grep -q drawtext
           uv run python ../scripts/append_cta.py ../output/final_short.mp4
           python ../scripts/validate_short.py ../output/final_short.mp4
 
