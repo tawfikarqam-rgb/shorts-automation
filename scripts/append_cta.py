@@ -69,7 +69,7 @@ def main():
 
     # Keep the displayed question concise and readable on a phone.
     question = question[:150].rstrip()
-    spoken = f"Like and subscribe for more. Tell us in the comments: {question}"
+    spoken = "Like and subscribe. Tell us what you think below."
     work = video.parent
     frame = work / "cta_last_frame.jpg"
     audio = work / "cta_voice.mp3"
