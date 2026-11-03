@@ -178,9 +178,10 @@ if len(downloaded) < MAX_IMAGES:
             normalized = license_name.lower().strip()
             # Allow licenses suitable for monetized videos and normal editing.
             # Exclude NonCommercial and NoDerivatives variants.
-            is_public_domain = "public domain" in normalized or re.search(r"\\bcc0\\b", normalized)
-            is_cc_by = bool(re.search(r"\\bcc by(?:-sa)?(?:\\s|$)", normalized))
-            if not (is_public_domain or is_cc_by) or "nc" in normalized or "nd" in normalized:
+            is_public_domain = "public domain" in normalized or re.search(r"\bcc0\b", normalized)
+            is_cc_by = bool(re.search(r"\bcc by(?:-sa)?(?:\s|$)", normalized))
+            has_restriction = bool(re.search(r"\b(?:nc|nd)\b", normalized))
+            if not (is_public_domain or is_cc_by) or has_restriction:
                 continue
             title = page.get("title", "")
             description = re.sub(
