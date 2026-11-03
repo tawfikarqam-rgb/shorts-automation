@@ -56,6 +56,10 @@ def request_with_retry(url, *, params=None, timeout=(15, 60), attempts=3):
             return response
         except requests.RequestException as exc:
             last = exc
+            # Authentication/permission errors will not recover by retrying.
+            if isinstance(exc, requests.HTTPError) and exc.response is not None:
+                if exc.response.status_code in (401, 403, 404):
+                    raise
             if attempt + 1 < attempts:
                 delay = min(8 * (2 ** attempt), 24)
                 print(f"Request attempt {attempt + 1}/{attempts} failed: {exc}; retrying in {delay}s")
@@ -171,8 +175,12 @@ if len(downloaded) < MAX_IMAGES:
             info = (page.get("imageinfo") or [{}])[0]
             meta = info.get("extmetadata") or {}
             license_name = meta.get("LicenseShortName", {}).get("value", "")
-            normalized = license_name.lower()
-            if not ("public domain" in normalized or normalized.strip() == "cc0" or "cc0" in normalized):
+            normalized = license_name.lower().strip()
+            # Allow licenses suitable for monetized videos and normal editing.
+            # Exclude NonCommercial and NoDerivatives variants.
+            is_public_domain = "public domain" in normalized or re.search(r"\\bcc0\\b", normalized)
+            is_cc_by = bool(re.search(r"\\bcc by(?:-sa)?(?:\\s|$)", normalized))
+            if not (is_public_domain or is_cc_by) or "nc" in normalized or "nd" in normalized:
                 continue
             title = page.get("title", "")
             description = re.sub(
@@ -180,7 +188,10 @@ if len(downloaded) < MAX_IMAGES:
                 meta.get("ImageDescription", {}).get("value", "")
             )
             overlap = relevance(term, title + " " + description)
-            if overlap >= minimum_overlap(term):
+            # Commons search already narrows by the full phrase. A single
+            # strong matching term is acceptable here because the fallback
+            # may otherwise return too few commercially usable historical images.
+            if overlap >= 1:
                 candidates.append((overlap, page))
 
         candidates.sort(key=lambda pair: pair[0], reverse=True)
