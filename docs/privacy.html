@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy Policy for Shorts Automation.">
+  <title>Privacy Policy — Shorts Automation</title>
+  <style>
+    :root{color-scheme:light dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+    body{max-width:820px;margin:0 auto;padding:40px 22px;line-height:1.7}
+    h1{line-height:1.2}section{margin:26px 0}a{margin-right:16px}
+    .muted{opacity:.75}
+  </style>
+</head>
+<body>
+  <p><a href="./index.html">Shorts Automation home</a></p>
+  <h1>Privacy Policy</h1>
+  <p class="muted">Effective date: November 4, 2026</p>
+  <p>This Privacy Policy explains how the independent project “Shorts Automation” accesses and handles information when its owner runs its automated video workflows.</p>
+
+  <section>
+    <h2>Who uses this application</h2>
+    <p>The application is operated by its project owner for the owner's YouTube channels. It does not provide public user registration or offer account management to third parties.</p>
+  </section>
+
+  <section>
+    <h2>Google and YouTube data accessed</h2>
+    <p>When the owner enables YouTube publishing, the application uses Google OAuth authorization and the YouTube Data API upload permission to upload videos, titles, descriptions, tags and publication settings to the owner's authorized channel.</p>
+    <p>When optional analytics collection is configured and separately authorized, the application uses the YouTube Analytics read-only permission to retrieve channel video report metrics. The configured report can include views, engaged views, average view duration, average view percentage, likes, comments, shares and subscribers gained for videos over a selected reporting period.</p>
+    <p>The application does not use Google user data for advertising, sell it, or use it to build profiles of people. It does not request access to Gmail, contacts, calendars, or Google Drive.</p>
+  </section>
+
+  <section>
+    <h2>How information is used</h2>
+    <ul>
+      <li>OAuth credentials are used to obtain authorized access tokens from Google and perform the owner-enabled YouTube upload or analytics operation.</li>
+      <li>Video files and related publishing metadata are used to publish the owner's generated videos.</li>
+      <li>Analytics metrics are used only to review the performance of the owner's videos and inform content planning.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Storage and retention</h2>
+    <p>OAuth client credentials and refresh tokens are configured as encrypted GitHub Actions repository secrets. They are supplied to workflow processes at runtime and are not intentionally written to workflow logs or generated reports.</p>
+    <p>Generated video files may be stored as GitHub Actions artifacts for the configured artifact-retention period (currently 3 days for daily videos). Analytics snapshots may be stored in GitHub Actions artifacts for up to 90 days and in the workflow's GitHub Actions cache for reuse by later runs, subject to GitHub's cache retention and eviction rules.</p>
+    <p>Google handles OAuth authorization and YouTube API requests under Google's own terms and privacy practices. GitHub hosts the source code and runs the automated workflows under GitHub's terms and privacy practices.</p>
+  </section>
+
+  <section>
+    <h2>Sharing</h2>
+    <p>The application does not sell or rent Google user data and does not share it with data brokers. Data is transmitted only to Google services needed for the authorized YouTube operation and to GitHub services used to run workflows and retain configured artifacts or cache data. Videos that the owner chooses to publish with public visibility become publicly available on YouTube.</p>
+  </section>
+
+  <section>
+    <h2>Security and revoking access</h2>
+    <p>Access is limited to the OAuth scopes configured for the enabled features. The owner can revoke the application's Google access through the Google Account third-party connections page and can remove or replace repository secrets in GitHub. Revoking authorization prevents future API operations until access is granted again.</p>
+  </section>
+
+  <section>
+    <h2>Children</h2>
+    <p>This project is an automation tool for its owner and is not designed for children or directed to children.</p>
+  </section>
+
+  <section>
+    <h2>Changes and contact</h2>
+    <p>This policy may be updated when the application's features or data practices change. The current version will be published on this page.</p>
+    <p>Questions or privacy requests: <a href="mailto:mahermo2050@gmail.com">mahermo2050@gmail.com</a></p>
+  </section>
+  <p class="muted">Last updated: November 4, 2026</p>
+</body>
+</html>
