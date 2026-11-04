@@ -3,6 +3,7 @@
 import os
 from pathlib import Path
 
+from google.auth.exceptions import RefreshError
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
@@ -96,10 +97,33 @@ def main() -> None:
     )
 
     response = None
-    while response is None:
-        status, response = request.next_chunk()
-        if status is not None:
-            print(f"UPLOAD_PROGRESS={int(status.progress() * 100)}%")
+    try:
+        while response is None:
+            status, response = request.next_chunk()
+            if status is not None:
+                print(f"UPLOAD_PROGRESS={int(status.progress() * 100)}%")
+    except RefreshError as exc:
+        # Do not expose OAuth credentials or dump a traceback into Actions logs.
+        refresh_secret = (
+            "HISTORY_YOUTUBE_REFRESH_TOKEN"
+            if IS_HISTORY
+            else "YOUTUBE_REFRESH_TOKEN"
+        )
+        error_text = str(exc).lower()
+        if "invalid_grant" in error_text:
+            raise SystemExit(
+                "UPLOAD_AUTH_FAILED: Google rejected the channel's refresh token "
+                "(expired or revoked). No successful upload was confirmed. "
+                f"Re-authorize this YouTube channel with the same OAuth client, "
+                f"then replace the GitHub Actions secret {refresh_secret}. "
+                "If the OAuth consent screen is in Testing mode, move it to "
+                "Production and re-authorize before retrying."
+            ) from None
+        raise SystemExit(
+            "UPLOAD_AUTH_FAILED: Google OAuth token refresh failed. "
+            f"Check the OAuth client and GitHub Actions secret {refresh_secret}; "
+            "credentials were not printed."
+        ) from None
 
     video_id = response.get("id")
     if not video_id:
