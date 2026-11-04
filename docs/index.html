@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shorts Automation creates short-form videos and, when authorized, publishes them to the owner's YouTube channels.">
+  <title>Shorts Automation</title>
+  <style>
+    :root{color-scheme:light dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+    body{max-width:820px;margin:0 auto;padding:48px 22px;line-height:1.65}
+    header{margin-bottom:36px}h1{line-height:1.15;font-size:clamp(2rem,6vw,3.2rem)}
+    .muted{opacity:.75}section{margin:28px 0}a{margin-right:18px}
+    footer{border-top:1px solid #8886;margin-top:44px;padding-top:20px}
+  </style>
+</head>
+<body>
+  <header>
+    <p class="muted">Independent automation project</p>
+    <h1>Shorts Automation</h1>
+    <p>Tools and workflows for creating short-form videos and publishing them to YouTube channels controlled by the project owner.</p>
+  </header>
+  <main>
+    <section>
+      <h2>What the application does</h2>
+      <p>Shorts Automation runs scheduled or manually started workflows that select a story topic, prepare a short video script, assemble a vertical video using sourced visual assets, narration and subtitles, and save the resulting video as a workflow artifact.</p>
+      <p>When the owner enables YouTube publishing and grants permission, the workflow uploads the generated video to the owner's selected YouTube channel. The workflow can also read channel-level video analytics to help review performance. Analytics collection is optional and does not determine whether video generation succeeds.</p>
+    </section>
+    <section>
+      <h2>Google and YouTube access</h2>
+      <p>The application requests YouTube permissions only for the functions enabled by the owner: uploading videos and, when configured, reading YouTube Analytics reports. OAuth credentials are used by automated workflows and are stored as encrypted repository secrets in GitHub Actions. The application is intended for the project owner's own channels, not for public sign-up or third-party account management.</p>
+    </section>
+    <section>
+      <h2>Operator and contact</h2>
+      <p>Shorts Automation is an independent project and is not affiliated with or endorsed by Google or YouTube.</p>
+      <p>Support: <a href="mailto:mahermo2050@gmail.com">mahermo2050@gmail.com</a></p>
+    </section>
+    <section>
+      <h2>Policies</h2>
+      <p><a href="./privacy.html">Privacy Policy</a><a href="./terms.html">Terms of Service</a></p>
+    </section>
+  </main>
+  <footer class="muted">Last updated: November 4, 2026</footer>
+</body>
+</html>
