@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "channel": "history",
+  "legacy_blocked_topics": [
+    "The Roman Concrete That Heals Itself",
+    "The War Australia Lost to Emus",
+    "The City Buried by a Volcano—and Preserved",
+    "The Viking Colony That Vanished from Greenland",
+    "The Wave of Molasses That Hit Boston",
+    "The Ancient Computer Pulled from the Sea",
+    "The Fake Fossil That Fooled Scientists",
+    "The Olympic Marathon That Turned into Chaos",
+    "Why an Ancient Army Terracotta Soldiers Look Different",
+    "The Medieval Book Nobody Can Read",
+    "The Radio Signal That Lasted 72 Seconds",
+    "The Ship Found Drifting Without Its Crew",
+    "The Desert Drawings Best Seen from the Sky",
+    "The Colony That Left One Strange Word"
+  ],
+  "entries": [
+    {
+      "status": "published",
+      "topic": "The Fake Fossil That Fooled Scientists",
+      "script": "For decades, the Piltdown Man discovery was presented as evidence of an important missing link in human evolution. In 1953, scientific tests showed the remains were a forgery made from a human skull and an orangutan jaw, with teeth altered to look ancient. The case embarrassed researchers, but it also became a lesson in science: extraordinary claims need independent testing, especially when evidence fits what people already want to believe.",
+      "video_id": "vLwVPOl_AAQ",
+      "source": "verified historical GitHub Actions log",
+      "run_number": 21
+    },
+    {
+      "status": "published",
+      "topic": "The Fake Fossil That Fooled Scientists",
+      "script": "For decades, the Piltdown Man discovery was presented as evidence of an important missing link in human evolution. In 1953, scientific tests showed the remains were a forgery made from a human skull and an orangutan jaw, with teeth altered to look ancient. The case embarrassed researchers, but it also became a lesson in science: extraordinary claims need independent testing, especially when evidence fits what people already want to believe.",
+      "video_id": "YkgkmDZRwBw",
+      "source": "verified historical GitHub Actions log",
+      "run_number": 35
+    }
+  ]
+}
