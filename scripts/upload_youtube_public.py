@@ -140,6 +140,10 @@ def main() -> None:
     print(f"VIDEO_URL=https://youtube.com/shorts/{video_id}")
     print(f"STUDIO_URL=https://studio.youtube.com/video/{video_id}/edit")
     print(f"PRIVACY_STATUS={returned_privacy or 'public requested; verify in Studio'}")
+    output_path = os.getenv("GITHUB_OUTPUT")
+    if output_path:
+        with open(output_path, "a", encoding="utf-8") as output_file:
+            output_file.write("video_id=" + video_id + "\\n")
 
 
 if __name__ == "__main__":
