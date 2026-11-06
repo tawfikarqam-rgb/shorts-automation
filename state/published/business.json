@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "channel": "business",
+  "legacy_blocked_topics": [
+    "Coca-Cola Changed Its Formula—and Customers Revolted",
+    "The Phone Giant That Missed the Smartphone Shift",
+    "How LEGO Nearly Ran Out of Bricks",
+    "Kodak Invented a Digital Camera—Then Hesitated",
+    "Netflix Offered to Sell to Blockbuster",
+    "The Startup That Sold a Blood-Test Dream",
+    "Why Costco Keeps Its Hot Dog So Cheap",
+    "The Vacuum Cleaner Built from 5,000 Prototypes",
+    "Why De Beers Helped Make Diamonds a Symbol of Love",
+    "Nintendo Started with Playing Cards",
+    "The Fast-Food Trick That Scaled a Small Restaurant",
+    "The Retailer That Tried to Stop Discounting",
+    "WeWork's Billion-Dollar Image Problem",
+    "Why Free Apps Still Need a Business Model"
+  ],
+  "entries": [
+    {
+      "status": "published",
+      "topic": "Why Costco Keeps Its Hot Dog So Cheap",
+      "script": "Costco is famous for keeping its food-court hot dog and soda combo at a low price for decades. The item is not just a snack; it reinforces the store's value image and gives members a memorable reason to feel they are getting a deal. The exact financial contribution is not the whole story. Sometimes a product helps a business by strengthening loyalty and trust, not by maximizing its own margin.",
+      "video_id": "7pqntpKcn-E",
+      "source": "verified historical GitHub Actions log",
+      "run_number": 21
+    },
+    {
+      "status": "published",
+      "topic": "Why Costco Keeps Its Hot Dog So Cheap",
+      "script": "Costco is famous for keeping its food-court hot dog and soda combo at a low price for decades. The item is not just a snack; it reinforces the store's value image and gives members a memorable reason to feel they are getting a deal. The exact financial contribution is not the whole story. Sometimes a product helps a business by strengthening loyalty and trust, not by maximizing its own margin.",
+      "video_id": "HQ6OM8W-wR4",
+      "source": "verified historical GitHub Actions log",
+      "run_number": 35
+    }
+  ]
+}
