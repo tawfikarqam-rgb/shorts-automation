@@ -93,20 +93,32 @@ def groq_generate(api_key, model, messages, browser_search=False, max_tokens=300
         payload["response_format"] = {"type": "json_object"}
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     response = None
-    # Groq may transiently return 5xx while its inference/browser-search backend is busy.
-    # Retry only server errors; never retry authentication, quota, or malformed requests.
+    # Retry transient 5xx errors and short-lived TPM (tokens/minute) limits only.
+    # Never retry daily token quotas (TPD), authentication, or malformed requests.
     for attempt in range(1, 4):
         response = requests.post(
             API_URL, headers=headers, json=payload, timeout=(20, 240)
         )
-        if response.status_code not in (500, 502, 503, 504) or attempt == 3:
+        body_lower = response.text.lower()
+        transient_server_error = response.status_code in (500, 502, 503, 504)
+        temporary_tpm_limit = (
+            response.status_code == 429
+            and "tokens per minute" in body_lower
+            and "tokens per day" not in body_lower
+        )
+        if attempt == 3 or not (transient_server_error or temporary_tpm_limit):
             break
+        if temporary_tpm_limit:
+            wait_match = re.search(r"try again in ([0-9]+(?:\\.[0-9]+)?)s", body_lower)
+            wait_seconds = min(60.0, max(1.0, float(wait_match.group(1)))) if wait_match else 10.0
+        else:
+            wait_seconds = attempt * 5
         print(
             f"GROQ_RETRY stage={stage} attempt={attempt}/3 "
-            f"http={response.status_code}; retrying after {attempt * 5}s",
+            f"http={response.status_code}; retrying after {wait_seconds:g}s",
             file=sys.stderr,
         )
-        time.sleep(attempt * 5)
+        time.sleep(wait_seconds)
     if not response.ok:
         detail = response.text[:1200].replace(api_key, "[REDACTED]")
         request_id = response.headers.get("x-groq-request-id", "unavailable")
