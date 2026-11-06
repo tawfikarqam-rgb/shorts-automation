@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Optional two-model OxionAI research and script generation stage."""
-import json, os, re, sys
+import difflib, json, os, re, sys
 from datetime import datetime, timezone
 from pathlib import Path
 import requests
@@ -8,6 +8,22 @@ import requests
 BASE = os.getenv("OXIONAI_BASE_URL", "https://www.oxionai.com/v1").rstrip("/")
 RESEARCH_MODEL = os.getenv("OXIONAI_RESEARCH_MODEL", "gemini-3.7-flash")
 WRITER_MODEL = os.getenv("OXIONAI_WRITER_MODEL", "deepseek-v4-flash-0731")
+
+
+
+def normalize_topic(value):
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).split())
+
+
+def matches_used_topic(candidate, used_topics):
+    candidate_key = normalize_topic(candidate)
+    if not candidate_key:
+        return False
+    for old_topic in used_topics:
+        old_key = normalize_topic(old_topic)
+        if old_key and difflib.SequenceMatcher(None, candidate_key, old_key).ratio() >= 0.88:
+            return True
+    return False
 
 
 def completion(key, model, messages, max_tokens):
@@ -55,20 +71,35 @@ def export_env(values):
 def main():
     research_key = os.getenv("OXIONAI_RESEARCH_API_KEY", "").strip()
     writer_key = os.getenv("OXIONAI_WRITER_API_KEY", "").strip()
-    if not research_key or not writer_key:
-        print("OXIONAI_STATUS=SKIPPED_MISSING_SECRETS; reviewed local story retained")
-        return
+    fallback_available = os.getenv("STORY_FALLBACK_AVAILABLE", "true").strip().lower() == "true"
+    try:
+        used_topics = json.loads(os.getenv("USED_STORY_TOPICS", "[]"))
+    except json.JSONDecodeError as exc:
+        raise ValueError("USED_STORY_TOPICS is not valid JSON") from exc
+    if not isinstance(used_topics, list):
+        raise ValueError("USED_STORY_TOPICS must be a JSON list")
+
     channel = os.getenv("CHANNEL_NAME", "history").strip().lower()
     topic = os.getenv("STORY_TOPIC", "").strip()
     seed = os.getenv("VIDEO_SCRIPT", "").strip()
-    if channel not in ("business", "history") or not topic or not seed:
-        raise ValueError("Missing selected story context")
+    if channel not in ("business", "history"):
+        raise ValueError("CHANNEL_NAME must be business or history")
+    if fallback_available and (not topic or not seed):
+        raise ValueError("Reviewed fallback was marked available but its story is missing")
+    if not research_key or not writer_key:
+        if fallback_available:
+            print("OXIONAI_STATUS=SKIPPED_MISSING_SECRETS; unused reviewed fallback retained")
+            return
+        raise RuntimeError("No unused reviewed fallback remains and OxionAI credentials are unavailable")
 
-    research_prompt = f"""Research this candidate for an English YouTube Shorts documentary.
+    if fallback_available:
+        research_prompt = f"""Research this unused candidate for an English YouTube Shorts documentary.
 Channel: {channel}
 Topic: {topic}
 Existing reviewed editorial seed (lead only, not proof):
 {seed}
+Previously used topics to avoid:
+{json.dumps(used_topics, ensure_ascii=False)}
 
 Use your native live web-search capability if available. Do not invent URLs or citations.
 Prefer primary sources, official filings, reputable museums, universities, archives and
@@ -80,6 +111,29 @@ Return JSON only:
 "sources":[{{"title":"source title","url":"https://...","publisher":"...","supports":["claim"]}}],
 "research_status":"verified|partially_verified|not_verified",
 "image_searches":["3-4 visual queries"]}}
+Only list sources actually consulted. Do not switch to any previously used topic."""
+    else:
+        channel_focus = (
+            "historical mysteries, discoveries, ancient civilizations, overlooked events, or well-documented turning points"
+            if channel == "history" else
+            "company history, business strategy, product decisions, market shifts, or documented entrepreneurial lessons"
+        )
+        research_prompt = f"""Find and research ONE fresh, compelling, verifiable story for an English YouTube Shorts documentary.
+Channel: {channel}
+Editorial focus: {channel_focus}
+Do not use, retell, or lightly re-title any of these previously used topics:
+{json.dumps(used_topics, ensure_ascii=False)}
+Choose a genuinely different subject, not a synonym or a new angle on a listed story.
+Use live web search if available. Prefer primary sources, official filings, reputable museums,
+universities, archives and established journalism. Do not invent URLs, citations, dates or facts.
+Distinguish facts from disputed interpretations. If sources cannot verify the story, mark
+research_status not_verified.
+Return JSON only:
+{{"topic":"accurate fresh title","verified_facts":["3-6 concise sourced facts"],
+"uncertain_or_disputed":["claims to avoid or qualify"],
+"sources":[{{"title":"source title","url":"https://...","publisher":"...","supports":["claim"]}}],
+"research_status":"verified|partially_verified|not_verified",
+"image_searches":["3-4 visual queries"]}}
 Only list sources actually consulted."""
 
     research_raw, research_usage = completion(
@@ -87,6 +141,11 @@ Only list sources actually consulted."""
         [{"role":"system","content":"Cautious fact-checking researcher. Never fabricate sources."},
          {"role":"user","content":research_prompt}], 1800)
     research = parse_object(research_raw)
+    researched_topic = research.get("topic")
+    if not isinstance(researched_topic, str) or not researched_topic.strip():
+        raise ValueError("Research stage did not return a topic")
+    if matches_used_topic(researched_topic, used_topics):
+        raise ValueError("Research stage selected a previously used topic: " + researched_topic)
     facts = research.get("verified_facts")
     sources = research.get("sources")
     valid_sources = [s for s in (sources if isinstance(sources, list) else [])
@@ -94,13 +153,16 @@ Only list sources actually consulted."""
                      and s["url"].startswith("https://") and s.get("title")]
     status = research.get("research_status", "not_verified")
     if not isinstance(facts, list) or len(facts) < 2 or len(valid_sources) < 2 or status == "not_verified":
-        print("OXIONAI_STATUS=RESEARCH_NOT_VERIFIED; reviewed local story retained")
-        return
+        if fallback_available:
+            print("OXIONAI_STATUS=RESEARCH_NOT_VERIFIED; unused reviewed fallback retained")
+            return
+        raise ValueError("Fresh story research was not sufficiently verified; refusing duplicate fallback")
 
     writer_prompt = f"""Write a compelling but accurate English YouTube Short for {channel}.
-Topic: {research.get("topic") or topic}
+Topic: {researched_topic}
 Target 75-105 spoken words. Structure: immediate hook, clear progression, satisfying payoff.
 Use ONLY the supplied facts. No invented details, dialogue, numbers or unsupported claims.
+Do not reuse any previously used topic or story. Previously used topics: {json.dumps(used_topics, ensure_ascii=False)}
 Qualify uncertainty. Return JSON only:
 {{"title":"accurate title under 65 characters","narration":"65-120 spoken words",
 "comment_question":"one natural, story-specific question that invites viewers to comment, 8-16 words",
@@ -127,6 +189,8 @@ SOURCES: {json.dumps(valid_sources, ensure_ascii=False)}"""
         raise ValueError("Generated narration word count outside 65-120: " + str(words))
     if not isinstance(title, str) or not title.strip() or len(title) > 80:
         raise ValueError("Generated title missing or too long")
+    if matches_used_topic(title, used_topics):
+        raise ValueError("Writer returned a previously used topic: " + title)
     if not isinstance(images, list) or len(images) < 4:
         raise ValueError("Need at least four distinct ordered scene image searches")
 
@@ -169,6 +233,9 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:
-        # Fail open to the pre-reviewed static story; never block the existing video pipeline.
         print(f"OXIONAI_WARNING={type(exc).__name__}: {exc}", file=sys.stderr)
-        print("OXIONAI_STATUS=FALLBACK_TO_REVIEWED_LOCAL_STORY")
+        if os.getenv("STORY_FALLBACK_AVAILABLE", "true").strip().lower() == "true":
+            print("OXIONAI_STATUS=FALLBACK_TO_UNUSED_REVIEWED_LOCAL_STORY")
+        else:
+            print("OXIONAI_STATUS=FAILED_NO_SAFE_FALLBACK; refusing to publish a repeated story", file=sys.stderr)
+            raise SystemExit(1)
