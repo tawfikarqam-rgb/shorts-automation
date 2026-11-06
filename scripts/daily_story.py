@@ -1,4 +1,5 @@
-import datetime, os
+import datetime, json, os, re
+from pathlib import Path
 
 # High-retention, fact-grounded short stories. Keep history and business pools separate.
 # Each script opens with a curiosity gap, delivers a clear payoff, and avoids presenting
@@ -98,34 +99,74 @@ if channel not in ("history", "business"):
     raise SystemExit("CHANNEL_NAME must be history or business")
 channel_stories = history_stories if channel == "history" else business_stories
 
-# Use the workflow run number so manual retries select a different story.
-# Each channel has its own 14-story rotation and never uses the other channel's pool.
-run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
-if run_number.isdigit() and int(run_number) > 0:
-    rotation_index = (int(run_number) - 1) % len(channel_stories)
-    rotation_source = "workflow run " + run_number
-else:
-    day = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
-    rotation_index = (day - 1) % len(channel_stories)
-    rotation_source = "UTC day fallback"
+def normalize_topic(value):
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).split())
 
-title, video_script, image_searches = channel_stories[rotation_index]
+
+ledger_path = Path("state/published") / (channel + ".json")
+ledger = {"legacy_blocked_topics": [], "entries": []}
+if ledger_path.is_file():
+    try:
+        ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit("Could not read the durable duplicate ledger: " + str(exc))
+
+used_topics = set()
+for value in ledger.get("legacy_blocked_topics", []):
+    if value:
+        used_topics.add(normalize_topic(value))
+for entry in ledger.get("entries", []):
+    for value in (entry.get("topic"), entry.get("seed_topic")):
+        if value:
+            used_topics.add(normalize_topic(value))
+
+available_stories = [
+    story for story in channel_stories
+    if normalize_topic(story[0]) not in used_topics
+]
+
+fallback_available = bool(available_stories)
+if fallback_available:
+    run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
+    if run_number.isdigit() and int(run_number) > 0:
+        rotation_index = (int(run_number) - 1) % len(available_stories)
+        rotation_source = "unused reviewed fallback pool"
+    else:
+        rotation_index = 0
+        rotation_source = "first unused reviewed fallback"
+    title, video_script, image_searches = available_stories[rotation_index]
+else:
+    # Never silently recycle an old static story. OxionAI must research a fresh one.
+    title = ""
+    video_script = ""
+    image_searches = ""
+    rotation_source = "fallback pool exhausted; fresh AI research required"
+
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("CHANNEL_NAME=" + channel + "\n")
     env.write("STORY_TOPIC=" + title + "\n")
-    # Local fallback if optional AI writing is unavailable.
+    env.write("STORY_SEED_TOPIC=" + title + "\n")
+    env.write("STORY_FALLBACK_AVAILABLE=" + str(fallback_available).lower() + "\n")
+    env.write("USED_STORY_TOPICS=" + json.dumps(sorted(used_topics), ensure_ascii=False) + "\n")
     fallback_question = (
         f"What do you think really happened in {title}?"
         if channel == "history" else
         f"Would you have made the same decision in {title}?"
-    )
+    ) if title else ""
     env.write("CTA_COMMENT_QUESTION=" + fallback_question + "\n")
     env.write("IMAGE_SEARCHES=" + image_searches + "\n")
-    env.write("VIDEO_SCRIPT<<STORY_SCRIPT_EOF\n")
-    env.write(video_script + "\n")
-    env.write("STORY_SCRIPT_EOF\n")
+    if video_script:
+        env.write("VIDEO_SCRIPT<<STORY_SCRIPT_EOF\n")
+        env.write(video_script + "\n")
+        env.write("STORY_SCRIPT_EOF\n")
+    else:
+        env.write("VIDEO_SCRIPT=\n")
+
 print("Today's channel: " + channel)
-print("Today's topic: " + title)
-print("Topic rotation: " + str(rotation_index + 1) + "/" + str(len(channel_stories)))
+print("Unused reviewed fallback stories: " + str(len(available_stories)))
+print("Fallback available: " + str(fallback_available))
 print("Rotation source: " + rotation_source)
-print("Script characters: " + str(len(video_script)))
+if title:
+    print("Today's fallback topic: " + title)
+else:
+    print("No unused local fallback remains; the AI stage must research a fresh topic.")
