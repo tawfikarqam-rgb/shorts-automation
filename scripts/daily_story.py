@@ -136,7 +136,7 @@ if fallback_available:
         rotation_source = "first unused reviewed fallback"
     title, video_script, image_searches = available_stories[rotation_index]
 else:
-    # Never silently recycle an old static story. OxionAI must research a fresh one.
+    # Never silently recycle an old static story. Gemini must research a fresh one.
     title = ""
     video_script = ""
     image_searches = ""
