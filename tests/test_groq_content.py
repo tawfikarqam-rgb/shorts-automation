@@ -24,6 +24,27 @@ class GroqContentTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             module.extract_message({"choices": [{"message": {"content": ""}}]})
 
+
+    def test_extract_annotation_sources(self):
+        data = {"choices": [{"message": {"annotations": [
+            {"type": "url_citation", "url_citation": {
+                "url": "https://archive.example/story", "title": "Archive record"
+            }},
+            {"type": "url_citation", "url_citation": {
+                "url": "https://museum.example/exhibit", "title": "Museum exhibit"
+            }},
+        ]}}]}
+        sources = module.extract_annotation_sources(data)
+        self.assertEqual(len(sources), 2)
+        self.assertEqual(sources[0]["url"], "https://archive.example/story")
+        self.assertEqual(len(module.validate_sources(sources)), 2)
+
+    def test_extract_annotation_sources_ignores_missing_urls(self):
+        data = {"choices": [{"message": {"annotations": [
+            {"type": "url_citation", "url_citation": {"title": "No URL"}}
+        ]}}]}
+        self.assertEqual(module.extract_annotation_sources(data), [])
+
     def test_validate_two_distinct_https_sources(self):
         sources = [
             {"title": "A", "url": "https://a.example/x", "supports": ["claim"]},
