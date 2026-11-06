@@ -45,7 +45,7 @@ class GroqContentTests(unittest.TestCase):
         response.ok = True
         response.json.return_value = {"choices": [{"message": {"content": '{"ok":true}'}}]}
         post.return_value = response
-        raw, _ = module.groq_generate("test-secret", "openai/gpt-oss-120b",
+        raw, _ = module.groq_generate("test-secret", "openai/gpt-oss-20b",
             [{"role": "user", "content": "research"}], browser_search=True)
         payload = post.call_args.kwargs["json"]
         self.assertEqual(raw, '{"ok":true}')
@@ -67,11 +67,46 @@ class GroqContentTests(unittest.TestCase):
         succeeded.ok = True
         succeeded.json.return_value = {"choices": [{"message": {"content": '{"ok":true}'}}]}
         post.side_effect = [failed, succeeded]
-        raw, _ = module.groq_generate("test-secret", "openai/gpt-oss-120b",
+        raw, _ = module.groq_generate("test-secret", "openai/gpt-oss-20b",
             [{"role": "user", "content": "research"}], stage="research")
         self.assertEqual(raw, '{"ok":true}')
         self.assertEqual(post.call_count, 2)
         sleep.assert_called_once_with(5)
+
+
+    @patch.object(module.time, "sleep")
+    @patch.object(module.requests, "post")
+    def test_retries_temporary_tpm_limit(self, post, sleep):
+        limited = Mock()
+        limited.status_code = 429
+        limited.ok = False
+        limited.text = '{"error":{"message":"Rate limit on tokens per minute. Please try again in 7.74s."}}'
+        limited.headers = {}
+        succeeded = Mock()
+        succeeded.status_code = 200
+        succeeded.ok = True
+        succeeded.json.return_value = {"choices": [{"message": {"content": '{"ok":true}'}}]}
+        post.side_effect = [limited, succeeded]
+        raw, _ = module.groq_generate("test-secret", "openai/gpt-oss-20b",
+            [{"role": "user", "content": "write"}], stage="writing")
+        self.assertEqual(raw, '{"ok":true}')
+        self.assertEqual(post.call_count, 2)
+        sleep.assert_called_once_with(7.74)
+
+    @patch.object(module.time, "sleep")
+    @patch.object(module.requests, "post")
+    def test_does_not_retry_daily_token_quota(self, post, sleep):
+        limited = Mock()
+        limited.status_code = 429
+        limited.ok = False
+        limited.text = '{"error":{"message":"Limit on tokens per day exceeded. Try again in 7.74s."}}'
+        limited.headers = {}
+        post.return_value = limited
+        with self.assertRaisesRegex(RuntimeError, "HTTP 429"):
+            module.groq_generate("test-secret", "openai/gpt-oss-20b",
+                [{"role": "user", "content": "write"}], stage="writing")
+        self.assertEqual(post.call_count, 1)
+        sleep.assert_not_called()
 
     @patch.object(module.requests, "post")
     def test_json_writer_request(self, post):
@@ -79,7 +114,7 @@ class GroqContentTests(unittest.TestCase):
         response.ok = True
         response.json.return_value = {"choices": [{"message": {"content": '{"ok":true}'}}]}
         post.return_value = response
-        module.groq_generate("test-secret", "openai/gpt-oss-120b",
+        module.groq_generate("test-secret", "openai/gpt-oss-20b",
             [{"role": "user", "content": "write"}], json_mode=True)
         payload = post.call_args.kwargs["json"]
         self.assertEqual(payload["response_format"], {"type": "json_object"})
