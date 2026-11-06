@@ -112,7 +112,6 @@ def groq_generate(api_key, model, messages, browser_search=False, max_tokens=300
         "max_completion_tokens": max_tokens,
     }
     if browser_search:
-        payload["citation_options"] = "enabled"
         payload["tools"] = [{"type": "browser_search"}]
         payload["tool_choice"] = "required"
         payload["reasoning_effort"] = "low"
