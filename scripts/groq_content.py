@@ -48,6 +48,32 @@ def extract_message(data):
     return content.strip()
 
 
+
+def extract_annotation_sources(response_data):
+    """Extract URLs Groq explicitly cites for browser-search results."""
+    choices = response_data.get("choices") or []
+    if not choices:
+        return []
+    message = choices[0].get("message") or {}
+    annotations = message.get("annotations") or []
+    sources = []
+    for annotation in annotations:
+        if not isinstance(annotation, dict):
+            continue
+        citation = annotation.get("url_citation") or annotation.get("citation") or {}
+        if not isinstance(citation, dict):
+            continue
+        url = str(citation.get("url") or "").strip()
+        title = str(citation.get("title") or "").strip()
+        if url:
+            sources.append({
+                "title": title or "Groq browser-search citation",
+                "url": url,
+                "publisher": urlparse(url).netloc,
+                "supports": [],
+            })
+    return sources
+
 def validate_sources(raw_sources):
     if not isinstance(raw_sources, list):
         raise ValueError("Research did not return a sources list")
@@ -86,6 +112,7 @@ def groq_generate(api_key, model, messages, browser_search=False, max_tokens=300
         "max_completion_tokens": max_tokens,
     }
     if browser_search:
+        payload["citation_options"] = "enabled"
         payload["tools"] = [{"type": "browser_search"}]
         payload["tool_choice"] = "required"
         payload["reasoning_effort"] = "low"
@@ -219,7 +246,20 @@ def main():
         raise ValueError("Research stage returned fewer than three factual claims")
     if research.get("research_status") != "verified":
         raise ValueError("Fresh story research was not verified; refusing to use it")
-    sources = validate_sources(research.get("sources"))
+    reported_sources = research.get("sources")
+    if not isinstance(reported_sources, list):
+        reported_sources = []
+    # Prefer explicit model-returned source metadata, and supplement it with
+    # URLs Groq itself attached as browser-search citation annotations.
+    reported_sources = reported_sources + extract_annotation_sources(research_response)
+    sources = validate_sources(reported_sources)
+    print(
+        "GROQ_RESEARCH_SOURCE_COUNTS="
+        f"model:{len(research.get('sources') or [])},"
+        f"citations:{len(extract_annotation_sources(research_response))},"
+        f"validated:{len(sources)}",
+        flush=True,
+    )
     uncertainty = research.get("uncertain_or_disputed", [])
     if not isinstance(uncertainty, list):
         uncertainty = []
