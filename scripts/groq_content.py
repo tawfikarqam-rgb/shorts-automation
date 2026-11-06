@@ -193,16 +193,29 @@ set research_status to not_verified. Do not claim verification merely because a 
 
 
 def build_writer_prompt(channel, topic, facts, uncertainty, sources, used_topics):
-    return f"""Write an accurate, compelling English YouTube Short for channel {channel}.
-Topic: {topic}. Use ONLY these verified facts and do not add unsupported dates, numbers,
-dialogue, quotes, or details. Qualify disputed points. Avoid these used topics:
-{json.dumps(used_topics, ensure_ascii=False)}
-Facts: {json.dumps(facts, ensure_ascii=False)}
-Uncertainty: {json.dumps(uncertainty, ensure_ascii=False)}
-Sources: {json.dumps(sources, ensure_ascii=False)}
-Return JSON only: title (under 65 characters), narration (65-120 spoken words),
-comment_question (8-16 words, ending in ?), image_searches (6-8 distinct scene searches
-in narration order). Make visual beats diverse and specific, but factually relevant."""
+    # Research has already enforced the full used-topic guard and validated every source.
+    # Give the writer only a compact evidence brief; retain the complete audit separately.
+    compact_facts = facts[:5]
+    compact_sources = [
+        {
+            "title": str(source.get("title") or "")[:120],
+            "url": str(source.get("url") or ""),
+            "publisher": str(source.get("publisher") or "")[:80],
+            "supports": [str(item)[:180] for item in (source.get("supports") or [])[:2]],
+        }
+        for source in sources[:2]
+    ]
+    compact_uncertainty = [str(item)[:180] for item in uncertainty[:3]]
+    return f"""Create an accurate English YouTube Short for {channel}.
+Topic: {topic}
+Use only the verified facts below. Add no unsupported dates, numbers, quotes, dialogue,
+or details. Qualify disputed points.
+Facts: {json.dumps(compact_facts, ensure_ascii=False, separators=(",", ":"))}
+Disputed: {json.dumps(compact_uncertainty, ensure_ascii=False, separators=(",", ":"))}
+Evidence: {json.dumps(compact_sources, ensure_ascii=False, separators=(",", ":"))}
+Return JSON with: title (under 65 characters), narration (65-120 spoken words),
+comment_question (8-16 words ending with ?), image_searches (6-8 distinct visual scenes
+in narration order). Keep every scene relevant to the verified story."""
 
 
 def main():
@@ -269,7 +282,7 @@ def main():
         [{"role": "user", "content": build_writer_prompt(
             channel, researched_topic, facts, uncertainty, sources, used_topics
         )}],
-        max_tokens=1800, json_mode=True, stage="writing",
+        max_tokens=1000, json_mode=True, stage="writing",
     )
     result = parse_object(writer_raw)
     narration, title = result.get("narration"), result.get("title")
