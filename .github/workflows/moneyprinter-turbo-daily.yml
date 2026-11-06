@@ -49,7 +49,7 @@ jobs:
       - name: Research a fresh story with Groq browser search and write the Short
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          GROQ_MODEL: openai/gpt-oss-120b
+          GROQ_MODEL: openai/gpt-oss-20b
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
