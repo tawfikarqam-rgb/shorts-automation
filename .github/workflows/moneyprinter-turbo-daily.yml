@@ -243,70 +243,70 @@ jobs:
           retention-days: 90
 
       - name: Install YouTube upload dependencies
-        if: \${{ success() && matrix.channel == 'business' }}
+        if: ${{ success() && matrix.channel == 'business' }}
         run: python -m pip install --disable-pip-version-check google-api-python-client google-auth
 
       - name: Install history YouTube upload dependencies
-        if: \${{ success() && matrix.channel == 'history' && vars.ENABLE_HISTORY_PUBLIC_UPLOAD == 'true' }}
+        if: ${{ success() && matrix.channel == 'history' && vars.ENABLE_HISTORY_PUBLIC_UPLOAD == 'true' }}
         run: python -m pip install --disable-pip-version-check google-api-python-client google-auth
 
       - name: Reserve unique YouTube publication
         id: publish_guard
-        if: \${{ success() && (matrix.channel == 'business' || (matrix.channel == 'history' && vars.ENABLE_HISTORY_PUBLIC_UPLOAD == 'true')) }}
+        if: ${{ success() && (matrix.channel == 'business' || (matrix.channel == 'history' && vars.ENABLE_HISTORY_PUBLIC_UPLOAD == 'true')) }}
         env:
-          GITHUB_TOKEN: \${{ github.token }}
-          CHANNEL_NAME: \${{ matrix.channel }}
+          GITHUB_TOKEN: ${{ github.token }}
+          CHANNEL_NAME: ${{ matrix.channel }}
           VIDEO_PATH: output/final_short.mp4
-          STORY_TOPIC: \${{ env.STORY_TOPIC }}
-          STORY_SEED_TOPIC: \${{ env.STORY_SEED_TOPIC }}
-          VIDEO_SCRIPT: \${{ env.VIDEO_SCRIPT }}
+          STORY_TOPIC: ${{ env.STORY_TOPIC }}
+          STORY_SEED_TOPIC: ${{ env.STORY_SEED_TOPIC }}
+          VIDEO_SCRIPT: ${{ env.VIDEO_SCRIPT }}
         run: python scripts/publish_guard.py --reserve
 
       - name: Upload business Short to YouTube as PUBLIC
         id: youtube_upload_business
-        if: \${{ success() && matrix.channel == 'business' && steps.publish_guard.outputs.publish_allowed == 'true' }}
+        if: ${{ success() && matrix.channel == 'business' && steps.publish_guard.outputs.publish_allowed == 'true' }}
         env:
           VIDEO_PATH: output/final_short.mp4
-          YOUTUBE_CLIENT_ID: \${{ secrets.YOUTUBE_CLIENT_ID }}
-          YOUTUBE_CLIENT_SECRET: \${{ secrets.YOUTUBE_CLIENT_SECRET }}
-          YOUTUBE_REFRESH_TOKEN: \${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
-          : "\${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
-          VIDEO_TITLE="\${STORY_TOPIC} | Money & Business Stories" python scripts/upload_youtube_public.py
+          : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
+          VIDEO_TITLE="${STORY_TOPIC} | Money & Business Stories" python scripts/upload_youtube_public.py
 
       - name: Confirm business publication in durable ledger
-        if: \${{ success() && matrix.channel == 'business' && steps.youtube_upload_business.outputs.video_id != '' }}
+        if: ${{ success() && matrix.channel == 'business' && steps.youtube_upload_business.outputs.video_id != '' }}
         env:
-          GITHUB_TOKEN: \${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
           CHANNEL_NAME: business
           VIDEO_PATH: output/final_short.mp4
-          STORY_TOPIC: \${{ env.STORY_TOPIC }}
-          VIDEO_ID: \${{ steps.youtube_upload_business.outputs.video_id }}
+          STORY_TOPIC: ${{ env.STORY_TOPIC }}
+          VIDEO_ID: ${{ steps.youtube_upload_business.outputs.video_id }}
         run: python scripts/publish_guard.py --mark-published "$VIDEO_ID"
 
       - name: Upload history Short to its YouTube channel as PUBLIC
         id: youtube_upload_history
-        if: \${{ success() && matrix.channel == 'history' && vars.ENABLE_HISTORY_PUBLIC_UPLOAD == 'true' && steps.publish_guard.outputs.publish_allowed == 'true' }}
+        if: ${{ success() && matrix.channel == 'history' && vars.ENABLE_HISTORY_PUBLIC_UPLOAD == 'true' && steps.publish_guard.outputs.publish_allowed == 'true' }}
         env:
           CHANNEL_NAME: history
           VIDEO_PATH: output/final_short.mp4
-          YOUTUBE_CLIENT_ID: \${{ secrets.HISTORY_YOUTUBE_CLIENT_ID }}
-          YOUTUBE_CLIENT_SECRET: \${{ secrets.HISTORY_YOUTUBE_CLIENT_SECRET }}
-          YOUTUBE_REFRESH_TOKEN: \${{ secrets.HISTORY_YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.HISTORY_YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.HISTORY_YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.HISTORY_YOUTUBE_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
-          : "\${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
-          VIDEO_TITLE="\${STORY_TOPIC} | History Shorts" python scripts/upload_youtube_public.py
+          : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
+          VIDEO_TITLE="${STORY_TOPIC} | History Shorts" python scripts/upload_youtube_public.py
 
       - name: Confirm history publication in durable ledger
-        if: \${{ success() && matrix.channel == 'history' && steps.youtube_upload_history.outputs.video_id != '' }}
+        if: ${{ success() && matrix.channel == 'history' && steps.youtube_upload_history.outputs.video_id != '' }}
         env:
-          GITHUB_TOKEN: \${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
           CHANNEL_NAME: history
           VIDEO_PATH: output/final_short.mp4
-          STORY_TOPIC: \${{ env.STORY_TOPIC }}
-          VIDEO_ID: \${{ steps.youtube_upload_history.outputs.video_id }}
+          STORY_TOPIC: ${{ env.STORY_TOPIC }}
+          VIDEO_ID: ${{ steps.youtube_upload_history.outputs.video_id }}
         run: python scripts/publish_guard.py --mark-published "$VIDEO_ID"
 
       - name: Collect optional YouTube Analytics
