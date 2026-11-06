@@ -143,7 +143,7 @@ def main() -> None:
     output_path = os.getenv("GITHUB_OUTPUT")
     if output_path:
         with open(output_path, "a", encoding="utf-8") as output_file:
-            output_file.write("video_id=" + video_id + "\\n")
+            output_file.write("video_id=" + video_id + "\n")
 
 
 if __name__ == "__main__":
