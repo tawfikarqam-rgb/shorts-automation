@@ -109,7 +109,7 @@ def groq_generate(api_key, model, messages, browser_search=False, max_tokens=300
         if attempt == 3 or not (transient_server_error or temporary_tpm_limit):
             break
         if temporary_tpm_limit:
-            wait_match = re.search(r"try again in ([0-9]+(?:\\.[0-9]+)?)s", body_lower)
+            wait_match = re.search(r"try again in ([0-9]+(?:\.[0-9]+)?)s", body_lower)
             wait_seconds = min(60.0, max(1.0, float(wait_match.group(1)))) if wait_match else 10.0
         else:
             wait_seconds = attempt * 5
