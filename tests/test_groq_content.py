@@ -72,6 +72,7 @@ class GroqContentTests(unittest.TestCase):
         self.assertEqual(raw, '{"ok":true}')
         self.assertEqual(payload["tools"], [{"type": "browser_search"}])
         self.assertEqual(payload["tool_choice"], "required")
+        self.assertNotIn("citation_options", payload)
         self.assertNotIn("test-secret", post.call_args.args[0])
         self.assertEqual(post.call_args.kwargs["headers"]["Authorization"], "Bearer test-secret")
 
