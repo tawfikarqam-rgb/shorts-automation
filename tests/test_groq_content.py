@@ -143,5 +143,28 @@ class GroqContentTests(unittest.TestCase):
         self.assertNotIn("tools", payload)
 
 
+    def test_writer_prompt_uses_compact_verified_evidence(self):
+        facts = [f"Verified fact {i}" for i in range(8)]
+        sources = [
+            {
+                "title": f"Source {i}",
+                "url": f"https://source{i}.example/story",
+                "publisher": f"Publisher {i}",
+                "supports": [f"Claim {j}" for j in range(5)],
+            }
+            for i in range(4)
+        ]
+        prompt = module.build_writer_prompt(
+            "history", "A verified story", facts, ["Disputed detail"],
+            sources, ["A previously used story"]
+        )
+        self.assertIn("Verified fact 4", prompt)
+        self.assertNotIn("Verified fact 5", prompt)
+        self.assertIn("https://source0.example/story", prompt)
+        self.assertIn("https://source1.example/story", prompt)
+        self.assertNotIn("https://source2.example/story", prompt)
+        self.assertNotIn("A previously used story", prompt)
+
+
 if __name__ == "__main__":
     unittest.main()
