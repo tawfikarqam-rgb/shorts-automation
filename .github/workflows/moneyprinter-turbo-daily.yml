@@ -43,10 +43,10 @@ jobs:
           restore-keys: |
             shorts-analytics-${{ matrix.channel }}-
 
-      - name: Select today's story
+      - name: Select an unused story or require fresh research
         run: python scripts/daily_story.py
 
-      - name: Generate researched script with OxionAI (optional)
+      - name: Generate a fresh researched script with OxionAI
         env:
           OXIONAI_RESEARCH_API_KEY: ${{ secrets.OXIONAI_RESEARCH_API_KEY }}
           OXIONAI_WRITER_API_KEY: ${{ secrets.OXIONAI_WRITER_API_KEY }}
