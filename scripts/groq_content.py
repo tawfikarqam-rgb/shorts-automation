@@ -5,6 +5,7 @@ import json
 import os
 import re
 import sys
+import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -75,7 +76,7 @@ def validate_sources(raw_sources):
     return sources
 
 
-def groq_generate(api_key, model, messages, browser_search=False, max_tokens=3000, json_mode=False):
+def groq_generate(api_key, model, messages, browser_search=False, max_tokens=3000, json_mode=False, stage="request"):
     if not api_key:
         raise RuntimeError("GROQ_API_KEY is missing")
     payload = {
@@ -90,15 +91,29 @@ def groq_generate(api_key, model, messages, browser_search=False, max_tokens=300
         payload["reasoning_effort"] = "low"
     if json_mode:
         payload["response_format"] = {"type": "json_object"}
-    response = requests.post(
-        API_URL,
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        json=payload,
-        timeout=(20, 240),
-    )
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    response = None
+    # Groq may transiently return 5xx while its inference/browser-search backend is busy.
+    # Retry only server errors; never retry authentication, quota, or malformed requests.
+    for attempt in range(1, 4):
+        response = requests.post(
+            API_URL, headers=headers, json=payload, timeout=(20, 240)
+        )
+        if response.status_code not in (500, 502, 503, 504) or attempt == 3:
+            break
+        print(
+            f"GROQ_RETRY stage={stage} attempt={attempt}/3 "
+            f"http={response.status_code}; retrying after {attempt * 5}s",
+            file=sys.stderr,
+        )
+        time.sleep(attempt * 5)
     if not response.ok:
         detail = response.text[:1200].replace(api_key, "[REDACTED]")
-        raise RuntimeError(f"Groq API HTTP {response.status_code}: {detail}")
+        request_id = response.headers.get("x-groq-request-id", "unavailable")
+        raise RuntimeError(
+            f"Groq API stage={stage} HTTP {response.status_code} "
+            f"request_id={request_id}: {detail}"
+        )
     data = response.json()
     return extract_message(data), data
 
@@ -172,10 +187,11 @@ def main():
             return
         raise RuntimeError("No unused reviewed fallback remains and GROQ_API_KEY is unavailable")
 
+    print("GROQ_STAGE=research", flush=True)
     research_raw, research_response = groq_generate(
         api_key, model,
         [{"role": "user", "content": build_research_prompt(channel, topic, seed, used_topics)}],
-        browser_search=True, max_tokens=5000,
+        browser_search=True, max_tokens=3000, stage="research",
     )
     research = parse_object(research_raw)
     researched_topic = research.get("topic")
@@ -196,12 +212,13 @@ def main():
     if not isinstance(uncertainty, list):
         uncertainty = []
 
+    print("GROQ_STAGE=writing", flush=True)
     writer_raw, writer_response = groq_generate(
         api_key, model,
         [{"role": "user", "content": build_writer_prompt(
             channel, researched_topic, facts, uncertainty, sources, used_topics
         )}],
-        max_tokens=1800, json_mode=True,
+        max_tokens=1800, json_mode=True, stage="writing",
     )
     result = parse_object(writer_raw)
     narration, title = result.get("narration"), result.get("title")
