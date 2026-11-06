@@ -54,6 +54,25 @@ class GroqContentTests(unittest.TestCase):
         self.assertNotIn("test-secret", post.call_args.args[0])
         self.assertEqual(post.call_args.kwargs["headers"]["Authorization"], "Bearer test-secret")
 
+    @patch.object(module.time, "sleep")
+    @patch.object(module.requests, "post")
+    def test_retries_transient_server_error(self, post, sleep):
+        failed = Mock()
+        failed.status_code = 500
+        failed.ok = False
+        failed.text = "temporary server failure"
+        failed.headers = {"x-groq-request-id": "req-test"}
+        succeeded = Mock()
+        succeeded.status_code = 200
+        succeeded.ok = True
+        succeeded.json.return_value = {"choices": [{"message": {"content": '{"ok":true}'}}]}
+        post.side_effect = [failed, succeeded]
+        raw, _ = module.groq_generate("test-secret", "openai/gpt-oss-120b",
+            [{"role": "user", "content": "research"}], stage="research")
+        self.assertEqual(raw, '{"ok":true}')
+        self.assertEqual(post.call_count, 2)
+        sleep.assert_called_once_with(5)
+
     @patch.object(module.requests, "post")
     def test_json_writer_request(self, post):
         response = Mock()
