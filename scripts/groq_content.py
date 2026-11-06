@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 import requests
 
 API_URL = "https://api.groq.com/openai/v1/chat/completions"
-DEFAULT_MODEL = "openai/gpt-oss-120b"
+DEFAULT_MODEL = "openai/gpt-oss-20b"
 
 
 def normalize_topic(value):
