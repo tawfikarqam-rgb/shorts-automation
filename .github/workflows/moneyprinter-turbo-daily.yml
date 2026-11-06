@@ -257,9 +257,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           CHANNEL_NAME: ${{ matrix.channel }}
           VIDEO_PATH: output/final_short.mp4
-          STORY_TOPIC: ${{ env.STORY_TOPIC }}
-          STORY_SEED_TOPIC: ${{ env.STORY_SEED_TOPIC }}
-          VIDEO_SCRIPT: ${{ env.VIDEO_SCRIPT }}
         run: python scripts/publish_guard.py --reserve
 
       - name: Upload business Short to YouTube as PUBLIC
@@ -281,7 +278,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           CHANNEL_NAME: business
           VIDEO_PATH: output/final_short.mp4
-          STORY_TOPIC: ${{ env.STORY_TOPIC }}
           VIDEO_ID: ${{ steps.youtube_upload_business.outputs.video_id }}
         run: python scripts/publish_guard.py --mark-published "$VIDEO_ID"
 
@@ -305,7 +301,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           CHANNEL_NAME: history
           VIDEO_PATH: output/final_short.mp4
-          STORY_TOPIC: ${{ env.STORY_TOPIC }}
           VIDEO_ID: ${{ steps.youtube_upload_history.outputs.video_id }}
         run: python scripts/publish_guard.py --mark-published "$VIDEO_ID"
 
