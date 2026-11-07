@@ -1,7 +1,7 @@
 import datetime, json, os, re
 from pathlib import Path
 
-# High-retention, fact-grounded short stories. Keep history and business pools separate.
+# High-retention, fact-grounded local story library. Keep history and business pools separate.
 # Each script opens with a curiosity gap, delivers a clear payoff, and avoids presenting
 # disputed explanations as proven facts.
 history_stories = [
@@ -125,48 +125,38 @@ available_stories = [
     if normalize_topic(story[0]) not in used_topics
 ]
 
-fallback_available = bool(available_stories)
-if fallback_available:
-    run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
-    if run_number.isdigit() and int(run_number) > 0:
-        rotation_index = (int(run_number) - 1) % len(available_stories)
-        rotation_source = "unused reviewed fallback pool"
-    else:
-        rotation_index = 0
-        rotation_source = "first unused reviewed fallback"
-    title, video_script, image_searches = available_stories[rotation_index]
+if not available_stories:
+    raise SystemExit(
+        f"No unused reviewed local stories remain for channel '{channel}'. "
+        "Add more reviewed stories before the next run; no AI API fallback is configured."
+    )
+
+run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
+if run_number.isdigit() and int(run_number) > 0:
+    rotation_index = (int(run_number) - 1) % len(available_stories)
+    rotation_source = "unused reviewed local story pool"
 else:
-    # Never silently recycle an old static story. Gemini must research a fresh one.
-    title = ""
-    video_script = ""
-    image_searches = ""
-    rotation_source = "fallback pool exhausted; fresh AI research required"
+    rotation_index = 0
+    rotation_source = "first unused reviewed local story"
+title, video_script, image_searches = available_stories[rotation_index]
 
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("CHANNEL_NAME=" + channel + "\n")
     env.write("STORY_TOPIC=" + title + "\n")
     env.write("STORY_SEED_TOPIC=" + title + "\n")
-    env.write("STORY_FALLBACK_AVAILABLE=" + str(fallback_available).lower() + "\n")
-    env.write("USED_STORY_TOPICS=" + json.dumps(sorted(used_topics), ensure_ascii=False) + "\n")
     fallback_question = (
         f"What do you think really happened in {title}?"
         if channel == "history" else
         f"Would you have made the same decision in {title}?"
-    ) if title else ""
+    )
     env.write("CTA_COMMENT_QUESTION=" + fallback_question + "\n")
     env.write("IMAGE_SEARCHES=" + image_searches + "\n")
     if video_script:
         env.write("VIDEO_SCRIPT<<STORY_SCRIPT_EOF\n")
         env.write(video_script + "\n")
         env.write("STORY_SCRIPT_EOF\n")
-    else:
-        env.write("VIDEO_SCRIPT=\n")
 
 print("Today's channel: " + channel)
-print("Unused reviewed fallback stories: " + str(len(available_stories)))
-print("Fallback available: " + str(fallback_available))
+print("Unused reviewed local stories: " + str(len(available_stories)))
 print("Rotation source: " + rotation_source)
-if title:
-    print("Today's fallback topic: " + title)
-else:
-    print("No unused local fallback remains; the AI stage must research a fresh topic.")
+print("Today's local topic: " + title)
