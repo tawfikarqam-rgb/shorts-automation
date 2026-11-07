@@ -88,3 +88,11 @@ Relevant upstream capabilities include staged production, resumable checkpoints,
 ### Phase 1 implementation boundary
 
 Do not call `YouTubeAutomationAgent.initialize()` in a GitHub Actions job: it starts the Express/dashboard and daily scheduler. Build a separate CLI entrypoint that initializes only the required services, accepts an explicit channel, executes one bounded generation, emits structured status, and exits. Publishing stays disabled in the first spike.
+
+
+## Phase 1 — compatibility workflow created
+
+- Added `.github/workflows/youtube-agent-compatibility.yml` on this feature branch.
+- The workflow checks out upstream at immutable commit `e973d515aef90c467da2289144df737a3bd03859`, installs its locked dependencies with `npm ci`, runs the upstream test suite, and verifies the required service modules and the dashboard/scheduler startup boundary.
+- It is manual-only (`workflow_dispatch`), uses read-only repository permissions, receives no secrets, and cannot publish or alter the active production workflow.
+- This is a compatibility test, not yet the headless production adapter. Its success will validate that the pinned upstream package installs and its tests pass in GitHub Actions. The next implementation task remains the non-interactive credential loader and one-shot generation adapter.
