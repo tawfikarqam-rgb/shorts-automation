@@ -15,7 +15,8 @@
     "The Radio Signal That Lasted 72 Seconds",
     "The Ship Found Drifting Without Its Crew",
     "The Desert Drawings Best Seen from the Sky",
-    "The Colony That Left One Strange Word"
+    "The Colony That Left One Strange Word",
+    "The 4,700-Year-Old Shipwreck That Rewrites Trade History"
   ],
   "entries": [
     {
@@ -33,6 +34,20 @@
       "video_id": "YkgkmDZRwBw",
       "source": "verified historical GitHub Actions log",
       "run_number": 35
+    },
+    {
+      "status": "reserved",
+      "topic": "The 4,700-Year-Old Shipwreck That Rewrites Trade History",
+      "topic_key": "the 4 700 year old shipwreck that rewrites trade history",
+      "script": "Off Turkey's Mediterranean coast, archaeologists identified a shipwreck that may date to between 2700 and 2400 BC. More than thirty ceramic jars and three stone anchors were recovered, while the wooden hull has not survived. The pottery suggests links between the Levant, Egypt, and Anatolia during the Early Bronze Age. Researchers are still studying residues inside some containers, so the ship's exact cargo remains uncertain. Even without its wood, the wreck offers a rare glimpse of trade in the age of the pyramids.",
+      "script_sha256": "41e32b93d7474bb4dd32cdedf875d879c810b6650571f573683301850822a07f",
+      "video_sha256": "68136c57155ce0223091852447d6f95ce49c8ddae9f8e7e28f8b65d160f883ea",
+      "seed_topic": "The 4,700-Year-Old Shipwreck That Rewrites Trade History",
+      "run_id": "42412150946",
+      "run_number": "60",
+      "run_attempt": "1",
+      "created_at": "2026-11-07T20:52:31.485209+00:00",
+      "video_id": null
     }
   ]
 }
