@@ -63,8 +63,24 @@ jobs:
           try:
               youtube = build("youtube", "v3", credentials=credentials, cache_discovery=False)
               response = youtube.channels().list(part="id,snippet", mine=True, maxResults=10).execute()
-          except RefreshError:
-              print(f"RESULT=OAUTH_REFRESH_FAILED channel={channel}; check token validity and OAuth client pairing.")
+          except RefreshError as exc:
+              # Surface only safe OAuth error diagnostics; never print token values or request headers.
+              print(f"RESULT=OAUTH_REFRESH_FAILED channel={channel}")
+              try:
+                  import json
+                  raw = getattr(exc, "args", [""])[0]
+                  if isinstance(raw, bytes):
+                      raw = raw.decode("utf-8", errors="replace")
+                  parsed = json.loads(raw) if isinstance(raw, str) and raw.strip().startswith("{") else {}
+                  if isinstance(parsed, dict):
+                      print(f"OAUTH_ERROR={str(parsed.get('error', ''))[:100]}")
+                      description = str(parsed.get('error_description', ''))[:300]
+                      if description:
+                          print(f"OAUTH_ERROR_DESCRIPTION={description}")
+                  else:
+                      print("OAUTH_ERROR_DETAILS=unavailable")
+              except Exception:
+                  print("OAUTH_ERROR_DETAILS=unavailable")
               sys.exit(1)
           except HttpError as exc:
               # Print only Google's structured API error diagnostics; never print request headers or credentials.
