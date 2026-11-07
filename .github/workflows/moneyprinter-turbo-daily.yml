@@ -41,13 +41,19 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Validate local story selection and project tests
+      - name: Validate Python syntax and project tests
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
           python -m py_compile scripts/daily_story.py scripts/publish_guard.py
           python -m unittest discover -s tests -v
-          python scripts/daily_story.py
+
+      - name: Select an unused reviewed local story
+        run: python scripts/daily_story.py
+
+      - name: Verify safe preflight result
+        run: |
+          set -euo pipefail
           test -n "$STORY_TOPIC"
           test -n "$VIDEO_SCRIPT"
           echo "SAFE_PREFLIGHT=PASS"
