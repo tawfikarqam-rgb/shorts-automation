@@ -1,0 +1,77 @@
+name: Cloudflare FLUX - Single Image Smoke Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      scene_description:
+        description: "One scene to generate (no semicolons)"
+        required: true
+        type: string
+        default: "A dramatic historical documentary scene of an ancient stone city at sunrise, cinematic realistic photography"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-image-smoke-test
+  cancel-in-progress: false
+
+jobs:
+  generate-one-image:
+    name: Generate and validate one Cloudflare image
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout automation repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install minimal dependency
+        run: python -m pip install --disable-pip-version-check requests
+
+      - name: Generate exactly one image with Cloudflare FLUX
+        timeout-minutes: 5
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          IMAGE_SEARCHES: ${{ inputs.scene_description }}
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/generate_cloudflare_images.py
+          python scripts/generate_cloudflare_images.py
+
+      - name: Verify exactly one valid image was generated
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          output = Path("MoneyPrinterTurbo/storage/local_videos")
+          images = sorted(output.glob("cloudflare_scene_*"))
+          if len(images) != 1:
+              raise SystemExit(f"Expected exactly 1 generated image; found {len(images)}")
+          image = images[0]
+          data = image.read_bytes()
+          valid = (
+              data.startswith(b"\x89PNG\r\n\x1a\n")
+              or (data.startswith(b"RIFF") and data[8:12] == b"WEBP")
+              or data.startswith(b"\xff\xd8\xff")
+          )
+          if len(data) < 10000 or not valid:
+              raise SystemExit(f"Generated file failed image signature/size validation: {image.name}")
+          print(f"CLOUDFLARE_IMAGE_SMOKE_TEST=PASS")
+          print(f"IMAGE_FILE={image.name}")
+          print(f"IMAGE_BYTES={len(data)}")
+          PY
+
+      - name: Upload generated image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-flux-single-image
+          path: MoneyPrinterTurbo/storage/local_videos/cloudflare_scene_*
+          if-no-files-found: error
+          retention-days: 3
