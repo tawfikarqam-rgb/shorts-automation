@@ -35,20 +35,20 @@ jobs:
         with:
           repository: darkzOGx/youtube-automation-agent
           ref: e973d515aef90c467da2289144df737a3bd03859
-          path: /tmp/youtube-automation-agent
+          path: upstream
           persist-credentials: false
 
       - name: Install upstream dependencies
-        working-directory: /tmp/youtube-automation-agent
+        working-directory: upstream
         run: npm ci --no-audit --no-fund
 
       - name: Run upstream tests
         if: inputs.run_upstream_tests
-        working-directory: /tmp/youtube-automation-agent
+        working-directory: upstream
         run: npm test
 
       - name: Verify headless entrypoint prerequisites
-        working-directory: /tmp/youtube-automation-agent
+        working-directory: upstream
         run: |
           node - <<'NODE'
           const fs = require('node:fs');
