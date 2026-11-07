@@ -57,9 +57,9 @@ jobs:
           image = images[0]
           data = image.read_bytes()
           valid = (
-              data.startswith(b"\\x89PNG\\r\\n\\x1a\\n")
+              data.startswith(b"\x89PNG\r\n\x1a\n")
               or (data.startswith(b"RIFF") and data[8:12] == b"WEBP")
-              or data.startswith(b"\\xff\\xd8\\xff")
+              or data.startswith(b"\xff\xd8\xff")
           )
           if len(data) < 10000 or not valid:
               raise SystemExit(f"Generated file failed image signature/size validation: {image.name}")
