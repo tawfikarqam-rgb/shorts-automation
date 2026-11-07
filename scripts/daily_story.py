@@ -159,6 +159,4 @@ with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
 print("Today's channel: " + channel)
 print("Unused reviewed local stories: " + str(len(available_stories)))
 print("Rotation source: " + rotation_source)
-if title:
-    print("Today's local topic: " + title)
-else:
+print("Today's local topic: " + title)
