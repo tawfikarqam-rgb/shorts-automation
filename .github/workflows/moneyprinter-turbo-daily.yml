@@ -10,7 +10,7 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: "15 19 * * *"
+    - cron: "15 10,19 * * *"
       timezone: "Africa/Cairo"
 
 permissions:
