@@ -21,7 +21,7 @@ MAX_PER_QUERY = 2
 
 # Include any AI-generated scene images created by the optional Cloudflare step.
 # These are combined with openly licensed Openverse/Commons images below.
-for generated_path in sorted(OUT.glob("cloudflare_scene_*.jpg"))[:MAX_IMAGES]:
+for generated_path in sorted(OUT.glob("cloudflare_scene_*"))[:MAX_IMAGES]:
     if generated_path.is_file() and generated_path.stat().st_size >= 10000:
         downloaded.append(str(generated_path.resolve()))
         sources.append({
