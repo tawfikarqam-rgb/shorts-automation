@@ -52,7 +52,7 @@
       "published_at": "2026-11-07T20:52:36.545925+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The 1583 Shipwreck That Kept Its Secrets",
       "topic_key": "the 1583 shipwreck that kept its secrets",
       "script": "The merchant ship Ann Francis sank off the coast of Wales in 1583, carrying objects that have survived underwater for more than four centuries. Among them was a small brass combination lock that researchers recently studied with modern scanning methods. The lock's letters have been decoded, but what they were meant to secure is still unknown. Shipwreck archaeology is often like this: technology can reveal how an object worked, while the people who used it remain just out of reach.",
@@ -63,7 +63,8 @@
       "run_number": "63",
       "run_attempt": "1",
       "created_at": "2026-11-07T21:24:20.527703+00:00",
-      "video_id": null
+      "video_id": "jfVXXmBHGaY",
+      "published_at": "2026-11-07T21:24:24.920918+00:00"
     }
   ]
 }
