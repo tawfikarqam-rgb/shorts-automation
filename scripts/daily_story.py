@@ -148,7 +148,7 @@ with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
         f"What do you think really happened in {title}?"
         if channel == "history" else
         f"Would you have made the same decision in {title}?"
-    ) if title else ""
+    )
     env.write("CTA_COMMENT_QUESTION=" + fallback_question + "\n")
     env.write("IMAGE_SEARCHES=" + image_searches + "\n")
     if video_script:
