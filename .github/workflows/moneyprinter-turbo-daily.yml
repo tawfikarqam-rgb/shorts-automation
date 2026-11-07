@@ -117,12 +117,31 @@ jobs:
             sudo apt-get install -y --no-install-recommends fontconfig fonts-dejavu-core
           fi
 
-          ffmpeg -version | head -n 1
-          ffprobe -version | head -n 1
-          FILTERS="$(ffmpeg -hide_banner -filters 2>/dev/null)"
-          [[ "$FILTERS" == *drawtext* ]]
-          test -s /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf
+          echo "CHECK=ffmpeg_version"
+          ffmpeg -version | sed -n '1p'
+          echo "CHECK=ffprobe_version"
+          ffprobe -version | sed -n '1p'
+
+          echo "CHECK=drawtext_filter"
+          FILTERS="$(ffmpeg -hide_banner -filters 2>&1)"
+          if ! printf '%s\n' "$FILTERS" | grep -F 'drawtext'; then
+            echo "::error::FFmpeg does not expose the required drawtext filter."
+            printf '%s\n' "$FILTERS" | tail -n 30
+            exit 1
+          fi
+
+          echo "CHECK=dejavu_font"
+          FONT_PATH="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+          if [ ! -s "$FONT_PATH" ]; then
+            echo "::error::Required font is missing: $FONT_PATH"
+            find /usr/share/fonts -type f -iname 'DejaVuSans-Bold.ttf' -print || true
+            exit 1
+          fi
+          echo "FONT_CHECK=PASS"
+
+          echo "CHECK=fontconfig"
           fc-list --format '%{family}\n' | sed -n '1,5p'
+          echo "MULTIMEDIA_PREFLIGHT=PASS"
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
