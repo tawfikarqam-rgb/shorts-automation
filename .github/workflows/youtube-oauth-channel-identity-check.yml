@@ -67,7 +67,23 @@ jobs:
               print(f"RESULT=OAUTH_REFRESH_FAILED channel={channel}; check token validity and OAuth client pairing.")
               sys.exit(1)
           except HttpError as exc:
-              print(f"RESULT=YOUTUBE_API_ERROR channel={channel} http_status={exc.resp.status}; no write operation was attempted.")
+              # Print only Google's structured API error diagnostics; never print request headers or credentials.
+              import json
+              status = getattr(exc.resp, "status", "unknown")
+              print(f"RESULT=YOUTUBE_API_ERROR channel={channel} http_status={status}; no write operation was attempted.")
+              try:
+                  payload = json.loads(exc.content.decode("utf-8", errors="replace"))
+                  error = payload.get("error", {}) if isinstance(payload, dict) else {}
+                  message = str(error.get("message", ""))[:500]
+                  print(f"GOOGLE_ERROR_STATUS={str(error.get('status', ''))[:100]}")
+                  if message:
+                      print(f"GOOGLE_ERROR_MESSAGE={message}")
+                  for item in error.get("errors", [])[:5]:
+                      if isinstance(item, dict):
+                          print(f"GOOGLE_ERROR_REASON={str(item.get('reason', ''))[:100]}")
+                          print(f"GOOGLE_ERROR_DOMAIN={str(item.get('domain', ''))[:100]}")
+              except Exception:
+                  print("GOOGLE_ERROR_DETAILS=unavailable; response body could not be safely parsed.")
               sys.exit(1)
           except GoogleAuthError:
               print(f"RESULT=GOOGLE_AUTH_ERROR channel={channel}; credentials could not be authenticated.")
