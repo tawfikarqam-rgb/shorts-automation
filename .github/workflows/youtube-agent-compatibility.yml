@@ -1,0 +1,87 @@
+name: YouTube Agent Compatibility Spike
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_upstream_tests:
+        description: Run the upstream project's full test suite
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-agent-compatibility-spike
+  cancel-in-progress: false
+
+jobs:
+  upstream-compatibility:
+    name: Pinned upstream compatibility check
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout this migration branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Checkout pinned upstream source
+        uses: actions/checkout@v4
+        with:
+          repository: darkzOGx/youtube-automation-agent
+          ref: e973d515aef90c467da2289144df737a3bd03859
+          path: /tmp/youtube-automation-agent
+          persist-credentials: false
+
+      - name: Install upstream dependencies
+        working-directory: /tmp/youtube-automation-agent
+        run: npm ci --no-audit --no-fund
+
+      - name: Run upstream tests
+        if: inputs.run_upstream_tests
+        working-directory: /tmp/youtube-automation-agent
+        run: npm test
+
+      - name: Verify headless entrypoint prerequisites
+        working-directory: /tmp/youtube-automation-agent
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const pkg = require('./package.json');
+          const required = [
+            'agents/content-strategy-agent.js',
+            'agents/script-writer-agent.js',
+            'agents/thumbnail-designer-agent.js',
+            'agents/seo-optimizer-agent.js',
+            'agents/production-management-agent.js',
+            'agents/publishing-scheduling-agent.js',
+            'database/db.js',
+            'utils/credential-manager.js'
+          ];
+          for (const file of required) {
+            if (!fs.existsSync(file)) throw new Error('Missing required upstream module: ' + file);
+          }
+          if (!pkg.scripts?.test) throw new Error('Upstream test script is missing');
+          const index = fs.readFileSync('index.js', 'utf8');
+          if (!index.includes('new DailyAutomation')) throw new Error('Expected built-in scheduler was not found; reassess integration');
+          if (!index.includes('this.app.listen')) throw new Error('Expected dashboard server startup was not found; reassess integration');
+          console.log(JSON.stringify({
+            upstreamVersion: pkg.version,
+            upstreamCommit: 'e973d515aef90c467da2289144df737a3bd03859',
+            nodeEngine: pkg.engines?.node || null,
+            dependenciesInstalled: true,
+            headlessAdapterRequired: true,
+            dashboardAndSchedulerMustNotStartInActions: true
+          }, null, 2));
+          NODE
+
+      - name: Report safety boundary
+        run: |
+          echo "Compatibility check only. No credentials were supplied."
+          echo "No channel production, media generation, OAuth, or YouTube upload was attempted."
+          echo "The active production workflow was not modified."
