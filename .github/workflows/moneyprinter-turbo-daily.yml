@@ -44,8 +44,8 @@ jobs:
       - name: Validate Python syntax and project tests
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/daily_story.py scripts/publish_guard.py scripts/generate_cloudflare_images.py
+          python -m pip install --disable-pip-version-check requests pillow
+          python -m py_compile scripts/daily_story.py scripts/publish_guard.py scripts/generate_cloudflare_images.py scripts/create_thumbnail.py scripts/set_youtube_thumbnail.py
           python -m unittest discover -s tests -v
 
       - name: Select an unused reviewed local story
@@ -94,8 +94,8 @@ jobs:
       - name: Select an unused reviewed local story (no AI API)
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/daily_story.py scripts/publish_guard.py scripts/generate_cloudflare_images.py
+          python -m pip install --disable-pip-version-check requests pillow
+          python -m py_compile scripts/daily_story.py scripts/publish_guard.py scripts/generate_cloudflare_images.py scripts/create_thumbnail.py scripts/set_youtube_thumbnail.py
           python -m unittest discover -s tests -v
           python scripts/daily_story.py
 
@@ -186,9 +186,18 @@ jobs:
         timeout-minutes: 10
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check requests
+          python -m pip install --disable-pip-version-check requests pillow
           python -m py_compile scripts/download_images.py
           python scripts/download_images.py
+
+      - name: Create vertical custom Shorts thumbnail
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check pillow
+          python -m py_compile scripts/create_thumbnail.py
+          python scripts/create_thumbnail.py
 
       - name: Install readable subtitle font
         run: |
@@ -304,7 +313,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: daily-short-${{ matrix.channel }}-${{ github.run_id }}
-          path: output/final_short.mp4
+          path: |
+            output/final_short.mp4
+            output/thumbnail.jpg
           if-no-files-found: warn
           retention-days: 3
 
@@ -338,6 +349,18 @@ jobs:
           : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
           VIDEO_TITLE="${STORY_TOPIC} | Money & Business Stories" python scripts/upload_youtube_public.py
 
+      - name: Set custom thumbnail for business Short
+        if: ${{ success() && steps.youtube_upload_business.outputs.video_id != '' && hashFiles('output/thumbnail.jpg') != '' }}
+        continue-on-error: true
+        env:
+          CHANNEL_NAME: business
+          VIDEO_ID: ${{ steps.youtube_upload_business.outputs.video_id }}
+          THUMBNAIL_PATH: output/thumbnail.jpg
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: python scripts/set_youtube_thumbnail.py
+
       - name: Confirm business publication in durable ledger
         if: ${{ success() && matrix.channel == 'business' && steps.youtube_upload_business.outputs.video_id != '' }}
         env:
@@ -360,6 +383,18 @@ jobs:
           set -euo pipefail
           : "${STORY_TOPIC:?STORY_TOPIC was not set by daily_story.py}"
           VIDEO_TITLE="${STORY_TOPIC} | History Shorts" python scripts/upload_youtube_public.py
+
+      - name: Set custom thumbnail for history Short
+        if: ${{ success() && steps.youtube_upload_history.outputs.video_id != '' && hashFiles('output/thumbnail.jpg') != '' }}
+        continue-on-error: true
+        env:
+          CHANNEL_NAME: history
+          VIDEO_ID: ${{ steps.youtube_upload_history.outputs.video_id }}
+          THUMBNAIL_PATH: output/thumbnail.jpg
+          YOUTUBE_CLIENT_ID: ${{ secrets.HISTORY_YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.HISTORY_YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.HISTORY_YOUTUBE_REFRESH_TOKEN }}
+        run: python scripts/set_youtube_thumbnail.py
 
       - name: Confirm history publication in durable ledger
         if: ${{ success() && matrix.channel == 'history' && steps.youtube_upload_history.outputs.video_id != '' }}
