@@ -64,21 +64,37 @@ jobs:
               youtube = build("youtube", "v3", credentials=credentials, cache_discovery=False)
               response = youtube.channels().list(part="id,snippet", mine=True, maxResults=10).execute()
           except RefreshError as exc:
-              # Surface only safe OAuth error diagnostics; never print token values or request headers.
+              # google-auth commonly stores OAuth response data in a later exception arg.
+              # Print only allowlisted fields; never print raw exception text, tokens, or headers.
               print(f"RESULT=OAUTH_REFRESH_FAILED channel={channel}")
               try:
                   import json
-                  raw = getattr(exc, "args", [""])[0]
-                  if isinstance(raw, bytes):
-                      raw = raw.decode("utf-8", errors="replace")
-                  parsed = json.loads(raw) if isinstance(raw, str) and raw.strip().startswith("{") else {}
-                  if isinstance(parsed, dict):
-                      print(f"OAUTH_ERROR={str(parsed.get('error', ''))[:100]}")
-                      description = str(parsed.get('error_description', ''))[:300]
-                      if description:
-                          print(f"OAUTH_ERROR_DESCRIPTION={description}")
+                  import re
+                  error_code = ""
+                  error_description = ""
+                  for arg in getattr(exc, "args", ()):
+                      candidate = arg
+                      if isinstance(candidate, bytes):
+                          candidate = candidate.decode("utf-8", errors="replace")
+                      if isinstance(candidate, dict):
+                          error_code = str(candidate.get("error", error_code))[:100]
+                          error_description = str(candidate.get("error_description", error_description))[:300]
+                      elif isinstance(candidate, str):
+                          match = re.search(r"\b(invalid_grant|invalid_client|invalid_scope|unauthorized_client|access_denied|temporarily_unavailable)\b", candidate)
+                          if match and not error_code:
+                              error_code = match.group(1)
+                          try:
+                              parsed = json.loads(candidate)
+                              if isinstance(parsed, dict):
+                                  error_code = str(parsed.get("error", error_code))[:100]
+                                  error_description = str(parsed.get("error_description", error_description))[:300]
+                          except Exception:
+                              pass
+                  print(f"OAUTH_ERROR={error_code or 'not_exposed_by_google_auth'}")
+                  if error_description:
+                      print(f"OAUTH_ERROR_DESCRIPTION={error_description}")
                   else:
-                      print("OAUTH_ERROR_DETAILS=unavailable")
+                      print("OAUTH_ERROR_DESCRIPTION=not_exposed")
               except Exception:
                   print("OAUTH_ERROR_DETAILS=unavailable")
               sys.exit(1)
