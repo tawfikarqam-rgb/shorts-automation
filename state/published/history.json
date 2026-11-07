@@ -36,7 +36,7 @@
       "run_number": 35
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The 4,700-Year-Old Shipwreck That Rewrites Trade History",
       "topic_key": "the 4 700 year old shipwreck that rewrites trade history",
       "script": "Off Turkey's Mediterranean coast, archaeologists identified a shipwreck that may date to between 2700 and 2400 BC. More than thirty ceramic jars and three stone anchors were recovered, while the wooden hull has not survived. The pottery suggests links between the Levant, Egypt, and Anatolia during the Early Bronze Age. Researchers are still studying residues inside some containers, so the ship's exact cargo remains uncertain. Even without its wood, the wreck offers a rare glimpse of trade in the age of the pyramids.",
@@ -47,7 +47,8 @@
       "run_number": "60",
       "run_attempt": "1",
       "created_at": "2026-11-07T20:52:31.485209+00:00",
-      "video_id": null
+      "video_id": "agvkBDv1UB4",
+      "published_at": "2026-11-07T20:52:36.545925+00:00"
     }
   ]
 }
