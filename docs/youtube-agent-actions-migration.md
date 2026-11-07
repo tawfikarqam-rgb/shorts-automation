@@ -74,3 +74,17 @@ Relevant upstream capabilities include staged production, resumable checkpoints,
 - State survives separate workflow runs.
 - All safety gates are covered by automated tests.
 - Upload happens only after durable reservation; successful upload is confirmed in the ledger; uncertain outcomes block retries.
+
+
+## Phase 1 spike findings
+
+- `index.js` constructs the Express app, credential manager, database, agents, and `DailyAutomation`; its normal initialization starts the scheduler. It is not suitable as the Actions entrypoint.
+- `CredentialManager` reads `config/credentials.json`; its setup path uses Inquirer and a localhost OAuth callback. Actions cannot run that interactive setup. A dedicated non-interactive credential loader is required, with the refresh token supplied through GitHub Secrets and no credential file committed.
+- `Database` uses local SQLite. GitHub-hosted runners are ephemeral, so upstream SQLite checkpoints, queue rows, and media files disappear after a job unless explicitly persisted.
+- `ProductionManagementAgent.processContent(contentData)` is a potentially reusable service-level production entrypoint, but its complete initialization dependencies and output contract must be mapped before calling it directly.
+- `PublishingSchedulingAgent.publishContent(contentId)` contains useful fail-closed checks for readiness, provenance, narration, and uncertain upload outcomes. Its database schedule entry model and OAuth integration must be adapted to the existing durable GitHub ledger before it can be used safely.
+- The upstream README's documented setup is interactive; no documented one-shot command exists for a single-channel generate-and-exit run.
+
+### Phase 1 implementation boundary
+
+Do not call `YouTubeAutomationAgent.initialize()` in a GitHub Actions job: it starts the Express/dashboard and daily scheduler. Build a separate CLI entrypoint that initializes only the required services, accepts an explicit channel, executes one bounded generation, emits structured status, and exits. Publishing stays disabled in the first spike.
