@@ -43,19 +43,12 @@ jobs:
           restore-keys: |
             shorts-analytics-${{ matrix.channel }}-
 
-      - name: Select an unused story or require fresh research
-        run: python scripts/daily_story.py
-
-      - name: Research a fresh story with Gemini 3.8 Flash and write the Short
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: gemini-3.8-flash
+      - name: Select an unused reviewed local story (no AI API)
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/daily_story.py scripts/gemini_content.py scripts/publish_guard.py
+          python -m py_compile scripts/daily_story.py scripts/publish_guard.py
           python -m unittest discover -s tests -v
-          python scripts/gemini_content.py
+          python scripts/daily_story.py
 
       - name: Set up FFmpeg
         uses: FedericoCarboni/setup-ffmpeg@v3
@@ -116,7 +109,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/download_images.py scripts/gemini_content.py
+          python -m py_compile scripts/download_images.py
           python scripts/download_images.py
 
       - name: Install readable subtitle font
@@ -236,15 +229,6 @@ jobs:
           path: output/final_short.mp4
           if-no-files-found: warn
           retention-days: 3
-
-      - name: Upload AI research and token audit
-        if: ${{ always() && hashFiles('output/ai_content_audit.json') != '' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ai-content-audit-${{ matrix.channel }}-${{ github.run_id }}
-          path: output/ai_content_audit.json
-          if-no-files-found: ignore
-          retention-days: 90
 
       - name: Install YouTube upload dependencies
         if: ${{ success() && matrix.channel == 'business' }}
