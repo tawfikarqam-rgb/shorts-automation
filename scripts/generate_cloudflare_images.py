@@ -45,7 +45,7 @@ def extract_image_bytes(response):
             raise ValueError("Cloudflare response did not contain an image")
         image_bytes = base64.b64decode(image_value, validate=True)
 
-    if image_bytes.startswith(b"\\x89PNG\\r\\n\\x1a\\n"):
+    if image_bytes.startswith(b"\x89PNG\r\n\x1a\n"):
         extension = ".png"
     elif image_bytes.startswith(b"RIFF") and image_bytes[8:12] == b"WEBP":
         extension = ".webp"
@@ -67,7 +67,7 @@ def main():
         return 0
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    for stale in OUTPUT_DIR.glob("cloudflare_scene_*.jpg"):
+    for stale in OUTPUT_DIR.glob("cloudflare_scene_*"):
         stale.unlink(missing_ok=True)
 
     endpoint = (
