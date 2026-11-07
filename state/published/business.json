@@ -16,7 +16,8 @@
     "The Retailer That Tried to Stop Discounting",
     "WeWork's Billion-Dollar Image Problem",
     "Why Free Apps Still Need a Business Model",
-    "Why IFC Put $100 Million Into Banque du Caire"
+    "Why IFC Put $100 Million Into Banque du Caire",
+    "Why Small Businesses Are Testing Automation"
   ],
   "entries": [
     {
@@ -49,6 +50,20 @@
       "created_at": "2026-11-07T20:49:13.387192+00:00",
       "video_id": "rXMryVAtkrQ",
       "published_at": "2026-11-07T20:49:17.443253+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "Why Small Businesses Are Testing Automation",
+      "topic_key": "why small businesses are testing automation",
+      "script": "A small company may not need a complicated AI strategy. It may simply want fewer missed customer messages, faster appointment reminders, or invoices entered without repetitive typing. Automation can save time, but only when the process is clear and exceptions are handled safely. A poorly configured bot can frustrate customers or create costly errors. The best starting point is usually one repetitive task with measurable time savings—not replacing an entire business with software.",
+      "script_sha256": "eb78ae75c9cefe2202f5a209a089b11fec5f6505fb93b469120f4a9b81f6ef73",
+      "video_sha256": "1022583a6ef6d9bd4295ee04b34e210c9dfa091283d54f685932834add79e7dd",
+      "seed_topic": "Why Small Businesses Are Testing Automation",
+      "run_id": "42415062578",
+      "run_number": "63",
+      "run_attempt": "1",
+      "created_at": "2026-11-07T21:22:09.410775+00:00",
+      "video_id": null
     }
   ]
 }
