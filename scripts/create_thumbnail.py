@@ -6,7 +6,6 @@ FLUX image) to avoid an extra image-generation API call for every Short.
 """
 import json
 import os
-import textwrap
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
@@ -54,6 +53,17 @@ def wrap_headline(draw, headline, font, max_width):
     return lines
 
 
+def load_font(font_path, size):
+    font_file = Path(font_path)
+    if font_file.is_file():
+        return ImageFont.truetype(str(font_file), size)
+    # Keep safe preflight portable; production normally has DejaVu installed.
+    try:
+        return ImageFont.load_default(size=size)
+    except TypeError:
+        return ImageFont.load_default()
+
+
 def create_thumbnail(source_path, output_path=OUTPUT, title="", channel="business", font_path=FONT_PATH):
     source_path = Path(source_path)
     output_path = Path(output_path)
@@ -73,13 +83,10 @@ def create_thumbnail(source_path, output_path=OUTPUT, title="", channel="busines
     image = Image.alpha_composite(image.convert("RGBA"), overlay)
     draw = ImageDraw.Draw(image)
 
-    font_file = Path(font_path)
-    if not font_file.is_file():
-        raise FileNotFoundError(f"Thumbnail font not found: {font_file}")
-
     label = "HISTORY" if str(channel).lower() == "history" else "BUSINESS"
-    label_font = ImageFont.truetype(str(font_file), 38)
-    headline_font = ImageFont.truetype(str(font_file), 88)
+    label_font = load_font(font_path, 38)
+    headline_size = 88
+    headline_font = load_font(font_path, headline_size)
 
     # Small channel label with a high-contrast capsule.
     label_box = draw.textbbox((0, 0), label, font=label_font)
@@ -89,8 +96,9 @@ def create_thumbnail(source_path, output_path=OUTPUT, title="", channel="busines
 
     headline = str(title).strip().upper()
     lines = wrap_headline(draw, headline, headline_font, 930)
-    while len(lines) > 2 and headline_font.size > 62:
-        headline_font = ImageFont.truetype(str(font_file), headline_font.size - 6)
+    while len(lines) > 2 and headline_size > 62:
+        headline_size -= 6
+        headline_font = load_font(font_path, headline_size)
         lines = wrap_headline(draw, headline, headline_font, 930)
 
     y = 245
@@ -99,7 +107,7 @@ def create_thumbnail(source_path, output_path=OUTPUT, title="", channel="busines
             (68, y), line, font=headline_font, fill=(255, 255, 255, 255),
             stroke_width=5, stroke_fill=(0, 0, 0, 210)
         )
-        y += headline_font.size + 24
+        y += headline_size + 24
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     image.convert("RGB").save(output_path, format="JPEG", quality=90, optimize=True, progressive=True)
