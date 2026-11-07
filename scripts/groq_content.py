@@ -50,29 +50,85 @@ def extract_message(data):
 
 
 def extract_annotation_sources(response_data):
-    """Extract URLs Groq explicitly cites for browser-search results."""
+    """Extract URLs explicitly returned by Groq browser-search metadata."""
     choices = response_data.get("choices") or []
     if not choices:
         return []
-    message = choices[0].get("message") or {}
+    choice = choices[0] if isinstance(choices[0], dict) else {}
+    message = choice.get("message") or {}
+    if not isinstance(message, dict):
+        message = {}
+
+    candidates = []
     annotations = message.get("annotations") or []
-    sources = []
     for annotation in annotations:
         if not isinstance(annotation, dict):
             continue
-        citation = annotation.get("url_citation") or annotation.get("citation") or {}
-        if not isinstance(citation, dict):
+        citation = (
+            annotation.get("url_citation")
+            or annotation.get("citation")
+            or annotation
+        )
+        if isinstance(citation, dict) and citation.get("url"):
+            candidates.append(citation)
+
+    # Groq's tool metadata can expose browser_results/search_results on an
+    # executed tool record. Accept only explicit result URLs, never URLs
+    # scraped from free-form model prose.
+    executed_tools = (
+        message.get("executed_tools")
+        or choice.get("executed_tools")
+        or response_data.get("executed_tools")
+        or []
+    )
+    for tool in executed_tools:
+        if not isinstance(tool, dict):
             continue
-        url = str(citation.get("url") or "").strip()
-        title = str(citation.get("title") or "").strip()
-        if url:
-            sources.append({
-                "title": title or "Groq browser-search citation",
-                "url": url,
-                "publisher": urlparse(url).netloc,
-                "supports": [],
-            })
+        browser_results = tool.get("browser_results") or []
+        for result in browser_results:
+            if isinstance(result, dict):
+                candidates.append(result)
+        search_results = tool.get("search_results") or {}
+        if isinstance(search_results, dict):
+            for result in search_results.get("results") or []:
+                if isinstance(result, dict):
+                    candidates.append(result)
+
+    sources, seen = [], set()
+    for item in candidates:
+        url = str(item.get("url") or "").strip()
+        parsed = urlparse(url)
+        if parsed.scheme != "https" or not parsed.netloc or url in seen:
+            continue
+        seen.add(url)
+        title = str(item.get("title") or "").strip()
+        sources.append({
+            "title": title[:200] or "Groq browser-search result",
+            "url": url,
+            "publisher": parsed.netloc,
+            "supports": [],
+        })
     return sources
+
+
+def research_response_diagnostics(response_data):
+    """Return safe structural diagnostics without logging source contents."""
+    choices = response_data.get("choices") or []
+    choice = choices[0] if choices and isinstance(choices[0], dict) else {}
+    message = choice.get("message") or {}
+    if not isinstance(message, dict):
+        message = {}
+    annotations = message.get("annotations") or []
+    tools = message.get("executed_tools") or choice.get("executed_tools") or []
+    return {
+        "usage": response_data.get("usage") or {},
+        "finish_reason": choice.get("finish_reason"),
+        "message_keys": sorted(message.keys()),
+        "annotation_count": len(annotations) if isinstance(annotations, list) else 0,
+        "executed_tool_count": len(tools) if isinstance(tools, list) else 0,
+        "content_chars": len(message.get("content") or "")
+            if isinstance(message.get("content"), str) else 0,
+    }
 
 def validate_sources(raw_sources):
     if not isinstance(raw_sources, list):
@@ -244,6 +300,18 @@ def main():
         [{"role": "user", "content": build_research_prompt(channel, topic, seed, used_topics)}],
         browser_search=True, max_tokens=3000, stage="research",
     )
+    diagnostics = research_response_diagnostics(research_response)
+    print(
+        "GROQ_RESEARCH_USAGE="
+        + json.dumps(diagnostics["usage"], sort_keys=True, separators=(",", ":")),
+        flush=True,
+    )
+    print(
+        "GROQ_RESEARCH_RESPONSE_SHAPE="
+        + json.dumps({key: value for key, value in diagnostics.items() if key != "usage"},
+                     sort_keys=True, separators=(",", ":")),
+        flush=True,
+    )
     research = parse_object(research_raw)
     researched_topic = research.get("topic")
     if not isinstance(researched_topic, str) or not researched_topic.strip():
@@ -263,7 +331,15 @@ def main():
         reported_sources = []
     # Prefer explicit model-returned source metadata, and supplement it with
     # URLs Groq itself attached as browser-search citation annotations.
-    reported_sources = reported_sources + extract_annotation_sources(research_response)
+    groq_search_sources = extract_annotation_sources(research_response)
+    reported_sources = reported_sources + groq_search_sources
+    print(
+        "GROQ_RESEARCH_SOURCE_COUNTS="
+        f"model:{len(research.get('sources') or [])},"
+        f"groq_search:{len(groq_search_sources)},"
+        f"validated_candidates:{len(reported_sources)}",
+        flush=True,
+    )
     sources = validate_sources(reported_sources)
     print(
         "GROQ_RESEARCH_SOURCE_COUNTS="
