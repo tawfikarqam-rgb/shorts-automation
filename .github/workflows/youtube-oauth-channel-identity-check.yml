@@ -23,7 +23,8 @@ jobs:
       CHANNEL_NAME: ${{ matrix.channel }}
       YOUTUBE_CLIENT_ID: ${{ matrix.channel == 'history' && secrets.HISTORY_YOUTUBE_CLIENT_ID || secrets.YOUTUBE_CLIENT_ID }}
       YOUTUBE_CLIENT_SECRET: ${{ matrix.channel == 'history' && secrets.HISTORY_YOUTUBE_CLIENT_SECRET || secrets.YOUTUBE_CLIENT_SECRET }}
-      YOUTUBE_REFRESH_TOKEN: ${{ matrix.channel == 'history' && secrets.HISTORY_YOUTUBE_REFRESH_TOKEN || secrets.YOUTUBE_REFRESH_TOKEN }}
+      # Dedicated identity-check refresh tokens; production upload tokens remain untouched.
+      YOUTUBE_REFRESH_TOKEN: ${{ matrix.channel == 'history' && secrets.HISTORY_IDENTITY_YOUTUBE_REFRESH_TOKEN || secrets.IDENTITY_YOUTUBE_REFRESH_TOKEN }}
     steps:
       - name: Set up Python
         uses: actions/setup-python@v5
