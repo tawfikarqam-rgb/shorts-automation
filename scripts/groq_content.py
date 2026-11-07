@@ -130,6 +130,59 @@ def research_response_diagnostics(response_data):
             if isinstance(message.get("content"), str) else 0,
     }
 
+
+def research_payload_diagnostics(research, response_data):
+    """Log safe output-shape metadata to diagnose incomplete research JSON."""
+    choices = response_data.get("choices") or []
+    choice = choices[0] if choices and isinstance(choices[0], dict) else {}
+    message = choice.get("message") or {}
+    if not isinstance(message, dict):
+        message = {}
+    tools = (
+        message.get("executed_tools")
+        or choice.get("executed_tools")
+        or response_data.get("executed_tools")
+        or []
+    )
+    tool_shapes = []
+    if isinstance(tools, list):
+        for tool in tools[:10]:
+            if not isinstance(tool, dict):
+                tool_shapes.append({"type": type(tool).__name__})
+                continue
+            browser_results = tool.get("browser_results") or []
+            search_results = tool.get("search_results") or {}
+            search_result_count = (
+                len(search_results.get("results") or [])
+                if isinstance(search_results, dict) else 0
+            )
+            tool_shapes.append({
+                "keys": sorted(tool.keys()),
+                "type": str(tool.get("type") or tool.get("name") or "")[:80],
+                "browser_results_count": (
+                    len(browser_results) if isinstance(browser_results, list) else 0
+                ),
+                "search_results_count": search_result_count,
+            })
+    return {
+        "json_keys": sorted(research.keys()),
+        "topic_present": "topic" in research,
+        "topic_type": type(research.get("topic")).__name__,
+        "topic_chars": (
+            len(research.get("topic")) if isinstance(research.get("topic"), str) else 0
+        ),
+        "facts_count": (
+            len(research.get("verified_facts"))
+            if isinstance(research.get("verified_facts"), list) else 0
+        ),
+        "sources_count": (
+            len(research.get("sources"))
+            if isinstance(research.get("sources"), list) else 0
+        ),
+        "research_status": str(research.get("research_status") or "")[:40],
+        "executed_tools_shape": tool_shapes,
+    }
+
 def validate_sources(raw_sources):
     if not isinstance(raw_sources, list):
         raise ValueError("Research did not return a sources list")
@@ -313,6 +366,25 @@ def main():
         flush=True,
     )
     research = parse_object(research_raw)
+    payload_diagnostics = research_payload_diagnostics(research, research_response)
+    print(
+        "GROQ_RESEARCH_PAYLOAD_SHAPE="
+        + json.dumps(payload_diagnostics, sort_keys=True, separators=(",", ":")),
+        flush=True,
+    )
+    reported_sources = research.get("sources")
+    if not isinstance(reported_sources, list):
+        reported_sources = []
+    groq_search_sources = extract_annotation_sources(research_response)
+    candidate_sources = reported_sources + groq_search_sources
+    print(
+        "GROQ_RESEARCH_SOURCE_COUNTS="
+        f"model:{len(reported_sources)},"
+        f"groq_search:{len(groq_search_sources)},"
+        f"validated_candidates:{len(candidate_sources)}",
+        flush=True,
+    )
+
     researched_topic = research.get("topic")
     if not isinstance(researched_topic, str) or not researched_topic.strip():
         raise ValueError("Research stage did not return a topic")
@@ -326,21 +398,9 @@ def main():
         raise ValueError("Research stage returned fewer than three factual claims")
     if research.get("research_status") != "verified":
         raise ValueError("Fresh story research was not verified; refusing to use it")
-    reported_sources = research.get("sources")
-    if not isinstance(reported_sources, list):
-        reported_sources = []
-    # Prefer explicit model-returned source metadata, and supplement it with
-    # URLs Groq itself attached as browser-search citation annotations.
-    groq_search_sources = extract_annotation_sources(research_response)
-    reported_sources = reported_sources + groq_search_sources
-    print(
-        "GROQ_RESEARCH_SOURCE_COUNTS="
-        f"model:{len(research.get('sources') or [])},"
-        f"groq_search:{len(groq_search_sources)},"
-        f"validated_candidates:{len(reported_sources)}",
-        flush=True,
-    )
-    sources = validate_sources(reported_sources)
+    # Validate the model-reported and tool-reported URLs only after the
+    # research payload has passed the topic/fact/status checks above.
+    sources = validate_sources(candidate_sources)
     print(
         "GROQ_RESEARCH_SOURCE_COUNTS="
         f"model:{len(research.get('sources') or [])},"
