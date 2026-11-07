@@ -99,12 +99,12 @@ jobs:
           python -m unittest discover -s tests -v
           python scripts/daily_story.py
 
-      - name: Set up FFmpeg
-        uses: FedericoCarboni/setup-ffmpeg@v3
+      - name: Install FFmpeg from Ubuntu packages
         timeout-minutes: 8
-        with:
-          ffmpeg-version: "release"
-          architecture: x64
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
 
       - name: Check system fonts and multimedia filters
         timeout-minutes: 3
