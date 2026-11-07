@@ -18,6 +18,21 @@ downloaded, sources, seen = [], [], set()
 seen_titles = set()
 MAX_IMAGES = 8
 MAX_PER_QUERY = 2
+
+# Include any AI-generated scene images created by the optional Cloudflare step.
+# These are combined with openly licensed Openverse/Commons images below.
+for generated_path in sorted(OUT.glob("cloudflare_scene_*"))[:MAX_IMAGES]:
+    if generated_path.is_file() and generated_path.stat().st_size >= 10000:
+        downloaded.append(str(generated_path.resolve()))
+        sources.append({
+            "file": str(generated_path),
+            "title": generated_path.stem.replace("_", " "),
+            "license": "AI-generated image",
+            "attribution": "Generated with Cloudflare Workers AI using FLUX.1 schnell",
+            "source_url": "https://developers.cloudflare.com/workers-ai/models/flux-1-schnell/",
+            "provider": "Cloudflare Workers AI / FLUX.1 schnell",
+            "matched_query": ""
+        })
 STOP_WORDS = {
     "about", "after", "before", "from", "into", "with", "without",
     "that", "this", "their", "there", "then", "they", "when", "where",

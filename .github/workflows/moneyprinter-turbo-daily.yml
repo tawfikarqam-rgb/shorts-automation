@@ -45,7 +45,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/daily_story.py scripts/publish_guard.py
+          python -m py_compile scripts/daily_story.py scripts/publish_guard.py scripts/generate_cloudflare_images.py
           python -m unittest discover -s tests -v
 
       - name: Select an unused reviewed local story
@@ -95,7 +95,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/daily_story.py scripts/publish_guard.py
+          python -m py_compile scripts/daily_story.py scripts/publish_guard.py scripts/generate_cloudflare_images.py
           python -m unittest discover -s tests -v
           python scripts/daily_story.py
 
@@ -171,6 +171,16 @@ jobs:
           cp config.example.toml config.toml
 
           uv run python cli.py --help
+
+      - name: Generate up to 3 custom scene images with Cloudflare FLUX
+        timeout-minutes: 12
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/generate_cloudflare_images.py
+          python scripts/generate_cloudflare_images.py
 
       - name: Download diverse relevant openly licensed scene images
         timeout-minutes: 10
