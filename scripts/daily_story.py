@@ -98,9 +98,9 @@ business_stories = [
 # Newly researched additions (November 2026). Keep scripts self-contained and cautious:
 # current-event claims are limited to facts supported by reputable reporting or official sources.
 history_stories.extend([
-    ("The Bomber That Landed With Nobody on Board",
-     "A military aircraft landing without a pilot sounds impossible, but unmanned and remotely operated aircraft have made that idea real. Recent history Shorts have drawn attention to stories of aircraft returning after crews were lost or forced to abandon them. Before publishing this angle, distinguish a genuinely empty landing from an aircraft that was remotely controlled or recovered by autopilot. The bigger historical question is how aviation moved from human pilots toward increasingly automated flight.",
-     "unmanned bomber aircraft historical;WWII bomber aircraft archival;military aircraft cockpit"),
+    ("The WWII Bomber That Crashed With No Crew Aboard",
+     "On November 23, 1944, a damaged American B-17 Flying Fortress came down in a field in Belgium with nobody aboard. Soldiers who inspected it found the engines still running and the crew missing. The story became known as the Phantom Fortress. Later accounts said the crew had set the aircraft on autopilot and parachuted out, but details in the surviving reports do not perfectly match. The remarkable landing was real enough to investigate; the mystery grew as versions of the story changed.",
+     "Phantom Fortress B-17 Belgium 1944;B-17 Flying Fortress WWII;91st Bombardment Group B-17"),
     ("The 400-Year-Old Lock Finally Opened",
      "A brass combination lock recovered from the wreck of the merchant ship Ann Francis, which sank off Wales in 1583, resisted researchers for centuries. Modern imaging helped specialists study its tiny internal mechanism and work out a four-letter combination: ANCE. The letters have not produced a confirmed explanation of what the lock protected. It is a remarkable meeting of archaeology and technology: a small everyday object preserved a puzzle across four hundred years.",
      "Ann Francis shipwreck Elizabethan lock;16th century brass combination lock;micro CT scan antique lock"),
@@ -128,9 +128,9 @@ history_stories.extend([
     ("The Mysterious Moai That Emerged Again",
      "The giant stone figures of Rapa Nui, often called Easter Island, are known around the world. Recent reports described a moai becoming visible again in a changing landscape, drawing attention to how these monuments are affected by erosion, water, and shifting ground. The statues were created by the island's Polynesian communities, and their history is tied to complex social and ceremonial traditions. Avoid the myth that outsiders built them: the moai are a remarkable achievement of Rapa Nui people.",
      "Rapa Nui moai statue landscape;Easter Island moai archaeology;moai statue coastal erosion"),
-    ("The Ancient Footprints That Changed a Migration Debate",
-     "A set of ancient human footprints can preserve a moment that bones alone cannot: people walking across a landscape. New archaeological work reported in 2026 has renewed debate about when humans reached particular regions and how they moved through them. Footprints must be dated carefully, because the age of the surrounding sediment and the possibility of disturbance both matter. When the evidence holds up, a trackway can turn an abstract migration theory into a scene of real people crossing the ground.",
-     "ancient human footprints archaeological site;prehistoric trackway excavation;human migration footprints"),
+    ("The Jordan Valley Site That May Rewrite Human Migration",
+     "A site called 'Ubeidiya in the Jordan Valley has been dated to about 1.9 million years ago, older than researchers previously thought. Scientists combined several dating methods, including analysis of buried rocks, fossil shells, and ancient magnetic-field records. The site contains stone tools and animal fossils, making it important evidence for early human movement beyond Africa. Researchers say the revised age may point to earlier or overlapping migration waves—but it does not identify exactly which human species made every tool.",
+     "Ubeidiya archaeological site Jordan Valley;1.9 million year old stone tools;early human migration excavation"),
     ("The 1583 Shipwreck That Kept Its Secrets",
      "The merchant ship Ann Francis sank off the coast of Wales in 1583, carrying objects that have survived underwater for more than four centuries. Among them was a small brass combination lock that researchers recently studied with modern scanning methods. The lock's letters have been decoded, but what they were meant to secure is still unknown. Shipwreck archaeology is often like this: technology can reveal how an object worked, while the people who used it remain just out of reach.",
      "Ann Francis 1583 shipwreck archaeology;Elizabethan merchant shipwreck artifacts;Tudor brass artifacts"),
