@@ -45,6 +45,39 @@ class GroqContentTests(unittest.TestCase):
         ]}}]}
         self.assertEqual(module.extract_annotation_sources(data), [])
 
+    def test_extract_browser_search_result_metadata(self):
+        data = {"choices": [{"message": {"executed_tools": [{
+            "type": "browser_search",
+            "browser_results": [
+                {"title": "Archive record", "url": "https://archive.example/story"},
+                {"title": "Invalid URL", "url": "http://insecure.example/story"},
+            ],
+            "search_results": {"results": [
+                {"title": "Museum record", "url": "https://museum.example/exhibit"}
+            ]},
+        }]}}]}
+        sources = module.extract_annotation_sources(data)
+        self.assertEqual(
+            [source["url"] for source in sources],
+            ["https://archive.example/story", "https://museum.example/exhibit"],
+        )
+        self.assertEqual(len(module.validate_sources(sources)), 2)
+
+    def test_research_diagnostics_include_usage_and_shape_only(self):
+        data = {
+            "usage": {"prompt_tokens": 100, "completion_tokens": 50, "total_tokens": 150},
+            "choices": [{"finish_reason": "stop", "message": {
+                "content": '{"sources":[]}',
+                "annotations": [{"type": "url_citation"}],
+                "executed_tools": [{"type": "browser_search"}],
+            }}],
+        }
+        diagnostics = module.research_response_diagnostics(data)
+        self.assertEqual(diagnostics["usage"]["total_tokens"], 150)
+        self.assertEqual(diagnostics["annotation_count"], 1)
+        self.assertEqual(diagnostics["executed_tool_count"], 1)
+        self.assertEqual(diagnostics["content_chars"], len('{"sources":[]}'))
+
     def test_validate_two_distinct_https_sources(self):
         sources = [
             {"title": "A", "url": "https://a.example/x", "supports": ["claim"]},
