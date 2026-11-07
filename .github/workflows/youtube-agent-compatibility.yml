@@ -29,8 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: npm
-          cache-dependency-path: /tmp/youtube-automation-agent/package-lock.json
 
       - name: Checkout pinned upstream source
         uses: actions/checkout@v4
