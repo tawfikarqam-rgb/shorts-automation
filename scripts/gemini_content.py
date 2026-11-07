@@ -6,6 +6,7 @@ import os
 import re
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -68,7 +69,7 @@ def extract_grounded_sources(response_data):
         sources.append({
             "title": title[:200] or "Google Search result",
             "url": url,
-            "publisher": parsed.netloc[:120],
+            "publisher": title[:120] or parsed.netloc[:120],
             "supports": [],
         })
     return sources
@@ -193,7 +194,7 @@ def export_env(values):
         return
     with open(path, "a", encoding="utf-8") as handle:
         for key, value in values.items():
-            delimiter = "GEMINI_" + str(abs(hash((key, value)))) + "_END"
+            delimiter = "GEMINI_" + uuid.uuid4().hex + "_END"
             handle.write(f"{key}<<{delimiter}\n{value}\n{delimiter}\n")
 
 
