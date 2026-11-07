@@ -285,20 +285,33 @@ def build_research_prompt(channel, topic, seed, used_topics):
         if channel == "history" else
         "company history, business strategy, product decisions, market shifts, or documented entrepreneurial lessons"
     )
-    return f"""You are a cautious documentary fact researcher. Research one English YouTube Shorts story.
+    return f"""You are a cautious documentary fact researcher. Research ONE English YouTube Shorts story.
 Channel: {channel}. Focus: {focus}
 {candidate}
 Do not reuse or lightly retitle any used topic: {json.dumps(used_topics, ensure_ascii=False)}
-You MUST use browser search. Prefer primary sources, official filings, reputable museums,
-universities, archives, and established journalism. Do not invent URLs or sources.
-Return one JSON object only, with keys:
+SEARCH BUDGET — STRICT:
+- Make exactly ONE concise browser_search query that combines the story subject with the
+  key fact(s) that need verification. Do not issue follow-up searches or repeat the query.
+- Do not open/visit individual websites. Use the returned search-result evidence only.
+- Review the available results and select only the 2-3 strongest relevant sources from
+  different reputable publishers where possible. Ignore irrelevant results.
+- Stop searching as soon as the single search result set is returned. Do not browse for images.
+EVIDENCE RULES:
+- Prefer primary sources, official filings, reputable museums, universities, archives,
+  and established journalism.
+- Use only facts directly supported by the returned result evidence. Do not infer details
+  from headlines alone. If the snippets do not support three specific facts, mark not_verified.
+- Never invent URLs, publishers, dates, quotes, or facts.
+Return one compact JSON object only, with keys:
 topic (string), verified_facts (array of at least 3 specific factual claims),
 uncertain_or_disputed (array), research_status ("verified" only if sources support the facts,
-otherwise "not_verified"), sources (array of objects with title, exact https URL, publisher,
-and supports array mapping claims to that source), image_searches (4-8 distinct visual searches).
-Include at least two different real HTTPS source URLs actually encountered during browser search.
-Never fabricate a URL. If you cannot supply two distinct sources and three supported facts,
-set research_status to not_verified. Do not claim verification merely because a page appeared in search."""
+otherwise "not_verified"), sources (array of 2-3 objects with title, exact https URL,
+publisher, and supports array mapping claims to that source), image_searches
+(4-6 short, distinct visual searches).
+Include at least two different real HTTPS source URLs actually encountered in the one
+browser_search result set. Never fabricate a URL. If you cannot supply two distinct sources
+and three supported facts, set research_status to not_verified. Do not claim verification
+merely because a page appeared in search."""
 
 
 def build_writer_prompt(channel, topic, facts, uncertainty, sources, used_topics):
@@ -351,7 +364,7 @@ def main():
     research_raw, research_response = groq_generate(
         api_key, model,
         [{"role": "user", "content": build_research_prompt(channel, topic, seed, used_topics)}],
-        browser_search=True, max_tokens=3000, stage="research",
+        browser_search=True, max_tokens=1800, stage="research",
     )
     diagnostics = research_response_diagnostics(research_response)
     print(
