@@ -46,6 +46,7 @@ jobs:
       - name: Select an unused reviewed local story (no AI API)
         run: |
           set -euo pipefail
+          python -m pip install --disable-pip-version-check requests
           python -m py_compile scripts/daily_story.py scripts/publish_guard.py
           python -m unittest discover -s tests -v
           python scripts/daily_story.py
