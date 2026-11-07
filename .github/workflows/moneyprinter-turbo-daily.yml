@@ -103,9 +103,8 @@ jobs:
         uses: FedericoCarboni/setup-ffmpeg@v3
         timeout-minutes: 8
         with:
-          ffmpeg-version: "6.1.1"
+          ffmpeg-version: "release"
           architecture: x64
-          linking-type: static
 
       - name: Check system fonts and multimedia filters
         timeout-minutes: 3
