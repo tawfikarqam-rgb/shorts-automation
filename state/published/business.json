@@ -36,7 +36,7 @@
       "run_number": 35
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "Why IFC Put $100 Million Into Banque du Caire",
       "topic_key": "why ifc put 100 million into banque du caire",
       "script": "The International Finance Corporation invested 100 million dollars in Banque du Caire's November 2026 IPO for an approximately seven percent stake. The IFC said the investment aims to help the bank expand financing for businesses and households, especially smaller companies. This is more than a headline about a foreign investor buying shares: development institutions often use investments to encourage private-sector lending and economic activity. The real test will be whether more firms can access useful finance and grow.",
@@ -47,7 +47,8 @@
       "run_number": "60",
       "run_attempt": "1",
       "created_at": "2026-11-07T20:49:13.387192+00:00",
-      "video_id": null
+      "video_id": "rXMryVAtkrQ",
+      "published_at": "2026-11-07T20:49:17.443253+00:00"
     }
   ]
 }
