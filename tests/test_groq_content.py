@@ -176,6 +176,16 @@ class GroqContentTests(unittest.TestCase):
         self.assertNotIn("tools", payload)
 
 
+    def test_research_prompt_enforces_single_search_budget(self):
+        prompt = module.build_research_prompt(
+            "history", "", "", ["Previously used topic"]
+        )
+        self.assertIn("exactly ONE concise browser_search query", prompt)
+        self.assertIn("Do not issue follow-up searches", prompt)
+        self.assertIn("Do not open/visit individual websites", prompt)
+        self.assertIn("2-3 strongest relevant sources", prompt)
+        self.assertIn("at least 3 specific factual claims", prompt)
+
     def test_writer_prompt_uses_compact_verified_evidence(self):
         facts = [f"Verified fact {i}" for i in range(8)]
         sources = [
