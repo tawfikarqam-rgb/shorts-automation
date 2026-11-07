@@ -36,7 +36,7 @@ class ThumbnailTests(unittest.TestCase):
         image = Image.new("RGB", (1080, 1920), "black")
         from PIL import ImageDraw, ImageFont
         draw = ImageDraw.Draw(image)
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 88)
+        font = ImageFont.load_default()
         lines = wrap_headline(draw, "A very long headline that should be shortened to fit within three clear readable lines on the thumbnail", font, 930)
         self.assertLessEqual(len(lines), 3)
 
