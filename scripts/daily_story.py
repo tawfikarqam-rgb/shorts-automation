@@ -125,22 +125,20 @@ available_stories = [
     if normalize_topic(story[0]) not in used_topics
 ]
 
-fallback_available = bool(available_stories)
-if not fallback_available:
+if not available_stories:
     raise SystemExit(
-        f\"No unused reviewed local stories remain for channel '{channel}'. \"
-        \"Add more reviewed stories before the next run; no AI API fallback is configured.\"
+        f"No unused reviewed local stories remain for channel '{channel}'. "
+        "Add more reviewed stories before the next run; no AI API fallback is configured."
     )
-if fallback_available:
-    run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
-    if run_number.isdigit() and int(run_number) > 0:
-        rotation_index = (int(run_number) - 1) % len(available_stories)
-        rotation_source = "unused reviewed fallback pool"
-    else:
-        rotation_index = 0
-        rotation_source = "first unused reviewed fallback"
-    title, video_script, image_searches = available_stories[rotation_index]
+
+run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
+if run_number.isdigit() and int(run_number) > 0:
+    rotation_index = (int(run_number) - 1) % len(available_stories)
+    rotation_source = "unused reviewed local story pool"
 else:
+    rotation_index = 0
+    rotation_source = "first unused reviewed local story"
+title, video_script, image_searches = available_stories[rotation_index]
 
 with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
     env.write("CHANNEL_NAME=" + channel + "\n")
@@ -159,8 +157,8 @@ with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
         env.write("STORY_SCRIPT_EOF\n")
 
 print("Today's channel: " + channel)
-print("Unused reviewed fallback stories: " + str(len(available_stories)))
+print("Unused reviewed local stories: " + str(len(available_stories)))
 print("Rotation source: " + rotation_source)
 if title:
-    print("Today's fallback topic: " + title)
+    print("Today's local topic: " + title)
 else:
