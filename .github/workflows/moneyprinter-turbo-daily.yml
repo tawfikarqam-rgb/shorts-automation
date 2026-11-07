@@ -116,7 +116,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check requests
-          python -m py_compile scripts/download_images.py scripts/groq_content.py
+          python -m py_compile scripts/download_images.py scripts/gemini_content.py
           python scripts/download_images.py
 
       - name: Install readable subtitle font
