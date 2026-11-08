@@ -17,7 +17,8 @@
     "The Desert Drawings Best Seen from the Sky",
     "The Colony That Left One Strange Word",
     "The 4,700-Year-Old Shipwreck That Rewrites Trade History",
-    "The 1583 Shipwreck That Kept Its Secrets"
+    "The 1583 Shipwreck That Kept Its Secrets",
+    "A Drought Revealed a Lost Roman City"
   ],
   "entries": [
     {
@@ -65,6 +66,20 @@
       "created_at": "2026-11-07T21:24:20.527703+00:00",
       "video_id": "jfVXXmBHGaY",
       "published_at": "2026-11-07T21:24:24.920918+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "A Drought Revealed a Lost Roman City",
+      "topic_key": "a drought revealed a lost roman city",
+      "script": "When water levels fall, landscapes can reveal structures hidden for centuries. Recent drought conditions in Europe exposed remains associated with a lost Roman settlement, bringing ancient walls and traces of urban life back into view. Such discoveries need careful identification: a visible ruin is not automatically a newly found city, and archaeologists compare maps, materials, and historical records before naming a site. The striking lesson is that climate can uncover the past while also threatening the archaeological remains it exposes.",
+      "script_sha256": "9161fd172f40b5096976f4a3a04969b26822b07367cb48b551b8e31067fd7f36",
+      "video_sha256": "6875aacded440d26c6a884602cabd47b69f01e2ffe8c469a89b7ce8c5c1bb831",
+      "seed_topic": "A Drought Revealed a Lost Roman City",
+      "run_id": "42465125592",
+      "run_number": "64",
+      "run_attempt": "1",
+      "created_at": "2026-11-08T09:03:51.902823+00:00",
+      "video_id": null
     }
   ]
 }
