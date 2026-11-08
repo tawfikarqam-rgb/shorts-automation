@@ -19,7 +19,8 @@
     "Why IFC Put $100 Million Into Banque du Caire",
     "Why Small Businesses Are Testing Automation",
     "The World Bank's $1 Billion Bet on Egypt's Reforms",
-    "The Subscription Trap: When Cheap Software Gets Expensive"
+    "The Subscription Trap: When Cheap Software Gets Expensive",
+    "Why Secondhand Shopping Became a Business"
   ],
   "entries": [
     {
@@ -97,6 +98,20 @@
       "created_at": "2026-11-08T10:39:55.387004+00:00",
       "video_id": "61E6Rt_eNEA",
       "published_at": "2026-11-08T10:39:59.685785+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "Why Secondhand Shopping Became a Business",
+      "topic_key": "why secondhand shopping became a business",
+      "script": "Resale businesses turn used clothing, electronics, and household goods into products with a second life. Their appeal can come from lower prices, rare finds, and growing interest in re-use. But a resale operation still needs sourcing, inspection, cleaning, photography, pricing, and reliable delivery. A cheap item is not automatically profitable if it takes too long to prepare or ship. The strongest sellers build trust by showing condition honestly and making the buying process simple.",
+      "script_sha256": "6015d09b34f329c993bd44e3b311c2ac6c92b8051950effa592829e7915fe512",
+      "video_sha256": "92f685f83d801d6b0eebd16e73506157d8f8a82a267e12d978e87401ba327337",
+      "seed_topic": "Why Secondhand Shopping Became a Business",
+      "run_id": "42504236986",
+      "run_number": "66",
+      "run_attempt": "1",
+      "created_at": "2026-11-08T17:27:05.535172+00:00",
+      "video_id": null
     }
   ]
 }
