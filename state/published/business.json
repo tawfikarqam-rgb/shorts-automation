@@ -84,7 +84,7 @@
       "published_at": "2026-11-08T09:12:09.033321+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Subscription Trap: When Cheap Software Gets Expensive",
       "topic_key": "the subscription trap when cheap software gets expensive",
       "script": "A business may sign up for several low-cost software subscriptions, each seeming harmless on its own. Over time, overlapping tools, unused seats, and automatic renewals can create a surprisingly large bill. The answer is not to cancel every subscription; it is to review who uses each tool, what work it replaces, and whether the value exceeds the cost. For software companies, retention depends on proving that customers still need the product after the first month.",
@@ -95,7 +95,8 @@
       "run_number": "65",
       "run_attempt": "1",
       "created_at": "2026-11-08T10:39:55.387004+00:00",
-      "video_id": null
+      "video_id": "61E6Rt_eNEA",
+      "published_at": "2026-11-08T10:39:59.685785+00:00"
     }
   ]
 }
