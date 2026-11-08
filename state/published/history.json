@@ -68,7 +68,7 @@
       "published_at": "2026-11-07T21:24:24.920918+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "A Drought Revealed a Lost Roman City",
       "topic_key": "a drought revealed a lost roman city",
       "script": "When water levels fall, landscapes can reveal structures hidden for centuries. Recent drought conditions in Europe exposed remains associated with a lost Roman settlement, bringing ancient walls and traces of urban life back into view. Such discoveries need careful identification: a visible ruin is not automatically a newly found city, and archaeologists compare maps, materials, and historical records before naming a site. The striking lesson is that climate can uncover the past while also threatening the archaeological remains it exposes.",
@@ -79,7 +79,8 @@
       "run_number": "64",
       "run_attempt": "1",
       "created_at": "2026-11-08T09:03:51.902823+00:00",
-      "video_id": null
+      "video_id": "UnxSqUZJYOI",
+      "published_at": "2026-11-08T09:03:56.141264+00:00"
     }
   ]
 }
