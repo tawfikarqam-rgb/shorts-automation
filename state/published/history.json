@@ -19,7 +19,8 @@
     "The 4,700-Year-Old Shipwreck That Rewrites Trade History",
     "The 1583 Shipwreck That Kept Its Secrets",
     "A Drought Revealed a Lost Roman City",
-    "The Ancient City That Was Bigger Than Its Ruins Suggested"
+    "The Ancient City That Was Bigger Than Its Ruins Suggested",
+    "The Roman Cup That Made Water Look Like Magic"
   ],
   "entries": [
     {
@@ -97,6 +98,20 @@
       "created_at": "2026-11-08T10:42:26.273545+00:00",
       "video_id": "ydj44hIHqek",
       "published_at": "2026-11-08T10:42:29.860540+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Roman Cup That Made Water Look Like Magic",
+      "topic_key": "the roman cup that made water look like magic",
+      "script": "Some ancient Roman glass changes colour depending on how light passes through it. The famous Lycurgus Cup can appear green in reflected light and reddish when light shines through it. Researchers link the effect to tiny particles of gold and silver embedded in the glass. It was not electricity or a hidden lamp: Roman craftspeople created an optical effect through remarkable control of materials. The cup shows how sophisticated ancient manufacturing could be.",
+      "script_sha256": "9603f21aaf0f3ac0f7fe6065954b2f038bd0757b72f3d38b2255fc495410c5f8",
+      "video_sha256": "62579053e836b61582f5d3aa0f9d775e876f6984cd657e19d4d2fc24f5dce726",
+      "seed_topic": "The Roman Cup That Made Water Look Like Magic",
+      "run_id": "42504236986",
+      "run_number": "66",
+      "run_attempt": "1",
+      "created_at": "2026-11-08T17:32:59.962131+00:00",
+      "video_id": null
     }
   ]
 }
