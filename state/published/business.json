@@ -20,7 +20,8 @@
     "Why Small Businesses Are Testing Automation",
     "The World Bank's $1 Billion Bet on Egypt's Reforms",
     "The Subscription Trap: When Cheap Software Gets Expensive",
-    "Why Secondhand Shopping Became a Business"
+    "Why Secondhand Shopping Became a Business",
+    "Why Builders Are Getting Pickier About AI Projects"
   ],
   "entries": [
     {
@@ -113,6 +114,20 @@
       "created_at": "2026-11-08T17:27:05.535172+00:00",
       "video_id": "PY9UnWNPQ68",
       "published_at": "2026-11-08T17:27:10.542977+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "Why Builders Are Getting Pickier About AI Projects",
+      "topic_key": "why builders are getting pickier about ai projects",
+      "script": "The AI data-center boom has created major construction opportunities, but not every project is equally safe. In November 2026, construction giant Skanska said it was becoming more selective, paying closer attention to whether newer developers had the financing and execution ability to finish projects. Demand can be real while individual companies still fail. For suppliers, contractors, and lenders, the lesson is to check who is paying, how the project is funded, and whether the promised facility can actually be delivered.",
+      "script_sha256": "1e74f3880a4c9a6b76c7c82aa2154f98cf8f6d0aa912cd0953af55ca1a5b62b9",
+      "video_sha256": "8b44cdfe8740ee02d7e7d0ae5a91177500b03657bae085d148eb33013f122db3",
+      "seed_topic": "Why Builders Are Getting Pickier About AI Projects",
+      "run_id": "42506349488",
+      "run_number": "67",
+      "run_attempt": "1",
+      "created_at": "2026-11-08T17:55:26.517534+00:00",
+      "video_id": null
     }
   ]
 }
