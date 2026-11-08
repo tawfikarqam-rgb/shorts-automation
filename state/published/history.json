@@ -20,7 +20,8 @@
     "The 1583 Shipwreck That Kept Its Secrets",
     "A Drought Revealed a Lost Roman City",
     "The Ancient City That Was Bigger Than Its Ruins Suggested",
-    "The Roman Cup That Made Water Look Like Magic"
+    "The Roman Cup That Made Water Look Like Magic",
+    "The Viking Hoard Hiding a Rare St Olaf Coin"
   ],
   "entries": [
     {
@@ -113,6 +114,20 @@
       "created_at": "2026-11-08T17:32:59.962131+00:00",
       "video_id": "xJYSbFc1CbE",
       "published_at": "2026-11-08T17:33:03.537347+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Viking Hoard Hiding a Rare St Olaf Coin",
+      "topic_key": "the viking hoard hiding a rare st olaf coin",
+      "script": "A Viking-age hoard can reveal more than how much wealth one person buried. A recently highlighted find included a rare coin associated with St Olaf, a Norwegian king later remembered as a saint. Coins travelled across borders, carrying rulers' names, religious symbols, and evidence of trade. A single unusual piece can help researchers trace connections between communities that left few written records. The hoard's full meaning depends on its archaeological context, not just the treasure's market value.",
+      "script_sha256": "851c2be4cd487e1c1c2675ef23ab33a8fb8857064d517bdaf82de73fbae47e17",
+      "video_sha256": "07d8f55519a6061fa25182e0ea2784d10d51d9fe6e4f2347eddab974ac08f961",
+      "seed_topic": "The Viking Hoard Hiding a Rare St Olaf Coin",
+      "run_id": "42506349488",
+      "run_number": "67",
+      "run_attempt": "1",
+      "created_at": "2026-11-08T17:52:32.446207+00:00",
+      "video_id": null
     }
   ]
 }
