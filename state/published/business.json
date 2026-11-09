@@ -164,7 +164,7 @@
       "published_at": "2026-11-09T17:53:09.375664+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The New Business Race: AI Agents for One Industry",
       "topic_key": "the new business race ai agents for one industry",
       "script": "Instead of building one AI assistant for everyone, some startups focus on a narrow job in a specific industry—such as processing invoices, reviewing insurance claims, or helping schedule field services. A specialized tool can be easier to measure because it targets one costly workflow. But businesses will only keep paying if the system is accurate, secure, and fits existing operations. The opportunity is not simply replacing workers with chatbots; it is removing repetitive work without creating expensive mistakes.",
@@ -175,7 +175,8 @@
       "run_number": "70",
       "run_attempt": "1",
       "created_at": "2026-11-09T18:11:02.660510+00:00",
-      "video_id": null
+      "video_id": "04uk8l8nW2M",
+      "published_at": "2026-11-09T18:11:06.609969+00:00"
     }
   ]
 }
