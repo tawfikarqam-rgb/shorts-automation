@@ -164,7 +164,7 @@
       "published_at": "2026-11-09T17:49:40.812401+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Castle Hidden Inside Another Castle",
       "topic_key": "the castle hidden inside another castle",
       "script": "In parts of medieval Europe, later builders expanded fortifications around older strongholds. Archaeologists have recently highlighted a castle complex where one defensive structure was effectively concealed within another. These layered buildings are physical records of changing power: a new ruler might strengthen, replace, or enclose an earlier fortress rather than erase it. The exact story depends on the site, but the visual twist is irresistible—what looks like one castle can contain several centuries of conflict and construction.",
@@ -175,7 +175,8 @@
       "run_number": "70",
       "run_attempt": "1",
       "created_at": "2026-11-09T18:05:23.487908+00:00",
-      "video_id": null
+      "video_id": "NbBTFQikIrI",
+      "published_at": "2026-11-09T18:05:28.470851+00:00"
     }
   ]
 }
