@@ -23,7 +23,8 @@
     "The Roman Cup That Made Water Look Like Magic",
     "The Viking Hoard Hiding a Rare St Olaf Coin",
     "The WWII Ship Still Holding 1,500 Tons of Explosives",
-    "The Jordan Valley Site That May Rewrite Human Migration"
+    "The Jordan Valley Site That May Rewrite Human Migration",
+    "The Castle Hidden Inside Another Castle"
   ],
   "entries": [
     {
@@ -161,6 +162,20 @@
       "created_at": "2026-11-09T17:49:36.825307+00:00",
       "video_id": "favD5HvR6Z0",
       "published_at": "2026-11-09T17:49:40.812401+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Castle Hidden Inside Another Castle",
+      "topic_key": "the castle hidden inside another castle",
+      "script": "In parts of medieval Europe, later builders expanded fortifications around older strongholds. Archaeologists have recently highlighted a castle complex where one defensive structure was effectively concealed within another. These layered buildings are physical records of changing power: a new ruler might strengthen, replace, or enclose an earlier fortress rather than erase it. The exact story depends on the site, but the visual twist is irresistible—what looks like one castle can contain several centuries of conflict and construction.",
+      "script_sha256": "34c13433b3948f19b75505a55b379cc12a1965cc77e0a039e872c73a46b0a9c1",
+      "video_sha256": "3d5178a790aea0b56ae6d08aaed599d92c121e0ecef227a3daf654de37275eea",
+      "seed_topic": "The Castle Hidden Inside Another Castle",
+      "run_id": "42669961508",
+      "run_number": "70",
+      "run_attempt": "1",
+      "created_at": "2026-11-09T18:05:23.487908+00:00",
+      "video_id": null
     }
   ]
 }
