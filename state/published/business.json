@@ -23,7 +23,8 @@
     "Why Secondhand Shopping Became a Business",
     "Why Builders Are Getting Pickier About AI Projects",
     "The Side Hustle Turning Designs Into Products",
-    "The Hidden Business Behind Every AI Prompt"
+    "The Hidden Business Behind Every AI Prompt",
+    "The New Business Race: AI Agents for One Industry"
   ],
   "entries": [
     {
@@ -161,6 +162,20 @@
       "created_at": "2026-11-09T17:53:04.970104+00:00",
       "video_id": "1ClI4Q6rERE",
       "published_at": "2026-11-09T17:53:09.375664+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The New Business Race: AI Agents for One Industry",
+      "topic_key": "the new business race ai agents for one industry",
+      "script": "Instead of building one AI assistant for everyone, some startups focus on a narrow job in a specific industry—such as processing invoices, reviewing insurance claims, or helping schedule field services. A specialized tool can be easier to measure because it targets one costly workflow. But businesses will only keep paying if the system is accurate, secure, and fits existing operations. The opportunity is not simply replacing workers with chatbots; it is removing repetitive work without creating expensive mistakes.",
+      "script_sha256": "963c7166e62436ef89ddb1b290d64cc48a5db2785a21ba9ebe3c3f1b3d85215b",
+      "video_sha256": "82ed5e3aa562d08d14925e220eeaab7e8d49f329d5119b9d52c6d3c1c552e5a3",
+      "seed_topic": "The New Business Race: AI Agents for One Industry",
+      "run_id": "42669961508",
+      "run_number": "70",
+      "run_attempt": "1",
+      "created_at": "2026-11-09T18:11:02.660510+00:00",
+      "video_id": null
     }
   ]
 }
