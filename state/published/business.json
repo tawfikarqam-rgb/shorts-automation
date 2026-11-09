@@ -21,7 +21,8 @@
     "The World Bank's $1 Billion Bet on Egypt's Reforms",
     "The Subscription Trap: When Cheap Software Gets Expensive",
     "Why Secondhand Shopping Became a Business",
-    "Why Builders Are Getting Pickier About AI Projects"
+    "Why Builders Are Getting Pickier About AI Projects",
+    "The Side Hustle Turning Designs Into Products"
   ],
   "entries": [
     {
@@ -129,6 +130,20 @@
       "created_at": "2026-11-08T17:55:26.517534+00:00",
       "video_id": "XyBAPJW0ltg",
       "published_at": "2026-11-08T17:55:32.829646+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Side Hustle Turning Designs Into Products",
+      "topic_key": "the side hustle turning designs into products",
+      "script": "Print-on-demand lets a seller upload a design and offer it on shirts, mugs, or posters without buying large amounts of inventory first. A supplier prints and ships an item after a customer orders it. That lowers the upfront stock risk, but it does not make the business effortless: sellers still need original designs, customer service, marketing, and enough margin to cover production and advertising. The real advantage is testing demand before committing money to inventory.",
+      "script_sha256": "5005403234fefa4149193e65db6d534f6c0b6f968ec9d2623ce99333055a8c7a",
+      "video_sha256": "7348cdab77ccac6f80ac7c504999dadec5e331871ed3ce15c3ad458398c6d945",
+      "seed_topic": "The Side Hustle Turning Designs Into Products",
+      "run_id": "42592543096",
+      "run_number": "68",
+      "run_attempt": "1",
+      "created_at": "2026-11-09T09:26:28.438601+00:00",
+      "video_id": null
     }
   ]
 }
