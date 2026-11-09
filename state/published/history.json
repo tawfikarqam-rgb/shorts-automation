@@ -148,7 +148,7 @@
       "published_at": "2026-11-09T09:23:24.899957+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Jordan Valley Site That May Rewrite Human Migration",
       "topic_key": "the jordan valley site that may rewrite human migration",
       "script": "A site called 'Ubeidiya in the Jordan Valley has been dated to about 1.9 million years ago, older than researchers previously thought. Scientists combined several dating methods, including analysis of buried rocks, fossil shells, and ancient magnetic-field records. The site contains stone tools and animal fossils, making it important evidence for early human movement beyond Africa. Researchers say the revised age may point to earlier or overlapping migration waves—but it does not identify exactly which human species made every tool.",
@@ -159,7 +159,8 @@
       "run_number": "69",
       "run_attempt": "1",
       "created_at": "2026-11-09T17:49:36.825307+00:00",
-      "video_id": null
+      "video_id": "favD5HvR6Z0",
+      "published_at": "2026-11-09T17:49:40.812401+00:00"
     }
   ]
 }
