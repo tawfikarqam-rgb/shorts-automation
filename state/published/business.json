@@ -148,7 +148,7 @@
       "published_at": "2026-11-09T09:26:33.472970+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Hidden Business Behind Every AI Prompt",
       "topic_key": "the hidden business behind every ai prompt",
       "script": "When someone sends a prompt to an AI service, computers in a data center process the request and use electricity, cooling, networking, and expensive hardware. At massive scale, small per-request costs add up. Providers try to reduce those costs through more efficient models and better hardware utilization, while customers compare price, speed, and quality. The business behind a simple chat window is an infrastructure operation—and its economics help determine which AI products can survive.",
@@ -159,7 +159,8 @@
       "run_number": "69",
       "run_attempt": "1",
       "created_at": "2026-11-09T17:53:04.970104+00:00",
-      "video_id": null
+      "video_id": "1ClI4Q6rERE",
+      "published_at": "2026-11-09T17:53:09.375664+00:00"
     }
   ]
 }
