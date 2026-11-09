@@ -132,7 +132,7 @@
       "published_at": "2026-11-08T17:55:32.829646+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Side Hustle Turning Designs Into Products",
       "topic_key": "the side hustle turning designs into products",
       "script": "Print-on-demand lets a seller upload a design and offer it on shirts, mugs, or posters without buying large amounts of inventory first. A supplier prints and ships an item after a customer orders it. That lowers the upfront stock risk, but it does not make the business effortless: sellers still need original designs, customer service, marketing, and enough margin to cover production and advertising. The real advantage is testing demand before committing money to inventory.",
@@ -143,7 +143,8 @@
       "run_number": "68",
       "run_attempt": "1",
       "created_at": "2026-11-09T09:26:28.438601+00:00",
-      "video_id": null
+      "video_id": "IYAZypnd07s",
+      "published_at": "2026-11-09T09:26:33.472970+00:00"
     }
   ]
 }
