@@ -21,7 +21,8 @@
     "A Drought Revealed a Lost Roman City",
     "The Ancient City That Was Bigger Than Its Ruins Suggested",
     "The Roman Cup That Made Water Look Like Magic",
-    "The Viking Hoard Hiding a Rare St Olaf Coin"
+    "The Viking Hoard Hiding a Rare St Olaf Coin",
+    "The WWII Ship Still Holding 1,500 Tons of Explosives"
   ],
   "entries": [
     {
@@ -129,6 +130,20 @@
       "created_at": "2026-11-08T17:52:32.446207+00:00",
       "video_id": "axFJyTInqsA",
       "published_at": "2026-11-08T17:52:37.177006+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The WWII Ship Still Holding 1,500 Tons of Explosives",
+      "topic_key": "the wwii ship still holding 1 500 tons of explosives",
+      "script": "The American cargo ship SS Richard Montgomery sank in the Thames Estuary in 1944 with a huge cargo of munitions still aboard. In November 2026, engineers removed its three exposed masts as part of ongoing efforts to reduce risks around the wreck. The operation did not remove the explosives: officials have continued to monitor the dangerous site. It is an unsettling reminder that the Second World War has left hazards beneath the water, even close to busy modern communities.",
+      "script_sha256": "33305fdd71b12cf4a3b0a0988bbfcf205084e53a199b1543799dca199f5b081e",
+      "video_sha256": "e7daa6be7766274e7a1429a55f935559a743f5af456db39cddc0ee3bee2b41e6",
+      "seed_topic": "The WWII Ship Still Holding 1,500 Tons of Explosives",
+      "run_id": "42592543096",
+      "run_number": "68",
+      "run_attempt": "1",
+      "created_at": "2026-11-09T09:23:19.834954+00:00",
+      "video_id": null
     }
   ]
 }
