@@ -22,7 +22,8 @@
     "The Subscription Trap: When Cheap Software Gets Expensive",
     "Why Secondhand Shopping Became a Business",
     "Why Builders Are Getting Pickier About AI Projects",
-    "The Side Hustle Turning Designs Into Products"
+    "The Side Hustle Turning Designs Into Products",
+    "The Hidden Business Behind Every AI Prompt"
   ],
   "entries": [
     {
@@ -145,6 +146,20 @@
       "created_at": "2026-11-09T09:26:28.438601+00:00",
       "video_id": "IYAZypnd07s",
       "published_at": "2026-11-09T09:26:33.472970+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Hidden Business Behind Every AI Prompt",
+      "topic_key": "the hidden business behind every ai prompt",
+      "script": "When someone sends a prompt to an AI service, computers in a data center process the request and use electricity, cooling, networking, and expensive hardware. At massive scale, small per-request costs add up. Providers try to reduce those costs through more efficient models and better hardware utilization, while customers compare price, speed, and quality. The business behind a simple chat window is an infrastructure operation—and its economics help determine which AI products can survive.",
+      "script_sha256": "168c1f89d1f1e5fa13323a94ec1e3a5d78a3e99e1cd61749a8b19fa68076ad05",
+      "video_sha256": "822471ea9b0e9c017292907efcf9d82794fd64fce6f585baad43fbcc1290ac6a",
+      "seed_topic": "The Hidden Business Behind Every AI Prompt",
+      "run_id": "42667116258",
+      "run_number": "69",
+      "run_attempt": "1",
+      "created_at": "2026-11-09T17:53:04.970104+00:00",
+      "video_id": null
     }
   ]
 }
