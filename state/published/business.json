@@ -24,7 +24,8 @@
     "Why Builders Are Getting Pickier About AI Projects",
     "The Side Hustle Turning Designs Into Products",
     "The Hidden Business Behind Every AI Prompt",
-    "The New Business Race: AI Agents for One Industry"
+    "The New Business Race: AI Agents for One Industry",
+    "The AI Spending Boom That Started Scaring Investors"
   ],
   "entries": [
     {
@@ -177,6 +178,20 @@
       "created_at": "2026-11-09T18:11:02.660510+00:00",
       "video_id": "04uk8l8nW2M",
       "published_at": "2026-11-09T18:11:06.609969+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The AI Spending Boom That Started Scaring Investors",
+      "topic_key": "the ai spending boom that started scaring investors",
+      "script": "The companies building artificial intelligence need enormous amounts of computing power, and that means expensive chips, buildings, electricity, and debt. In November 2026, investors became more cautious about whether the returns will justify the spending. That does not mean AI demand has disappeared: construction firms still report strong projects, while lenders are watching weaker developers more closely. The business question is simple but huge: who will earn enough from AI to pay for the infrastructure being built today?",
+      "script_sha256": "1163197f793ae449101232a0217ee8e2512e3a6b37144ceb631cc6d763948053",
+      "video_sha256": "7107365ed3222467a1ca7db9edc249d9ca56e2b3f309afaaba330be36633ba4f",
+      "seed_topic": "The AI Spending Boom That Started Scaring Investors",
+      "run_id": "42786868959",
+      "run_number": "71",
+      "run_attempt": "1",
+      "created_at": "2026-11-10T09:11:37.592295+00:00",
+      "video_id": null
     }
   ]
 }
