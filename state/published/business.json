@@ -25,7 +25,8 @@
     "The Side Hustle Turning Designs Into Products",
     "The Hidden Business Behind Every AI Prompt",
     "The New Business Race: AI Agents for One Industry",
-    "The AI Spending Boom That Started Scaring Investors"
+    "The AI Spending Boom That Started Scaring Investors",
+    "The Business Lesson From Companies That Ignore Their Core"
   ],
   "entries": [
     {
@@ -193,6 +194,20 @@
       "created_at": "2026-11-10T09:11:37.592295+00:00",
       "video_id": "LnIkKteMPaA",
       "published_at": "2026-11-10T09:11:42.126109+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Business Lesson From Companies That Ignore Their Core",
+      "topic_key": "the business lesson from companies that ignore their core",
+      "script": "A company can grow quickly by adding products, opening new divisions, and chasing every opportunity. But each new activity adds complexity, costs, and management attention. Businesses that lose clarity about their strongest customer promise can become harder to operate and harder to explain. A disciplined strategy asks what the company does unusually well, which customers value it, and what should be stopped. Sometimes the most profitable growth decision is choosing not to expand.",
+      "script_sha256": "38ffc8bbbc3591c65af2a56a49554071f233d0cf81c19913aeb70a6273401da9",
+      "video_sha256": "9f52df04b92d41b2bd16a91530fbfa5eae20a5d459436849a50610188236a370",
+      "seed_topic": "The Business Lesson From Companies That Ignore Their Core",
+      "run_id": "42869613769",
+      "run_number": "72",
+      "run_attempt": "1",
+      "created_at": "2026-11-10T18:04:41.586056+00:00",
+      "video_id": null
     }
   ]
 }
