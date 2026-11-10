@@ -180,7 +180,7 @@
       "published_at": "2026-11-09T18:05:28.470851+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The WWII Bomber That Crashed With No Crew Aboard",
       "topic_key": "the wwii bomber that crashed with no crew aboard",
       "script": "On November 23, 1944, a damaged American B-17 Flying Fortress came down in a field in Belgium with nobody aboard. Soldiers who inspected it found the engines still running and the crew missing. The story became known as the Phantom Fortress. Later accounts said the crew had set the aircraft on autopilot and parachuted out, but details in the surviving reports do not perfectly match. The remarkable landing was real enough to investigate; the mystery grew as versions of the story changed.",
@@ -191,7 +191,8 @@
       "run_number": "71",
       "run_attempt": "1",
       "created_at": "2026-11-10T09:16:10.316736+00:00",
-      "video_id": null
+      "video_id": "d9to6lFaLtY",
+      "published_at": "2026-11-10T09:16:15.187420+00:00"
     }
   ]
 }
