@@ -180,7 +180,7 @@
       "published_at": "2026-11-09T18:11:06.609969+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The AI Spending Boom That Started Scaring Investors",
       "topic_key": "the ai spending boom that started scaring investors",
       "script": "The companies building artificial intelligence need enormous amounts of computing power, and that means expensive chips, buildings, electricity, and debt. In November 2026, investors became more cautious about whether the returns will justify the spending. That does not mean AI demand has disappeared: construction firms still report strong projects, while lenders are watching weaker developers more closely. The business question is simple but huge: who will earn enough from AI to pay for the infrastructure being built today?",
@@ -191,7 +191,8 @@
       "run_number": "71",
       "run_attempt": "1",
       "created_at": "2026-11-10T09:11:37.592295+00:00",
-      "video_id": null
+      "video_id": "LnIkKteMPaA",
+      "published_at": "2026-11-10T09:11:42.126109+00:00"
     }
   ]
 }
