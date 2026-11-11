@@ -212,7 +212,7 @@
       "published_at": "2026-11-10T18:03:05.445431+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The 400-Year-Old Lock Finally Opened",
       "topic_key": "the 400 year old lock finally opened",
       "script": "A brass combination lock recovered from the wreck of the merchant ship Ann Francis, which sank off Wales in 1583, resisted researchers for centuries. Modern imaging helped specialists study its tiny internal mechanism and work out a four-letter combination: ANCE. The letters have not produced a confirmed explanation of what the lock protected. It is a remarkable meeting of archaeology and technology: a small everyday object preserved a puzzle across four hundred years.",
@@ -223,7 +223,8 @@
       "run_number": "73",
       "run_attempt": "1",
       "created_at": "2026-11-11T09:08:51.912505+00:00",
-      "video_id": null
+      "video_id": "o2peE5Tb5SI",
+      "published_at": "2026-11-11T09:08:57.421125+00:00"
     }
   ]
 }
