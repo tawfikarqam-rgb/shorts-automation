@@ -26,7 +26,8 @@
     "The Hidden Business Behind Every AI Prompt",
     "The New Business Race: AI Agents for One Industry",
     "The AI Spending Boom That Started Scaring Investors",
-    "The Business Lesson From Companies That Ignore Their Core"
+    "The Business Lesson From Companies That Ignore Their Core",
+    "Why an AI Data Center Can Cost Billions"
   ],
   "entries": [
     {
@@ -209,6 +210,20 @@
       "created_at": "2026-11-10T18:04:41.586056+00:00",
       "video_id": "NqwJeiehtfY",
       "published_at": "2026-11-10T18:04:46.627789+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "Why an AI Data Center Can Cost Billions",
+      "topic_key": "why an ai data center can cost billions",
+      "script": "An AI data center is not just a warehouse full of computers. It needs specialized power systems, cooling, backup equipment, networking, land, and highly expensive accelerators. Bank of America research estimated global data-center spending could reach one trillion dollars in 2026 and rise further by 2028. Those are forecasts, not guaranteed outcomes. The opportunity is enormous for builders and equipment suppliers, but the costs create a difficult question: how quickly can customers turn all that computing capacity into revenue?",
+      "script_sha256": "57be4362e686d9cb93cdb8fb4413385124bb470959b1a7743c70a5d29b027bc5",
+      "video_sha256": "92d3f40f220047b98181c0fbd7338d344c6e9ccf8a81de58626b0e7a3070ae2c",
+      "seed_topic": "Why an AI Data Center Can Cost Billions",
+      "run_id": "42991766616",
+      "run_number": "73",
+      "run_attempt": "1",
+      "created_at": "2026-11-11T09:12:31.377140+00:00",
+      "video_id": null
     }
   ]
 }
