@@ -228,7 +228,7 @@
       "published_at": "2026-11-11T09:12:34.832458+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "Why AI Companies Need More Than Users",
       "topic_key": "why ai companies need more than users",
       "script": "A technology startup can attract millions of users and still struggle to become a durable business. AI services have ongoing costs: computing, data, engineering, security, and customer support. If customers pay less than it costs to serve them, growth can make losses larger rather than smaller. Investors are increasingly asking how a company will turn usage into recurring revenue and positive margins. In the AI economy, attention is valuable—but sustainable unit economics matter more.",
@@ -239,7 +239,8 @@
       "run_number": "74",
       "run_attempt": "1",
       "created_at": "2026-11-11T18:03:56.512145+00:00",
-      "video_id": null
+      "video_id": "iK1oMWCUjl0",
+      "published_at": "2026-11-11T18:04:00.460291+00:00"
     }
   ]
 }
