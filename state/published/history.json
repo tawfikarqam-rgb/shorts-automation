@@ -27,7 +27,8 @@
     "The Castle Hidden Inside Another Castle",
     "The WWII Bomber That Crashed With No Crew Aboard",
     "Why the Nazca Lines Survived for Centuries",
-    "The 400-Year-Old Lock Finally Opened"
+    "The 400-Year-Old Lock Finally Opened",
+    "The Mysterious Moai That Emerged Again"
   ],
   "entries": [
     {
@@ -225,6 +226,20 @@
       "created_at": "2026-11-11T09:08:51.912505+00:00",
       "video_id": "o2peE5Tb5SI",
       "published_at": "2026-11-11T09:08:57.421125+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Mysterious Moai That Emerged Again",
+      "topic_key": "the mysterious moai that emerged again",
+      "script": "The giant stone figures of Rapa Nui, often called Easter Island, are known around the world. Recent reports described a moai becoming visible again in a changing landscape, drawing attention to how these monuments are affected by erosion, water, and shifting ground. The statues were created by the island's Polynesian communities, and their history is tied to complex social and ceremonial traditions. Avoid the myth that outsiders built them: the moai are a remarkable achievement of Rapa Nui people.",
+      "script_sha256": "4da3d4b198562fd722150660529c52af54574d9a59628cd7895c19020cf3cb2b",
+      "video_sha256": "f34660f9fb8b308b48545f491781b0a5c28b371a0c77304ac107a175e80a6889",
+      "seed_topic": "The Mysterious Moai That Emerged Again",
+      "run_id": "43073432908",
+      "run_number": "74",
+      "run_attempt": "1",
+      "created_at": "2026-11-11T18:08:13.501462+00:00",
+      "video_id": null
     }
   ]
 }
