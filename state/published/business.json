@@ -27,7 +27,8 @@
     "The New Business Race: AI Agents for One Industry",
     "The AI Spending Boom That Started Scaring Investors",
     "The Business Lesson From Companies That Ignore Their Core",
-    "Why an AI Data Center Can Cost Billions"
+    "Why an AI Data Center Can Cost Billions",
+    "Why AI Companies Need More Than Users"
   ],
   "entries": [
     {
@@ -225,6 +226,20 @@
       "created_at": "2026-11-11T09:12:31.377140+00:00",
       "video_id": "XZUdQhB-6ZA",
       "published_at": "2026-11-11T09:12:34.832458+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "Why AI Companies Need More Than Users",
+      "topic_key": "why ai companies need more than users",
+      "script": "A technology startup can attract millions of users and still struggle to become a durable business. AI services have ongoing costs: computing, data, engineering, security, and customer support. If customers pay less than it costs to serve them, growth can make losses larger rather than smaller. Investors are increasingly asking how a company will turn usage into recurring revenue and positive margins. In the AI economy, attention is valuable—but sustainable unit economics matter more.",
+      "script_sha256": "5e4e683b07059991e34f8b56bda6de780f721102588da90d0b6092376b6b1de9",
+      "video_sha256": "31c433b9c855980836f6c4495ca6403decf6f71cc51f72d02a7fecd7db51ef72",
+      "seed_topic": "Why AI Companies Need More Than Users",
+      "run_id": "43073432908",
+      "run_number": "74",
+      "run_attempt": "1",
+      "created_at": "2026-11-11T18:03:56.512145+00:00",
+      "video_id": null
     }
   ]
 }
