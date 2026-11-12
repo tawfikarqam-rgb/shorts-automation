@@ -244,7 +244,7 @@
       "published_at": "2026-11-11T18:04:00.460291+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The $36 Billion Egyptian Bank Listing",
       "topic_key": "the 36 billion egyptian bank listing",
       "script": "Banque du Caire began trading on Egypt's stock exchange in November 2026 after an offering worth more than 36.37 billion Egyptian pounds. The sale covered 45 percent of the bank, and the public tranche was reported as 27 times oversubscribed. That made it the largest IPO in the history of Egypt's capital market. An IPO does not guarantee future success, but it can broaden ownership, attract investors, and give a company new scrutiny from public markets.",
@@ -255,7 +255,8 @@
       "run_number": "75",
       "run_attempt": "1",
       "created_at": "2026-11-12T09:14:32.587961+00:00",
-      "video_id": null
+      "video_id": "5Gt46bYsMuo",
+      "published_at": "2026-11-12T09:14:36.461650+00:00"
     }
   ]
 }
