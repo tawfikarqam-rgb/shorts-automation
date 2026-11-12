@@ -28,7 +28,8 @@
     "The WWII Bomber That Crashed With No Crew Aboard",
     "Why the Nazca Lines Survived for Centuries",
     "The 400-Year-Old Lock Finally Opened",
-    "The Mysterious Moai That Emerged Again"
+    "The Mysterious Moai That Emerged Again",
+    "Egypt's 2,600-Year-Old Structure Found Beneath the Delta"
   ],
   "entries": [
     {
@@ -241,6 +242,20 @@
       "created_at": "2026-11-11T18:08:13.501462+00:00",
       "video_id": "m4cs4dRnFv8",
       "published_at": "2026-11-11T18:08:17.412724+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "Egypt's 2,600-Year-Old Structure Found Beneath the Delta",
+      "topic_key": "egypt s 2 600 year old structure found beneath the delta",
+      "script": "At ancient Buto in Egypt's Nile Delta, researchers used satellite radar and electrical-resistivity methods to investigate a large buried structure beneath the ground. The remains are estimated to be about 2,600 years old and measure roughly 128 by 62 metres. The discovery does not mean an entire city suddenly appeared from space. It shows how remote sensing can guide archaeologists toward buried places before excavation begins—and how much of ancient Egypt may still lie hidden.",
+      "script_sha256": "17a3d5e54e240cf49ee6aea28b099818cbf666e1c7adfdb9137c3cf240b096a2",
+      "video_sha256": "3d66b91060305ef3a5cbcc3d634696de8fdd79ffe11b070cefa44c77db118c04",
+      "seed_topic": "Egypt's 2,600-Year-Old Structure Found Beneath the Delta",
+      "run_id": "43188834825",
+      "run_number": "75",
+      "run_attempt": "1",
+      "created_at": "2026-11-12T09:21:45.108918+00:00",
+      "video_id": null
     }
   ]
 }
