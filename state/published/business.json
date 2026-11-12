@@ -28,7 +28,8 @@
     "The AI Spending Boom That Started Scaring Investors",
     "The Business Lesson From Companies That Ignore Their Core",
     "Why an AI Data Center Can Cost Billions",
-    "Why AI Companies Need More Than Users"
+    "Why AI Companies Need More Than Users",
+    "The $36 Billion Egyptian Bank Listing"
   ],
   "entries": [
     {
@@ -241,6 +242,20 @@
       "created_at": "2026-11-11T18:03:56.512145+00:00",
       "video_id": "iK1oMWCUjl0",
       "published_at": "2026-11-11T18:04:00.460291+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The $36 Billion Egyptian Bank Listing",
+      "topic_key": "the 36 billion egyptian bank listing",
+      "script": "Banque du Caire began trading on Egypt's stock exchange in November 2026 after an offering worth more than 36.37 billion Egyptian pounds. The sale covered 45 percent of the bank, and the public tranche was reported as 27 times oversubscribed. That made it the largest IPO in the history of Egypt's capital market. An IPO does not guarantee future success, but it can broaden ownership, attract investors, and give a company new scrutiny from public markets.",
+      "script_sha256": "75d8ca38ff2dbb0ae1000e7d143ffd478c528f6324e3dde6ee1b43fa1f3a0a05",
+      "video_sha256": "bf6db750a3ea1027bfaeb5e30e3fe1a34c092adae4890c5bafed83af8f673500",
+      "seed_topic": "The $36 Billion Egyptian Bank Listing",
+      "run_id": "43188834825",
+      "run_number": "75",
+      "run_attempt": "1",
+      "created_at": "2026-11-12T09:14:32.587961+00:00",
+      "video_id": null
     }
   ]
 }
