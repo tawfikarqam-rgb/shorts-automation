@@ -260,7 +260,7 @@
       "published_at": "2026-11-12T09:14:36.461650+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Search Engine That Sold Ads Beside Answers",
       "topic_key": "the search engine that sold ads beside answers",
       "script": "Google's advertising business grew around matching ads to search intent and charging advertisers when people interact with them. This made online advertising more measurable than many traditional formats, while search users could still access organic results. The model depends on relevance, trust, and a large volume of searches. It also creates ongoing questions about privacy, market power, and how clearly paid results should be identified.",
@@ -271,7 +271,8 @@
       "run_number": "79",
       "run_attempt": "1",
       "created_at": "2026-11-13T15:48:22.392561+00:00",
-      "video_id": null
+      "video_id": "OqfS4VEvwkw",
+      "published_at": "2026-11-13T15:48:26.816607+00:00"
     }
   ]
 }
