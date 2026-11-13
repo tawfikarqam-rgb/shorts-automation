@@ -30,7 +30,8 @@
     "The 400-Year-Old Lock Finally Opened",
     "The Mysterious Moai That Emerged Again",
     "Egypt's 2,600-Year-Old Structure Found Beneath the Delta",
-    "The Fire That Rebuilt Chicago"
+    "The Fire That Rebuilt Chicago",
+    "The First Photograph Took Hours to Make"
   ],
   "entries": [
     {
@@ -273,6 +274,20 @@
       "created_at": "2026-11-13T15:48:19.911080+00:00",
       "video_id": "hBLD1NNy87Y",
       "published_at": "2026-11-13T15:48:24.050641+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The First Photograph Took Hours to Make",
+      "topic_key": "the first photograph took hours to make",
+      "script": "In the 1820s or early 1830s, French inventor Nicéphore Niépce created one of the earliest surviving permanent photographs using a light-sensitive surface. The exposure took many hours, which is why the image is faint and the process was difficult to repeat. Photography later became faster through improvements in chemistry, lenses, and cameras. The first image was not a casual snapshot; it was the result of years of experimentation.",
+      "script_sha256": "a141e8fc3bac98999202994c1d6efd157e328980dd86b61e7d9b29cdb94257a3",
+      "video_sha256": "f24aa283850c71c5baea9e85fb8f7fc3ad8212426b06208750d2de45113e0987",
+      "seed_topic": "The First Photograph Took Hours to Make",
+      "run_id": "43477748897",
+      "run_number": "80",
+      "run_attempt": "1",
+      "created_at": "2026-11-13T18:04:19.308812+00:00",
+      "video_id": null
     }
   ]
 }
