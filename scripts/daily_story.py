@@ -316,6 +316,75 @@ business_stories.extend([
      "Southwest Airlines Boeing 737 aircraft;airline ground crew quick turnaround;Southwest Airlines early advertisement"),
 ])
 
+
+# Further reserve inventory: ten more topics per channel for a 15-day runway
+# at two scheduled runs per day, assuming one story per channel per run.
+history_stories.extend([
+    ("The Canal That Changed Global Shipping",
+     "The Suez Canal opened in 1869, creating a direct sea route between the Mediterranean and the Red Sea. Ships no longer needed to sail around the southern tip of Africa when travelling between Europe and much of Asia. The canal shortened many journeys and became strategically important for trade and geopolitics. Its history also shows how infrastructure can reshape global commerce far beyond the country where it is built.",
+     "Suez Canal 1869 historic opening;Suez Canal ships aerial;19th century canal construction"),
+    ("The Great Fire That Reshaped London",
+     "A fire began in a bakery on Pudding Lane in September 1666 and spread through much of the City of London. Wooden buildings, narrow streets, and strong winds helped the flames travel. The fire destroyed thousands of homes and many churches, including the old St Paul's Cathedral. Rebuilding changed parts of the city, but the disaster did not instantly create modern fire safety; reforms came gradually.",
+     "Great Fire of London 1666 painting;Pudding Lane London historic;Christopher Wren rebuilding London"),
+    ("The First Photograph Took Hours to Make",
+     "In the 1820s or early 1830s, French inventor Nicéphore Niépce created one of the earliest surviving permanent photographs using a light-sensitive surface. The exposure took many hours, which is why the image is faint and the process was difficult to repeat. Photography later became faster through improvements in chemistry, lenses, and cameras. The first image was not a casual snapshot; it was the result of years of experimentation.",
+     "View from the Window at Le Gras photograph;Nicéphore Niépce camera obscura;early photography plate"),
+    ("The Ancient Trade Route That Was Never One Road",
+     "The Silk Road was not a single paved highway running from China to Europe. It was a shifting network of land and sea routes used by merchants, travellers, diplomats, and religious communities. Goods such as silk, spices, glass, and metals moved along different paths depending on politics, geography, and demand. Ideas and technologies travelled too, making the network important for cultural exchange as well as commerce.",
+     "Silk Road ancient trade route map;Silk Road camel caravan illustration;Central Asian historic bazaar"),
+    ("The Stone Circle Built Across Many Generations",
+     "Stonehenge was not built in one short construction project. Archaeological evidence shows that the monument developed through several phases over many centuries, beginning with earthworks before the large stones were arranged. People transported and positioned massive stones using techniques that researchers continue to study. Its exact purposes changed or remain debated, but the site clearly required planning, shared labour, and repeated rebuilding.",
+     "Stonehenge aerial view;Stonehenge sarsen stones closeup;Stonehenge archaeological excavation"),
+    ("The Flight That Lasted Only Twelve Seconds",
+     "On December 17, 1903, Orville and Wilbur Wright made a powered flight at Kitty Hawk, North Carolina. The first flight lasted about twelve seconds and covered roughly 120 feet. It was not the first human attempt to fly, but it demonstrated controlled, powered, heavier-than-air flight using an aircraft the brothers had designed and tested. Their achievement grew from experiments with gliders, wings, and control systems.",
+     "Wright brothers first flight 1903;Wright Flyer aircraft reconstruction;Kitty Hawk Wright brothers monument"),
+    ("The Empire That Built Roads Across the Andes",
+     "The Inca Empire developed an extensive road network across the Andes, connecting highland settlements, administrative centres, and coastal regions. The routes included stairs, bridges, and paths adapted to steep terrain. Runners and relay stations helped messages move across the empire, while storehouses supported officials and armies. The network shows how infrastructure can hold a state together even where mountains make travel difficult.",
+     "Inca road Qhapaq Nan Andes;Inca rope bridge reconstruction;Inca trail stone steps"),
+    ("The City That Preserved Its Past in a Cave",
+     "The caves near Lascaux in France contain remarkable prehistoric paintings of animals, created roughly 17,000 years ago. The images were made with mineral pigments and placed across walls and ceilings, often in difficult-to-reach spaces. After the cave was opened to the public, changes in humidity and carbon dioxide threatened the paintings, so access was restricted and replicas were created. Preserving art can sometimes mean keeping visitors away from the original.",
+     "Lascaux cave paintings horses;Lascaux prehistoric cave art;Lascaux cave replica hall"),
+    ("The Manuscript That Helped Save an Ancient Language",
+     "The Behistun Inscription in Iran contains a royal proclamation written in Old Persian, Elamite, and Babylonian cuneiform. Because the same message appeared in multiple languages, it helped scholars compare signs and work toward deciphering cuneiform writing. The inscription was carved high on a cliff, making study physically difficult. Like the Rosetta Stone, it shows how multilingual records can become keys to understanding the past.",
+     "Behistun Inscription Iran cliff;Behistun cuneiform inscription closeup;ancient Persian relief"),
+    ("The Bridge Built Without Modern Steel",
+     "The Romans built durable stone bridges across rivers throughout their empire, using arches to distribute weight and foundations designed for local conditions. Some bridges remain in use or survive as major archaeological structures after many centuries. Not every Roman bridge was identical, and repairs and later rebuilding were common. Their legacy is less about one perfect design and more about practical engineering repeated across a huge territory.",
+     "Roman stone bridge Alcantara;ancient Roman bridge arch;Roman bridge river engineering"),
+])
+
+business_stories.extend([
+    ("The Assembly Line That Made Cars More Affordable",
+     "Henry Ford did not invent the assembly line, but Ford Motor Company refined moving-line production for automobile manufacturing in the early twentieth century. Breaking complex work into repeatable steps helped reduce the time needed to assemble a Model T. The system also required careful coordination of parts, workers, and machinery. The broader lesson is that productivity often comes from redesigning the whole process rather than asking individuals to work faster.",
+     "Ford Model T moving assembly line;historic Ford factory workers;Model T automobile production"),
+    ("The Razor Company That Sold a Refill Habit",
+     "King C. Gillette helped popularize the safety razor with inexpensive replaceable blades in the early twentieth century. The model made the handle a durable purchase while creating repeat demand for blades. The broader pattern became known as a razor-and-blades strategy, although many businesses use variations of it. It works only when customers see ongoing value and replacement parts remain convenient and trustworthy.",
+     "vintage Gillette safety razor;early razor blade advertisement;classic shaving razor blades"),
+    ("The Chocolate Company That Turned a Bar Into a Brand",
+     "Cadbury grew from a small family business selling drinking chocolate into a major confectionery company. Its expansion involved product development, manufacturing investment, distribution, and distinctive packaging. The company also became associated with the model village of Bournville, built around its factory and employee welfare ideas. The story shows how a consumer brand can be shaped by production choices and the communities around its business.",
+     "Cadbury vintage chocolate advertisement;Bournville Cadbury factory historic;classic chocolate bar packaging"),
+    ("The Online Retailer That Made Fast Delivery a Membership",
+     "Amazon Prime began as a paid membership offering faster shipping, then expanded to include digital services and other benefits. The bundle gives customers a reason to shop more often on one platform, while the company uses membership revenue and customer loyalty to support its wider retail ecosystem. The strategy is powerful but expensive to operate: delivery speed requires warehouses, logistics, and reliable last-mile networks.",
+     "Amazon Prime delivery van;Amazon warehouse package conveyor;Amazon Prime membership screen"),
+    ("The Phone Brand That Could Not Keep Its Lead",
+     "BlackBerry became famous for secure mobile email and physical keyboards, especially among business users. As touchscreen smartphones and app ecosystems changed customer expectations, the company struggled to maintain its position in handsets. BlackBerry later shifted its focus toward software and security services. Its history is not simply about one product being better; it shows how a company's strengths can become less decisive when the market changes around them.",
+     "BlackBerry classic keyboard phone;BlackBerry smartphone evolution;early business mobile email device"),
+    ("The Pizza Chain That Made Ordering a Process",
+     "Domino's expanded through a standardized operating model built around a focused menu, repeatable preparation, and delivery operations. The company later invested heavily in digital ordering and tracking, turning the customer experience into a technology problem as well as a food-service problem. Its growth shows how a service business can compete by making the entire process—from ordering to delivery—more predictable and convenient.",
+     "Dominos Pizza delivery store;pizza chain kitchen preparation;online pizza order tracking screen"),
+    ("The Retail Club That Makes Membership the Product",
+     "Costco's warehouse-club model asks customers to pay an annual membership fee in exchange for access to bulk products and value pricing. Membership revenue helps support the business, while a focused range of products and high sales volume help keep operating costs under control. The model depends on customers believing they save enough to justify renewing. Loyalty is not automatic; it must be earned every year.",
+     "Costco warehouse club interior;Costco membership card;bulk shopping warehouse shelves"),
+    ("The Computer Company That Changed Its Business Model",
+     "IBM began as a business-machine company and became a major force in computing through hardware, software, and services. Over time it shifted emphasis as customer needs changed, including moving away from some commodity hardware markets and investing in enterprise services and software. The company's history is not a straight line of success, but it illustrates how large organizations repeatedly have to decide which capabilities to keep and which businesses to leave.",
+     "IBM early tabulating machine;IBM mainframe computer room;IBM historic computing advertisement"),
+    ("The Game Console Rivalry That Changed Marketing",
+     "The competition between Nintendo and Sega in the late 1980s and early 1990s helped shape the modern video-game console market. Both companies used distinctive characters, hardware features, and bold advertising to attract young players. Their rivalry was not only about technical specifications; it was about identity, exclusive games, and how a brand spoke to its audience. Competition can accelerate innovation when customers have meaningful alternatives.",
+     "Nintendo Sega console rivalry;Sega Genesis Mega Drive console;Nintendo Super Nintendo console"),
+    ("The Company That Made Shipping Containers Standard",
+     "Standardized shipping containers transformed global trade by allowing goods to move between ships, trains, and trucks without being unpacked at every transfer. Entrepreneur Malcolm McLean helped drive containerization in the 1950s, and ports gradually redesigned cranes, terminals, and logistics around the new system. The result was faster handling and lower costs, but it required coordination across shipping companies, ports, and governments.",
+     "Malcolm McLean shipping container;container ship port cranes;historic containerization cargo ship"),
+])
+
 channel = os.environ.get("CHANNEL_NAME", "history").strip().lower()
 if channel not in ("history", "business"):
     raise SystemExit("CHANNEL_NAME must be history or business")
