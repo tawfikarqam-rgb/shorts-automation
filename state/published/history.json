@@ -276,7 +276,7 @@
       "published_at": "2026-11-13T15:48:24.050641+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The First Photograph Took Hours to Make",
       "topic_key": "the first photograph took hours to make",
       "script": "In the 1820s or early 1830s, French inventor Nicéphore Niépce created one of the earliest surviving permanent photographs using a light-sensitive surface. The exposure took many hours, which is why the image is faint and the process was difficult to repeat. Photography later became faster through improvements in chemistry, lenses, and cameras. The first image was not a casual snapshot; it was the result of years of experimentation.",
@@ -287,7 +287,8 @@
       "run_number": "80",
       "run_attempt": "1",
       "created_at": "2026-11-13T18:04:19.308812+00:00",
-      "video_id": null
+      "video_id": "NG2FGxqa4gA",
+      "published_at": "2026-11-13T18:04:23.321186+00:00"
     }
   ]
 }
