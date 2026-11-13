@@ -30,7 +30,8 @@
     "Why an AI Data Center Can Cost Billions",
     "Why AI Companies Need More Than Users",
     "The $36 Billion Egyptian Bank Listing",
-    "The Search Engine That Sold Ads Beside Answers"
+    "The Search Engine That Sold Ads Beside Answers",
+    "The Chocolate Company That Turned a Bar Into a Brand"
   ],
   "entries": [
     {
@@ -273,6 +274,20 @@
       "created_at": "2026-11-13T15:48:22.392561+00:00",
       "video_id": "OqfS4VEvwkw",
       "published_at": "2026-11-13T15:48:26.816607+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Chocolate Company That Turned a Bar Into a Brand",
+      "topic_key": "the chocolate company that turned a bar into a brand",
+      "script": "Cadbury grew from a small family business selling drinking chocolate into a major confectionery company. Its expansion involved product development, manufacturing investment, distribution, and distinctive packaging. The company also became associated with the model village of Bournville, built around its factory and employee welfare ideas. The story shows how a consumer brand can be shaped by production choices and the communities around its business.",
+      "script_sha256": "bc818612114ceeb8c4d15925cf0e1fa34e8f48dd8fd838c3b1c3824201df1a31",
+      "video_sha256": "ee6866ec42c829d943d436319480c9149f5b9017f25dc8a7943e33c4b8947ef5",
+      "seed_topic": "The Chocolate Company That Turned a Bar Into a Brand",
+      "run_id": "43477748897",
+      "run_number": "80",
+      "run_attempt": "1",
+      "created_at": "2026-11-13T18:01:53.038678+00:00",
+      "video_id": null
     }
   ]
 }
