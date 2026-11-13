@@ -29,7 +29,8 @@
     "The Business Lesson From Companies That Ignore Their Core",
     "Why an AI Data Center Can Cost Billions",
     "Why AI Companies Need More Than Users",
-    "The $36 Billion Egyptian Bank Listing"
+    "The $36 Billion Egyptian Bank Listing",
+    "The Search Engine That Sold Ads Beside Answers"
   ],
   "entries": [
     {
@@ -257,6 +258,20 @@
       "created_at": "2026-11-12T09:14:32.587961+00:00",
       "video_id": "5Gt46bYsMuo",
       "published_at": "2026-11-12T09:14:36.461650+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Search Engine That Sold Ads Beside Answers",
+      "topic_key": "the search engine that sold ads beside answers",
+      "script": "Google's advertising business grew around matching ads to search intent and charging advertisers when people interact with them. This made online advertising more measurable than many traditional formats, while search users could still access organic results. The model depends on relevance, trust, and a large volume of searches. It also creates ongoing questions about privacy, market power, and how clearly paid results should be identified.",
+      "script_sha256": "f4065e1355dc1a2c58b6384eecbf74c4b71be986e6ebc11d65d899b6c864a8c5",
+      "video_sha256": "36314c4487061e712f934350d4ab1f34f2e14bc6b21a1e0006285bd5259d19e3",
+      "seed_topic": "The Search Engine That Sold Ads Beside Answers",
+      "run_id": "43455112344",
+      "run_number": "79",
+      "run_attempt": "1",
+      "created_at": "2026-11-13T15:48:22.392561+00:00",
+      "video_id": null
     }
   ]
 }
