@@ -260,7 +260,7 @@
       "published_at": "2026-11-12T09:21:49.066393+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Fire That Rebuilt Chicago",
       "topic_key": "the fire that rebuilt chicago",
       "script": "A major fire swept through Chicago in October 1871, destroying a large part of the city and leaving many people homeless. The causes were more complicated than the famous story about a cow and a lantern, which has never been proven. Rebuilding brought new construction methods, stronger fire regulations, and a wave of architectural experimentation. The disaster became part of the story of how a fast-growing city redesigned itself after catastrophe.",
@@ -271,7 +271,8 @@
       "run_number": "79",
       "run_attempt": "1",
       "created_at": "2026-11-13T15:48:19.911080+00:00",
-      "video_id": null
+      "video_id": "hBLD1NNy87Y",
+      "published_at": "2026-11-13T15:48:24.050641+00:00"
     }
   ]
 }
