@@ -292,7 +292,7 @@
       "published_at": "2026-11-13T18:04:23.321186+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Empire That Built Roads Across the Andes",
       "topic_key": "the empire that built roads across the andes",
       "script": "The Inca Empire developed an extensive road network across the Andes, connecting highland settlements, administrative centres, and coastal regions. The routes included stairs, bridges, and paths adapted to steep terrain. Runners and relay stations helped messages move across the empire, while storehouses supported officials and armies. The network shows how infrastructure can hold a state together even where mountains make travel difficult.",
@@ -303,7 +303,8 @@
       "run_number": "81",
       "run_attempt": "1",
       "created_at": "2026-11-14T09:05:32.315569+00:00",
-      "video_id": null
+      "video_id": "GGZRZx10Y84",
+      "published_at": "2026-11-14T09:05:35.975734+00:00"
     }
   ]
 }
