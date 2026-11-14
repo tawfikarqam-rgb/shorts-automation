@@ -31,7 +31,8 @@
     "Why AI Companies Need More Than Users",
     "The $36 Billion Egyptian Bank Listing",
     "The Search Engine That Sold Ads Beside Answers",
-    "The Chocolate Company That Turned a Bar Into a Brand"
+    "The Chocolate Company That Turned a Bar Into a Brand",
+    "The Retail Club That Makes Membership the Product"
   ],
   "entries": [
     {
@@ -289,6 +290,20 @@
       "created_at": "2026-11-13T18:01:53.038678+00:00",
       "video_id": "sz_KIfUGcPs",
       "published_at": "2026-11-13T18:01:57.519455+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Retail Club That Makes Membership the Product",
+      "topic_key": "the retail club that makes membership the product",
+      "script": "Costco's warehouse-club model asks customers to pay an annual membership fee in exchange for access to bulk products and value pricing. Membership revenue helps support the business, while a focused range of products and high sales volume help keep operating costs under control. The model depends on customers believing they save enough to justify renewing. Loyalty is not automatic; it must be earned every year.",
+      "script_sha256": "e7dd7ff6cac6176882cd63385f2dcae7f9be21a0df9490d7f9ff04d162ff8ff4",
+      "video_sha256": "f57327c9a895dece7132ed101297799c08d4b96fa9e1f31bd1e0642ac7ac66bc",
+      "seed_topic": "The Retail Club That Makes Membership the Product",
+      "run_id": "43578194805",
+      "run_number": "81",
+      "run_attempt": "1",
+      "created_at": "2026-11-14T09:04:25.917095+00:00",
+      "video_id": null
     }
   ]
 }
