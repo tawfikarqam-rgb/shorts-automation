@@ -308,7 +308,7 @@
       "published_at": "2026-11-14T09:05:35.975734+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Printing Press That Changed Europe",
       "topic_key": "the printing press that changed europe",
       "script": "In the mid-fifteenth century, Johannes Gutenberg developed a European system for printing books with movable metal type. Printing itself had older roots in East Asia, but Gutenberg's combination of reusable type, ink, and a press helped books be produced in much larger numbers. Ideas could travel farther, and texts became easier to compare and preserve. The change was not instant or universal, but it transformed how knowledge circulated.",
@@ -319,7 +319,8 @@
       "run_number": "82",
       "run_attempt": "1",
       "created_at": "2026-11-14T17:51:53.014495+00:00",
-      "video_id": null
+      "video_id": "vdAjE6cgrkc",
+      "published_at": "2026-11-14T17:51:57.805583+00:00"
     }
   ]
 }
