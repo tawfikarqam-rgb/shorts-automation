@@ -31,7 +31,8 @@
     "The Mysterious Moai That Emerged Again",
     "Egypt's 2,600-Year-Old Structure Found Beneath the Delta",
     "The Fire That Rebuilt Chicago",
-    "The First Photograph Took Hours to Make"
+    "The First Photograph Took Hours to Make",
+    "The Empire That Built Roads Across the Andes"
   ],
   "entries": [
     {
@@ -289,6 +290,20 @@
       "created_at": "2026-11-13T18:04:19.308812+00:00",
       "video_id": "NG2FGxqa4gA",
       "published_at": "2026-11-13T18:04:23.321186+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Empire That Built Roads Across the Andes",
+      "topic_key": "the empire that built roads across the andes",
+      "script": "The Inca Empire developed an extensive road network across the Andes, connecting highland settlements, administrative centres, and coastal regions. The routes included stairs, bridges, and paths adapted to steep terrain. Runners and relay stations helped messages move across the empire, while storehouses supported officials and armies. The network shows how infrastructure can hold a state together even where mountains make travel difficult.",
+      "script_sha256": "851cc4af7969786648e68084c987aa41723998394e7aa8f64f92b004cf9dfe10",
+      "video_sha256": "88c20340e8b811783c2bdf1228f8c7daa545b19293385f9c6c26ab485fcb1b3a",
+      "seed_topic": "The Empire That Built Roads Across the Andes",
+      "run_id": "43578194805",
+      "run_number": "81",
+      "run_attempt": "1",
+      "created_at": "2026-11-14T09:05:32.315569+00:00",
+      "video_id": null
     }
   ]
 }
