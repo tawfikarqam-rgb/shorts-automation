@@ -32,7 +32,8 @@
     "The $36 Billion Egyptian Bank Listing",
     "The Search Engine That Sold Ads Beside Answers",
     "The Chocolate Company That Turned a Bar Into a Brand",
-    "The Retail Club That Makes Membership the Product"
+    "The Retail Club That Makes Membership the Product",
+    "How Toyota Made Small Improvements a Daily Habit"
   ],
   "entries": [
     {
@@ -305,6 +306,20 @@
       "created_at": "2026-11-14T09:04:25.917095+00:00",
       "video_id": "V5bYAOr49eE",
       "published_at": "2026-11-14T09:04:29.317855+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "How Toyota Made Small Improvements a Daily Habit",
+      "topic_key": "how toyota made small improvements a daily habit",
+      "script": "Toyota became known for a production approach that emphasizes reducing waste, improving quality, and giving workers a role in spotting problems. The Toyota Production System developed over decades rather than appearing as one overnight invention. Ideas such as just-in-time production and continuous improvement influenced manufacturers around the world. Its deeper lesson is that efficiency comes from designing a system where problems are visible and people can fix them early.",
+      "script_sha256": "849cbc03f707a7b51fc9647c9a6f07593e8cf348e2354482b5922fbe8f02fa26",
+      "video_sha256": "e72f4fb4c30afa97b442e350d56d905a59af0176342b1b04251bd7a4bc11e363",
+      "seed_topic": "How Toyota Made Small Improvements a Daily Habit",
+      "run_id": "43622718526",
+      "run_number": "82",
+      "run_attempt": "1",
+      "created_at": "2026-11-14T17:53:46.259304+00:00",
+      "video_id": null
     }
   ]
 }
