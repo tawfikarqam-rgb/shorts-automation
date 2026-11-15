@@ -34,7 +34,8 @@
     "The Chocolate Company That Turned a Bar Into a Brand",
     "The Retail Club That Makes Membership the Product",
     "How Toyota Made Small Improvements a Daily Habit",
-    "The Coffee Chain That Sold a Place to Pause"
+    "The Coffee Chain That Sold a Place to Pause",
+    "The Chip Company That Licensed Its Designs"
   ],
   "entries": [
     {
@@ -337,6 +338,20 @@
       "created_at": "2026-11-15T09:03:24.897093+00:00",
       "video_id": "mbC2f1uLOEg",
       "published_at": "2026-11-15T09:03:30.125892+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Chip Company That Licensed Its Designs",
+      "topic_key": "the chip company that licensed its designs",
+      "script": "Arm became influential by licensing processor designs and intellectual property to companies that build their own chips. Instead of manufacturing every processor itself, Arm earns revenue through licensing and royalties as its architecture is used in phones, computers, cars, and other devices. This model allows broad adoption but requires strong technical standards and relationships with partners. It shows how a company can build a business around designs rather than factories.",
+      "script_sha256": "c39fd4d05f9735a621946e86dcd0ac4e1997b3d407f2f48526b8368cbd8f2463",
+      "video_sha256": "3af549dbb6ba495c7dc5a105dc8e336d7e365fa0984eb915c20272586f2318ec",
+      "seed_topic": "The Chip Company That Licensed Its Designs",
+      "run_id": "43742836885",
+      "run_number": "84",
+      "run_attempt": "1",
+      "created_at": "2026-11-15T17:51:19.840084+00:00",
+      "video_id": null
     }
   ]
 }
