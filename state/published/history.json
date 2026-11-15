@@ -33,7 +33,8 @@
     "The Fire That Rebuilt Chicago",
     "The First Photograph Took Hours to Make",
     "The Empire That Built Roads Across the Andes",
-    "The Printing Press That Changed Europe"
+    "The Printing Press That Changed Europe",
+    "The Explorer Who Reached the South Pole First"
   ],
   "entries": [
     {
@@ -321,6 +322,20 @@
       "created_at": "2026-11-14T17:51:53.014495+00:00",
       "video_id": "vdAjE6cgrkc",
       "published_at": "2026-11-14T17:51:57.805583+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Explorer Who Reached the South Pole First",
+      "topic_key": "the explorer who reached the south pole first",
+      "script": "In December 1911, Norwegian explorer Roald Amundsen and his team reached the geographic South Pole ahead of a British expedition led by Robert Falcon Scott. Amundsen's success depended on careful planning, skis, dogs, and lessons learned from Arctic travel. Scott's party reached the pole weeks later but died on the return journey. The race is often told as a contest of bravery, yet preparation, logistics, and adapting equipment to the environment were decisive.",
+      "script_sha256": "e1e9d9dd5c50714ed2573db343c10d4279d0cd67f564ff1f60027ce8080f7bf6",
+      "video_sha256": "be9754ba99a5b39f5dabcf5eeb97715dc8ccfeaf387ea865cf03c0906c89c3ce",
+      "seed_topic": "The Explorer Who Reached the South Pole First",
+      "run_id": "43696851519",
+      "run_number": "83",
+      "run_attempt": "1",
+      "created_at": "2026-11-15T09:06:14.495191+00:00",
+      "video_id": null
     }
   ]
 }
