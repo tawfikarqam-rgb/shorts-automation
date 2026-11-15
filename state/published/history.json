@@ -340,7 +340,7 @@
       "published_at": "2026-11-15T09:06:19.391349+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The King Whose Pilgrimage Shook Gold Markets",
       "topic_key": "the king whose pilgrimage shook gold markets",
       "script": "Mansa Musa ruled the Mali Empire in the fourteenth century, when West African gold and trade routes connected the region to North Africa and beyond. During his pilgrimage to Mecca, his large entourage passed through Cairo, where later accounts described substantial gold spending and its effect on local prices. Exact figures are uncertain, but the journey revealed Mali's wealth and international connections to observers far beyond West Africa.",
@@ -351,7 +351,8 @@
       "run_number": "84",
       "run_attempt": "1",
       "created_at": "2026-11-15T17:50:51.277545+00:00",
-      "video_id": null
+      "video_id": "7B_PC7INVFM",
+      "published_at": "2026-11-15T17:50:54.972285+00:00"
     }
   ]
 }
