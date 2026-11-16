@@ -372,7 +372,7 @@
       "published_at": "2026-11-16T10:25:34.065960+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Razor Company That Sold a Refill Habit",
       "topic_key": "the razor company that sold a refill habit",
       "script": "King C. Gillette helped popularize the safety razor with inexpensive replaceable blades in the early twentieth century. The model made the handle a durable purchase while creating repeat demand for blades. The broader pattern became known as a razor-and-blades strategy, although many businesses use variations of it. It works only when customers see ongoing value and replacement parts remain convenient and trustworthy.",
@@ -383,7 +383,8 @@
       "run_number": "86",
       "run_attempt": "1",
       "created_at": "2026-11-16T18:14:58.547031+00:00",
-      "video_id": null
+      "video_id": "grdrMLhYQuA",
+      "published_at": "2026-11-16T18:15:02.660553+00:00"
     }
   ]
 }
