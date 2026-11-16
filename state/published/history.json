@@ -356,7 +356,7 @@
       "published_at": "2026-11-15T17:50:54.972285+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Roman Road Network That Connected an Empire",
       "topic_key": "the roman road network that connected an empire",
       "script": "Roman roads were built for military movement, administration, trade, and communication. Some routes used carefully prepared foundations and durable surfaces, while bridges and milestones helped travelers cross and understand the network. Not every road was paved with large stone slabs, despite the familiar image. The system helped officials and armies move across a huge territory, and traces of many routes remain visible today.",
@@ -367,7 +367,8 @@
       "run_number": "85",
       "run_attempt": "1",
       "created_at": "2026-11-16T10:25:37.599878+00:00",
-      "video_id": null
+      "video_id": "YSdqjDBl7XE",
+      "published_at": "2026-11-16T10:25:41.600522+00:00"
     }
   ]
 }
