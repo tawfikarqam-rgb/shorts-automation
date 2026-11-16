@@ -36,7 +36,8 @@
     "The Printing Press That Changed Europe",
     "The Explorer Who Reached the South Pole First",
     "The King Whose Pilgrimage Shook Gold Markets",
-    "The Roman Road Network That Connected an Empire"
+    "The Roman Road Network That Connected an Empire",
+    "The Great Fire That Reshaped London"
   ],
   "entries": [
     {
@@ -369,6 +370,20 @@
       "created_at": "2026-11-16T10:25:37.599878+00:00",
       "video_id": "YSdqjDBl7XE",
       "published_at": "2026-11-16T10:25:41.600522+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Great Fire That Reshaped London",
+      "topic_key": "the great fire that reshaped london",
+      "script": "A fire began in a bakery on Pudding Lane in September 1666 and spread through much of the City of London. Wooden buildings, narrow streets, and strong winds helped the flames travel. The fire destroyed thousands of homes and many churches, including the old St Paul's Cathedral. Rebuilding changed parts of the city, but the disaster did not instantly create modern fire safety; reforms came gradually.",
+      "script_sha256": "75611eec18eb0a5aceb438976d6533b0426d9d99003669c3d80ae62a0ae84261",
+      "video_sha256": "735f262ba6efd9418f1cabe59ceadc77424ed3bcdf634451b56e5fbcd0252e3a",
+      "seed_topic": "The Great Fire That Reshaped London",
+      "run_id": "43925665815",
+      "run_number": "86",
+      "run_attempt": "1",
+      "created_at": "2026-11-16T18:19:45.889854+00:00",
+      "video_id": null
     }
   ]
 }
