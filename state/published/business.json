@@ -35,7 +35,8 @@
     "The Retail Club That Makes Membership the Product",
     "How Toyota Made Small Improvements a Daily Habit",
     "The Coffee Chain That Sold a Place to Pause",
-    "The Chip Company That Licensed Its Designs"
+    "The Chip Company That Licensed Its Designs",
+    "The Toy Company That Turned a Brick Into a Platform"
   ],
   "entries": [
     {
@@ -353,6 +354,20 @@
       "created_at": "2026-11-15T17:51:19.840084+00:00",
       "video_id": "GE4B29i4NHs",
       "published_at": "2026-11-15T17:51:23.660793+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Toy Company That Turned a Brick Into a Platform",
+      "topic_key": "the toy company that turned a brick into a platform",
+      "script": "LEGO's building system works because pieces made decades apart can still connect in many ways. That compatibility turns individual sets into a larger creative platform: customers can combine parts, rebuild models, and invent their own designs. The company has expanded into games, films, and experiences, but the brick remains central to its identity. A consistent core product can support many new experiences without losing what makes it distinctive.",
+      "script_sha256": "385018e09996e85758452c28472b7b6bda1b569b86adac939830d19f99f63d8b",
+      "video_sha256": "f2775879938bbcc8be24416937d6c0dad43da03949a00e6f3c5a4630e958e1a5",
+      "seed_topic": "The Toy Company That Turned a Brick Into a Platform",
+      "run_id": "43847426015",
+      "run_number": "85",
+      "run_attempt": "1",
+      "created_at": "2026-11-16T10:25:30.006015+00:00",
+      "video_id": null
     }
   ]
 }
