@@ -372,7 +372,7 @@
       "published_at": "2026-11-16T10:25:41.600522+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Great Fire That Reshaped London",
       "topic_key": "the great fire that reshaped london",
       "script": "A fire began in a bakery on Pudding Lane in September 1666 and spread through much of the City of London. Wooden buildings, narrow streets, and strong winds helped the flames travel. The fire destroyed thousands of homes and many churches, including the old St Paul's Cathedral. Rebuilding changed parts of the city, but the disaster did not instantly create modern fire safety; reforms came gradually.",
@@ -383,7 +383,8 @@
       "run_number": "86",
       "run_attempt": "1",
       "created_at": "2026-11-16T18:19:45.889854+00:00",
-      "video_id": null
+      "video_id": "ehuAn_JhckU",
+      "published_at": "2026-11-16T18:19:49.893884+00:00"
     }
   ]
 }
