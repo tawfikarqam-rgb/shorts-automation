@@ -37,7 +37,8 @@
     "The Coffee Chain That Sold a Place to Pause",
     "The Chip Company That Licensed Its Designs",
     "The Toy Company That Turned a Brick Into a Platform",
-    "The Razor Company That Sold a Refill Habit"
+    "The Razor Company That Sold a Refill Habit",
+    "The Game Console Rivalry That Changed Marketing"
   ],
   "entries": [
     {
@@ -385,6 +386,20 @@
       "created_at": "2026-11-16T18:14:58.547031+00:00",
       "video_id": "grdrMLhYQuA",
       "published_at": "2026-11-16T18:15:02.660553+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Game Console Rivalry That Changed Marketing",
+      "topic_key": "the game console rivalry that changed marketing",
+      "script": "The competition between Nintendo and Sega in the late 1980s and early 1990s helped shape the modern video-game console market. Both companies used distinctive characters, hardware features, and bold advertising to attract young players. Their rivalry was not only about technical specifications; it was about identity, exclusive games, and how a brand spoke to its audience. Competition can accelerate innovation when customers have meaningful alternatives.",
+      "script_sha256": "15415678edc88b01e29ca6719803da3fd89be167eb62ba64552dbf3d76aa6732",
+      "video_sha256": "206765b025eeeb3175488a27213fa9311d3380f356bf6c5b21b0c5e1b7c685a2",
+      "seed_topic": "The Game Console Rivalry That Changed Marketing",
+      "run_id": "44053146277",
+      "run_number": "87",
+      "run_attempt": "1",
+      "created_at": "2026-11-17T09:21:49.710200+00:00",
+      "video_id": null
     }
   ]
 }
