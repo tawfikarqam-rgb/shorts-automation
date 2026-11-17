@@ -38,7 +38,8 @@
     "The King Whose Pilgrimage Shook Gold Markets",
     "The Roman Road Network That Connected an Empire",
     "The Great Fire That Reshaped London",
-    "The Manuscript That Helped Save an Ancient Language"
+    "The Manuscript That Helped Save an Ancient Language",
+    "The Manuscripts That Survived in Timbuktu"
   ],
   "entries": [
     {
@@ -401,6 +402,20 @@
       "created_at": "2026-11-17T09:21:31.624345+00:00",
       "video_id": "oRxbZkmddzU",
       "published_at": "2026-11-17T09:21:35.852266+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Manuscripts That Survived in Timbuktu",
+      "topic_key": "the manuscripts that survived in timbuktu",
+      "script": "For centuries, scholars and families in Timbuktu preserved handwritten works on law, astronomy, mathematics, history, and religion. The manuscripts reflect West Africa's long intellectual and trading networks, not an isolated outpost cut off from the world. Many collections were kept in private homes and libraries, where heat, dust, conflict, and time created serious preservation challenges. Their survival reminds us that written knowledge has been protected by communities as well as famous institutions.",
+      "script_sha256": "1995fddc4881b4a54f9f85ba4bcdc21a1c733039ef6e3971ed4a229f2af67c6e",
+      "video_sha256": "8909a8808967f65e4170c9248a53b75f0fb33c1924a86979ee81fbf91869ca4a",
+      "seed_topic": "The Manuscripts That Survived in Timbuktu",
+      "run_id": "44144570847",
+      "run_number": "88",
+      "run_attempt": "1",
+      "created_at": "2026-11-17T18:17:39.481218+00:00",
+      "video_id": null
     }
   ]
 }
