@@ -404,7 +404,7 @@
       "published_at": "2026-11-17T09:21:35.852266+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Manuscripts That Survived in Timbuktu",
       "topic_key": "the manuscripts that survived in timbuktu",
       "script": "For centuries, scholars and families in Timbuktu preserved handwritten works on law, astronomy, mathematics, history, and religion. The manuscripts reflect West Africa's long intellectual and trading networks, not an isolated outpost cut off from the world. Many collections were kept in private homes and libraries, where heat, dust, conflict, and time created serious preservation challenges. Their survival reminds us that written knowledge has been protected by communities as well as famous institutions.",
@@ -415,7 +415,8 @@
       "run_number": "88",
       "run_attempt": "1",
       "created_at": "2026-11-17T18:17:39.481218+00:00",
-      "video_id": null
+      "video_id": "y-cQQTjhM_g",
+      "published_at": "2026-11-17T18:17:43.107269+00:00"
     }
   ]
 }
