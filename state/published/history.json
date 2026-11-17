@@ -37,7 +37,8 @@
     "The Explorer Who Reached the South Pole First",
     "The King Whose Pilgrimage Shook Gold Markets",
     "The Roman Road Network That Connected an Empire",
-    "The Great Fire That Reshaped London"
+    "The Great Fire That Reshaped London",
+    "The Manuscript That Helped Save an Ancient Language"
   ],
   "entries": [
     {
@@ -385,6 +386,20 @@
       "created_at": "2026-11-16T18:19:45.889854+00:00",
       "video_id": "ehuAn_JhckU",
       "published_at": "2026-11-16T18:19:49.893884+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Manuscript That Helped Save an Ancient Language",
+      "topic_key": "the manuscript that helped save an ancient language",
+      "script": "The Behistun Inscription in Iran contains a royal proclamation written in Old Persian, Elamite, and Babylonian cuneiform. Because the same message appeared in multiple languages, it helped scholars compare signs and work toward deciphering cuneiform writing. The inscription was carved high on a cliff, making study physically difficult. Like the Rosetta Stone, it shows how multilingual records can become keys to understanding the past.",
+      "script_sha256": "8fac18b0315270e65342cc7236aa5c15ed302d1a010e7ffadaf55bad237c5f1e",
+      "video_sha256": "f3b276c29c706d0b08774c40a616af51abb485fc6064815a4bbbeab3b5d93ddc",
+      "seed_topic": "The Manuscript That Helped Save an Ancient Language",
+      "run_id": "44053146277",
+      "run_number": "87",
+      "run_attempt": "1",
+      "created_at": "2026-11-17T09:21:31.624345+00:00",
+      "video_id": null
     }
   ]
 }
