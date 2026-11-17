@@ -404,7 +404,7 @@
       "published_at": "2026-11-17T09:21:53.878126+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Delivery Network Built Around One Hub",
       "topic_key": "the delivery network built around one hub",
       "script": "FedEx helped popularize an overnight delivery model built around a central air hub, where packages are sorted and transferred between flights. A hub-and-spoke network can connect many cities efficiently, but it depends on tight schedules, reliable sorting, and backup plans when weather or equipment disrupts operations. The innovation was not simply faster planes. It was a coordinated network that made a time-sensitive promise possible at scale.",
@@ -415,7 +415,8 @@
       "run_number": "88",
       "run_attempt": "1",
       "created_at": "2026-11-17T18:16:48.422323+00:00",
-      "video_id": null
+      "video_id": "36TFOkkZzDA",
+      "published_at": "2026-11-17T18:16:52.686227+00:00"
     }
   ]
 }
