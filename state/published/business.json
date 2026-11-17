@@ -38,7 +38,8 @@
     "The Chip Company That Licensed Its Designs",
     "The Toy Company That Turned a Brick Into a Platform",
     "The Razor Company That Sold a Refill Habit",
-    "The Game Console Rivalry That Changed Marketing"
+    "The Game Console Rivalry That Changed Marketing",
+    "The Delivery Network Built Around One Hub"
   ],
   "entries": [
     {
@@ -401,6 +402,20 @@
       "created_at": "2026-11-17T09:21:49.710200+00:00",
       "video_id": "OdfA9VI8Ru4",
       "published_at": "2026-11-17T09:21:53.878126+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Delivery Network Built Around One Hub",
+      "topic_key": "the delivery network built around one hub",
+      "script": "FedEx helped popularize an overnight delivery model built around a central air hub, where packages are sorted and transferred between flights. A hub-and-spoke network can connect many cities efficiently, but it depends on tight schedules, reliable sorting, and backup plans when weather or equipment disrupts operations. The innovation was not simply faster planes. It was a coordinated network that made a time-sensitive promise possible at scale.",
+      "script_sha256": "c027c8023fb907b8427e9b98b1967d13366fd649a6831d815bdd239c3bc90a9e",
+      "video_sha256": "bad3c298ad4a1fc90b6ec4a3a6acf57a67f9f1facc62ee7e875b601470330850",
+      "seed_topic": "The Delivery Network Built Around One Hub",
+      "run_id": "44144570847",
+      "run_number": "88",
+      "run_attempt": "1",
+      "created_at": "2026-11-17T18:16:48.422323+00:00",
+      "video_id": null
     }
   ]
 }
