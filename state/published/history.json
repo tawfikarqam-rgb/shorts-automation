@@ -436,7 +436,7 @@
       "published_at": "2026-11-18T09:19:23.820646+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Canal That Changed Global Shipping",
       "topic_key": "the canal that changed global shipping",
       "script": "The Suez Canal opened in 1869, creating a direct sea route between the Mediterranean and the Red Sea. Ships no longer needed to sail around the southern tip of Africa when travelling between Europe and much of Asia. The canal shortened many journeys and became strategically important for trade and geopolitics. Its history also shows how infrastructure can reshape global commerce far beyond the country where it is built.",
@@ -447,7 +447,8 @@
       "run_number": "90",
       "run_attempt": "1",
       "created_at": "2026-11-18T18:08:26.097430+00:00",
-      "video_id": null
+      "video_id": "Q9NzQm8EfVQ",
+      "published_at": "2026-11-18T18:08:30.924860+00:00"
     }
   ]
 }
