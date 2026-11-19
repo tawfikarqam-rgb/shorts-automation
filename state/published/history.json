@@ -41,7 +41,8 @@
     "The Manuscript That Helped Save an Ancient Language",
     "The Manuscripts That Survived in Timbuktu",
     "The Explosion That Flattened a Canadian Harbor",
-    "The Canal That Changed Global Shipping"
+    "The Canal That Changed Global Shipping",
+    "The Message Hidden in the Rosetta Stone"
   ],
   "entries": [
     {
@@ -449,6 +450,20 @@
       "created_at": "2026-11-18T18:08:26.097430+00:00",
       "video_id": "Q9NzQm8EfVQ",
       "published_at": "2026-11-18T18:08:30.924860+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Message Hidden in the Rosetta Stone",
+      "topic_key": "the message hidden in the rosetta stone",
+      "script": "The Rosetta Stone carries the same decree in three scripts: hieroglyphic, Demotic, and ancient Greek. Because scholars could read Greek, the inscriptions gave them a crucial way to compare signs and meanings. Jean-François Champollion announced a major breakthrough in deciphering Egyptian hieroglyphs in 1822. The stone did not translate every inscription by itself, but it helped unlock a writing system that had been unreadable to scholars for centuries.",
+      "script_sha256": "5de9bc5b54bfc8c1fc0adce8c06a8d0cb441e8ef7becdee55f0427cb15ffbebf",
+      "video_sha256": "cc079f05fe3e01e2044331f8cc1d0f10dd3ac76b9ea2254d3185768e8850affb",
+      "seed_topic": "The Message Hidden in the Rosetta Stone",
+      "run_id": "44494587296",
+      "run_number": "91",
+      "run_attempt": "1",
+      "created_at": "2026-11-19T09:30:34.642238+00:00",
+      "video_id": null
     }
   ]
 }
