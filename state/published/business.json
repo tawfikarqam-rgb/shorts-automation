@@ -436,7 +436,7 @@
       "published_at": "2026-11-18T09:22:49.173605+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Phone Brand That Could Not Keep Its Lead",
       "topic_key": "the phone brand that could not keep its lead",
       "script": "BlackBerry became famous for secure mobile email and physical keyboards, especially among business users. As touchscreen smartphones and app ecosystems changed customer expectations, the company struggled to maintain its position in handsets. BlackBerry later shifted its focus toward software and security services. Its history is not simply about one product being better; it shows how a company's strengths can become less decisive when the market changes around them.",
@@ -447,7 +447,8 @@
       "run_number": "92",
       "run_attempt": "1",
       "created_at": "2026-11-19T18:06:04.641497+00:00",
-      "video_id": null
+      "video_id": "k08Okz96zYI",
+      "published_at": "2026-11-19T18:06:08.529735+00:00"
     }
   ]
 }
