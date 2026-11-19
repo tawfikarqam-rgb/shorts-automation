@@ -42,7 +42,8 @@
     "The Manuscripts That Survived in Timbuktu",
     "The Explosion That Flattened a Canadian Harbor",
     "The Canal That Changed Global Shipping",
-    "The Message Hidden in the Rosetta Stone"
+    "The Message Hidden in the Rosetta Stone",
+    "The Scrolls Hidden Near the Dead Sea"
   ],
   "entries": [
     {
@@ -465,6 +466,20 @@
       "created_at": "2026-11-19T09:30:34.642238+00:00",
       "video_id": "mrS2yD1dQgg",
       "published_at": "2026-11-19T09:30:38.353050+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Scrolls Hidden Near the Dead Sea",
+      "topic_key": "the scrolls hidden near the dead sea",
+      "script": "Beginning in 1947, ancient manuscripts were discovered in caves near Qumran by the Dead Sea. The Dead Sea Scrolls include biblical texts, community writings, and other works copied over centuries. They gave scholars an unusually rich window into Jewish life and religious thought in the Second Temple period. The scrolls did not answer every historical question, but they showed how varied texts and traditions were in the ancient world.",
+      "script_sha256": "be961f9d2c1d197ce40c46269a7bed0155ff5d97a651ef3dcc286bda2acb2179",
+      "video_sha256": "bc65f341de39b71a175eab3bd00ca508c0a8c91134bf52cf36d01f9e98516026",
+      "seed_topic": "The Scrolls Hidden Near the Dead Sea",
+      "run_id": "44583051326",
+      "run_number": "92",
+      "run_attempt": "1",
+      "created_at": "2026-11-19T18:07:43.789292+00:00",
+      "video_id": null
     }
   ]
 }
