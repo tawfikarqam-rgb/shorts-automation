@@ -43,7 +43,8 @@
     "The Explosion That Flattened a Canadian Harbor",
     "The Canal That Changed Global Shipping",
     "The Message Hidden in the Rosetta Stone",
-    "The Scrolls Hidden Near the Dead Sea"
+    "The Scrolls Hidden Near the Dead Sea",
+    "The Flight That Lasted Only Twelve Seconds"
   ],
   "entries": [
     {
@@ -481,6 +482,20 @@
       "created_at": "2026-11-19T18:07:43.789292+00:00",
       "video_id": "nNXvexq1noA",
       "published_at": "2026-11-19T18:07:48.100512+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Flight That Lasted Only Twelve Seconds",
+      "topic_key": "the flight that lasted only twelve seconds",
+      "script": "On December 17, 1903, Orville and Wilbur Wright made a powered flight at Kitty Hawk, North Carolina. The first flight lasted about twelve seconds and covered roughly 120 feet. It was not the first human attempt to fly, but it demonstrated controlled, powered, heavier-than-air flight using an aircraft the brothers had designed and tested. Their achievement grew from experiments with gliders, wings, and control systems.",
+      "script_sha256": "94fd090b6ea5b2e2aa783e0040c8712b97b102a4ef1ddfda7397aa3b8a164da4",
+      "video_sha256": "1ca063db2473d2e76cda080c210186f6babe0f63563a89805ef85bc9d98fcd35",
+      "seed_topic": "The Flight That Lasted Only Twelve Seconds",
+      "run_id": "44789227431",
+      "run_number": "94",
+      "run_attempt": "1",
+      "created_at": "2026-11-20T18:14:35.070480+00:00",
+      "video_id": null
     }
   ]
 }
