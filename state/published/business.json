@@ -42,7 +42,8 @@
     "The Delivery Network Built Around One Hub",
     "The Online Store That Made Selling Easier for Others",
     "The Phone Brand That Could Not Keep Its Lead",
-    "The Fashion Company That Made Speed Its Strategy"
+    "The Fashion Company That Made Speed Its Strategy",
+    "The Software Company That Won Developers First"
   ],
   "entries": [
     {
@@ -465,6 +466,20 @@
       "created_at": "2026-11-20T09:25:29.860538+00:00",
       "video_id": "EpWDodbTnAA",
       "published_at": "2026-11-20T09:25:34.149221+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Software Company That Won Developers First",
+      "topic_key": "the software company that won developers first",
+      "script": "Stripe built payment tools aimed at making it easier for developers and businesses to accept online payments. Clear documentation, APIs, and a relatively simple integration experience helped it spread among internet companies. Payment processing is complicated behind the scenes, involving fraud checks, banking relationships, and local rules. Stripe's story shows how a technical product can win customers by removing friction from a task that businesses need to get right.",
+      "script_sha256": "3acb26a8c48352f1cc31aecb9de2da3844ee5dd2d4fce5faba11ef13ba483297",
+      "video_sha256": "f108c9effdbd76aa1dec084f8600e49a0111e2e22f7b9af6d291406813019311",
+      "seed_topic": "The Software Company That Won Developers First",
+      "run_id": "44789227431",
+      "run_number": "94",
+      "run_attempt": "1",
+      "created_at": "2026-11-20T18:09:23.413124+00:00",
+      "video_id": null
     }
   ]
 }
