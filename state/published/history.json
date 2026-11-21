@@ -516,7 +516,7 @@
       "published_at": "2026-11-21T09:06:32.675339+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Stone Circle Built Across Many Generations",
       "topic_key": "the stone circle built across many generations",
       "script": "Stonehenge was not built in one short construction project. Archaeological evidence shows that the monument developed through several phases over many centuries, beginning with earthworks before the large stones were arranged. People transported and positioned massive stones using techniques that researchers continue to study. Its exact purposes changed or remain debated, but the site clearly required planning, shared labour, and repeated rebuilding.",
@@ -527,7 +527,8 @@
       "run_number": "96",
       "run_attempt": "1",
       "created_at": "2026-11-21T22:17:57.054238+00:00",
-      "video_id": null
+      "video_id": "MdXh1cxqx3M",
+      "published_at": "2026-11-21T22:18:00.750882+00:00"
     }
   ]
 }
