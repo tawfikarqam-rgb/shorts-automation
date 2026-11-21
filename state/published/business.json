@@ -44,7 +44,8 @@
     "The Phone Brand That Could Not Keep Its Lead",
     "The Fashion Company That Made Speed Its Strategy",
     "The Software Company That Won Developers First",
-    "The Computer Company That Changed Its Business Model"
+    "The Computer Company That Changed Its Business Model",
+    "The Sports Drink Brand Built on Event Marketing"
   ],
   "entries": [
     {
@@ -496,6 +497,20 @@
       "created_at": "2026-11-21T09:04:00.413429+00:00",
       "video_id": "zEdjtPCIfgU",
       "published_at": "2026-11-21T09:04:04.052144+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Sports Drink Brand Built on Event Marketing",
+      "topic_key": "the sports drink brand built on event marketing",
+      "script": "Red Bull grew by connecting its energy drink with high-energy sports, music, and adventurous events. Rather than relying only on traditional product advertising, the company invested in experiences and media that audiences wanted to watch. That strategy helped make the brand recognizable far beyond the supermarket shelf. The lesson is that content and community can become powerful marketing assets when they reinforce a clear brand identity.",
+      "script_sha256": "824e1e581544b003e762f769e407ea917e725ab3960589ce9d9046be13753da0",
+      "video_sha256": "8082d90ed1abd5bbd17e586abfd9fab11000c7e16dd4702c77bf7cc430cae3d5",
+      "seed_topic": "The Sports Drink Brand Built on Event Marketing",
+      "run_id": "44955383130",
+      "run_number": "96",
+      "run_attempt": "1",
+      "created_at": "2026-11-21T22:20:46.315540+00:00",
+      "video_id": null
     }
   ]
 }
