@@ -44,7 +44,8 @@
     "The Canal That Changed Global Shipping",
     "The Message Hidden in the Rosetta Stone",
     "The Scrolls Hidden Near the Dead Sea",
-    "The Flight That Lasted Only Twelve Seconds"
+    "The Flight That Lasted Only Twelve Seconds",
+    "The Ancient Library We Cannot Rebuild"
   ],
   "entries": [
     {
@@ -497,6 +498,20 @@
       "created_at": "2026-11-20T18:14:35.070480+00:00",
       "video_id": "Z_SRy43oDOk",
       "published_at": "2026-11-20T18:14:38.809445+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Ancient Library We Cannot Rebuild",
+      "topic_key": "the ancient library we cannot rebuild",
+      "script": "The Library of Alexandria became a symbol of ancient scholarship, but its history is more complicated than the popular story of one fire destroying all knowledge. The institution changed over time, and the loss of books likely happened through multiple episodes of political upheaval, neglect, and damage. Scholars gathered texts from across the Mediterranean world, making the library an ambitious center of learning. Its real story is a warning about how fragile knowledge institutions can be.",
+      "script_sha256": "8864f1411c80b8069529c25567901b327c1efb015e8782975d3cd5f7770e2936",
+      "video_sha256": "72f5071945409c64a60e835eb40754b9f336b0b1a45da65899eb56e366ad1845",
+      "seed_topic": "The Ancient Library We Cannot Rebuild",
+      "run_id": "44887145613",
+      "run_number": "95",
+      "run_attempt": "1",
+      "created_at": "2026-11-21T09:06:28.820879+00:00",
+      "video_id": null
     }
   ]
 }
