@@ -43,7 +43,8 @@
     "The Online Store That Made Selling Easier for Others",
     "The Phone Brand That Could Not Keep Its Lead",
     "The Fashion Company That Made Speed Its Strategy",
-    "The Software Company That Won Developers First"
+    "The Software Company That Won Developers First",
+    "The Computer Company That Changed Its Business Model"
   ],
   "entries": [
     {
@@ -479,6 +480,20 @@
       "run_number": "94",
       "run_attempt": "1",
       "created_at": "2026-11-20T18:09:23.413124+00:00",
+      "video_id": null
+    },
+    {
+      "status": "reserved",
+      "topic": "The Computer Company That Changed Its Business Model",
+      "topic_key": "the computer company that changed its business model",
+      "script": "IBM began as a business-machine company and became a major force in computing through hardware, software, and services. Over time it shifted emphasis as customer needs changed, including moving away from some commodity hardware markets and investing in enterprise services and software. The company's history is not a straight line of success, but it illustrates how large organizations repeatedly have to decide which capabilities to keep and which businesses to leave.",
+      "script_sha256": "94703b679c08b8ab0946bf121c6eff1ccfc70f08c402e7f1a6d4949fd12fecb2",
+      "video_sha256": "057a6598948157732103415bc17475d92c7ffa5fad083d54e22797000d20a459",
+      "seed_topic": "The Computer Company That Changed Its Business Model",
+      "run_id": "44887145613",
+      "run_number": "95",
+      "run_attempt": "1",
+      "created_at": "2026-11-21T09:04:00.413429+00:00",
       "video_id": null
     }
   ]
