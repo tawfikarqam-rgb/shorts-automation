@@ -499,7 +499,7 @@
       "published_at": "2026-11-21T09:04:04.052144+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Sports Drink Brand Built on Event Marketing",
       "topic_key": "the sports drink brand built on event marketing",
       "script": "Red Bull grew by connecting its energy drink with high-energy sports, music, and adventurous events. Rather than relying only on traditional product advertising, the company invested in experiences and media that audiences wanted to watch. That strategy helped make the brand recognizable far beyond the supermarket shelf. The lesson is that content and community can become powerful marketing assets when they reinforce a clear brand identity.",
@@ -510,7 +510,8 @@
       "run_number": "96",
       "run_attempt": "1",
       "created_at": "2026-11-21T22:20:46.315540+00:00",
-      "video_id": null
+      "video_id": "qSFUDFsfK-U",
+      "published_at": "2026-11-21T22:20:49.625440+00:00"
     }
   ]
 }
