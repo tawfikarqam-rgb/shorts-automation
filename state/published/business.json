@@ -483,7 +483,7 @@
       "video_id": null
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Computer Company That Changed Its Business Model",
       "topic_key": "the computer company that changed its business model",
       "script": "IBM began as a business-machine company and became a major force in computing through hardware, software, and services. Over time it shifted emphasis as customer needs changed, including moving away from some commodity hardware markets and investing in enterprise services and software. The company's history is not a straight line of success, but it illustrates how large organizations repeatedly have to decide which capabilities to keep and which businesses to leave.",
@@ -494,7 +494,8 @@
       "run_number": "95",
       "run_attempt": "1",
       "created_at": "2026-11-21T09:04:00.413429+00:00",
-      "video_id": null
+      "video_id": "zEdjtPCIfgU",
+      "published_at": "2026-11-21T09:04:04.052144+00:00"
     }
   ]
 }
