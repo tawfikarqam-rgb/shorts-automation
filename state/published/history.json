@@ -45,7 +45,8 @@
     "The Message Hidden in the Rosetta Stone",
     "The Scrolls Hidden Near the Dead Sea",
     "The Flight That Lasted Only Twelve Seconds",
-    "The Ancient Library We Cannot Rebuild"
+    "The Ancient Library We Cannot Rebuild",
+    "The Stone Circle Built Across Many Generations"
   ],
   "entries": [
     {
@@ -513,6 +514,20 @@
       "created_at": "2026-11-21T09:06:28.820879+00:00",
       "video_id": "WTaFX48Ssk0",
       "published_at": "2026-11-21T09:06:32.675339+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Stone Circle Built Across Many Generations",
+      "topic_key": "the stone circle built across many generations",
+      "script": "Stonehenge was not built in one short construction project. Archaeological evidence shows that the monument developed through several phases over many centuries, beginning with earthworks before the large stones were arranged. People transported and positioned massive stones using techniques that researchers continue to study. Its exact purposes changed or remain debated, but the site clearly required planning, shared labour, and repeated rebuilding.",
+      "script_sha256": "d076f9eb64fe3b2a4427bcdfc20ba2b462199c85013e4beb750b60ecea64c546",
+      "video_sha256": "09ad9cec18d93da0adb2a1d0ac9184580b2b62f114b56224da7e541814352614",
+      "seed_topic": "The Stone Circle Built Across Many Generations",
+      "run_id": "44955383130",
+      "run_number": "96",
+      "run_attempt": "1",
+      "created_at": "2026-11-21T22:17:57.054238+00:00",
+      "video_id": null
     }
   ]
 }
