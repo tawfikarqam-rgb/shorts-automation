@@ -47,7 +47,8 @@
     "The Flight That Lasted Only Twelve Seconds",
     "The Ancient Library We Cannot Rebuild",
     "The Stone Circle Built Across Many Generations",
-    "The Eruption That Sent Ash Around the World"
+    "The Eruption That Sent Ash Around the World",
+    "The Cable That Tried to Connect Two Continents"
   ],
   "entries": [
     {
@@ -545,6 +546,20 @@
       "created_at": "2026-11-22T16:25:32.378693+00:00",
       "video_id": "qzTm85Qi9Eo",
       "published_at": "2026-11-22T16:25:35.805685+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Cable That Tried to Connect Two Continents",
+      "topic_key": "the cable that tried to connect two continents",
+      "script": "In 1858, a submarine telegraph cable briefly connected North America and Europe, allowing messages to cross the Atlantic far faster than ships. The first cable failed after only a few weeks because its electrical performance and insulation could not withstand the demands placed on it. A more successful cable was laid in 1866. The breakthrough showed that global communication would depend not only on clever ideas, but on engineering that survived the real ocean.",
+      "script_sha256": "013e30ef7467e80436963101701f62a6c3fb5a9d62c95d970195ca1ef885ad09",
+      "video_sha256": "b48fd2d3b5d15ad71b528f64259a419dffe0bfc54a9ae82824e2f8bfb1066e5e",
+      "seed_topic": "The Cable That Tried to Connect Two Continents",
+      "run_id": "45077880963",
+      "run_number": "98",
+      "run_attempt": "1",
+      "created_at": "2026-11-22T22:35:33.334390+00:00",
+      "video_id": null
     }
   ]
 }
