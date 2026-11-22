@@ -531,7 +531,7 @@
       "published_at": "2026-11-22T16:24:26.889827+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Company That Made Renting a Room Feel Normal",
       "topic_key": "the company that made renting a room feel normal",
       "script": "Airbnb began by helping travelers find short-term stays in homes and spare rooms, offering an alternative to traditional hotels. Its platform connected hosts with guests and built trust through profiles, reviews, payments, and customer support. The model scaled without owning most of the accommodation itself, but it also created local debates about housing, regulation, and neighborhood impact. Platform growth depends on solving trust problems as well as matching supply and demand.",
@@ -542,7 +542,8 @@
       "run_number": "98",
       "run_attempt": "1",
       "created_at": "2026-11-22T22:35:37.487212+00:00",
-      "video_id": null
+      "video_id": "AGdzOUb_2vs",
+      "published_at": "2026-11-22T22:35:41.026398+00:00"
     }
   ]
 }
