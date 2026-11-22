@@ -45,7 +45,8 @@
     "The Fashion Company That Made Speed Its Strategy",
     "The Software Company That Won Developers First",
     "The Computer Company That Changed Its Business Model",
-    "The Sports Drink Brand Built on Event Marketing"
+    "The Sports Drink Brand Built on Event Marketing",
+    "The Pizza Chain That Made Ordering a Process"
   ],
   "entries": [
     {
@@ -512,6 +513,20 @@
       "created_at": "2026-11-21T22:20:46.315540+00:00",
       "video_id": "qSFUDFsfK-U",
       "published_at": "2026-11-21T22:20:49.625440+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Pizza Chain That Made Ordering a Process",
+      "topic_key": "the pizza chain that made ordering a process",
+      "script": "Domino's expanded through a standardized operating model built around a focused menu, repeatable preparation, and delivery operations. The company later invested heavily in digital ordering and tracking, turning the customer experience into a technology problem as well as a food-service problem. Its growth shows how a service business can compete by making the entire process—from ordering to delivery—more predictable and convenient.",
+      "script_sha256": "b397a794b4fc71a6e7c15d21947dc2c25c30560beb9f24aa2b56ff5edea51b5c",
+      "video_sha256": "700620738e4f90c3dff5d250a183272364381248ba7dbb02a5fe5a5cffd1e27a",
+      "seed_topic": "The Pizza Chain That Made Ordering a Process",
+      "run_id": "45042808972",
+      "run_number": "97",
+      "run_attempt": "1",
+      "created_at": "2026-11-22T16:24:22.991540+00:00",
+      "video_id": null
     }
   ]
 }
