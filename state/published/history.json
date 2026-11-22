@@ -46,7 +46,8 @@
     "The Scrolls Hidden Near the Dead Sea",
     "The Flight That Lasted Only Twelve Seconds",
     "The Ancient Library We Cannot Rebuild",
-    "The Stone Circle Built Across Many Generations"
+    "The Stone Circle Built Across Many Generations",
+    "The Eruption That Sent Ash Around the World"
   ],
   "entries": [
     {
@@ -529,6 +530,20 @@
       "created_at": "2026-11-21T22:17:57.054238+00:00",
       "video_id": "MdXh1cxqx3M",
       "published_at": "2026-11-21T22:18:00.750882+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Eruption That Sent Ash Around the World",
+      "topic_key": "the eruption that sent ash around the world",
+      "script": "In 1883, the volcanic island of Krakatoa erupted in Indonesia in a series of enormous explosions. The eruption generated tsunamis, devastated nearby coastlines, and sent ash and gases high into the atmosphere. Reports of unusual sunsets appeared far from the eruption zone. The event became one of the best documented major volcanic disasters of its era, showing how a local geological event can have effects across the planet.",
+      "script_sha256": "22f60cafa49cc13be6e1566ba055deffcf9b3cb02e07e70904390c7b78f5a551",
+      "video_sha256": "811caa5027ce882b5b397aa96803422bef950d4965333891309182703d4256d5",
+      "seed_topic": "The Eruption That Sent Ash Around the World",
+      "run_id": "45042808972",
+      "run_number": "97",
+      "run_attempt": "1",
+      "created_at": "2026-11-22T16:25:32.378693+00:00",
+      "video_id": null
     }
   ]
 }
