@@ -46,7 +46,8 @@
     "The Software Company That Won Developers First",
     "The Computer Company That Changed Its Business Model",
     "The Sports Drink Brand Built on Event Marketing",
-    "The Pizza Chain That Made Ordering a Process"
+    "The Pizza Chain That Made Ordering a Process",
+    "The Company That Made Renting a Room Feel Normal"
   ],
   "entries": [
     {
@@ -528,6 +529,20 @@
       "created_at": "2026-11-22T16:24:22.991540+00:00",
       "video_id": "TKwz0XI0jsA",
       "published_at": "2026-11-22T16:24:26.889827+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Company That Made Renting a Room Feel Normal",
+      "topic_key": "the company that made renting a room feel normal",
+      "script": "Airbnb began by helping travelers find short-term stays in homes and spare rooms, offering an alternative to traditional hotels. Its platform connected hosts with guests and built trust through profiles, reviews, payments, and customer support. The model scaled without owning most of the accommodation itself, but it also created local debates about housing, regulation, and neighborhood impact. Platform growth depends on solving trust problems as well as matching supply and demand.",
+      "script_sha256": "f6869b2eb7217bbc6cfb1f7d6e7015c67c6d8aeb6f2f68a8fa6573219acfbb88",
+      "video_sha256": "037a4018bde4c401eb3c60aa1cd8906757df1b74fb91fff0eba58b4acce8ff11",
+      "seed_topic": "The Company That Made Renting a Room Feel Normal",
+      "run_id": "45077880963",
+      "run_number": "98",
+      "run_attempt": "1",
+      "created_at": "2026-11-22T22:35:37.487212+00:00",
+      "video_id": null
     }
   ]
 }
