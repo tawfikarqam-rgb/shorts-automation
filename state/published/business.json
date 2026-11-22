@@ -515,7 +515,7 @@
       "published_at": "2026-11-21T22:20:49.625440+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Pizza Chain That Made Ordering a Process",
       "topic_key": "the pizza chain that made ordering a process",
       "script": "Domino's expanded through a standardized operating model built around a focused menu, repeatable preparation, and delivery operations. The company later invested heavily in digital ordering and tracking, turning the customer experience into a technology problem as well as a food-service problem. Its growth shows how a service business can compete by making the entire process—from ordering to delivery—more predictable and convenient.",
@@ -526,7 +526,8 @@
       "run_number": "97",
       "run_attempt": "1",
       "created_at": "2026-11-22T16:24:22.991540+00:00",
-      "video_id": null
+      "video_id": "TKwz0XI0jsA",
+      "published_at": "2026-11-22T16:24:26.889827+00:00"
     }
   ]
 }
