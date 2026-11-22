@@ -548,7 +548,7 @@
       "published_at": "2026-11-22T16:25:35.805685+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Cable That Tried to Connect Two Continents",
       "topic_key": "the cable that tried to connect two continents",
       "script": "In 1858, a submarine telegraph cable briefly connected North America and Europe, allowing messages to cross the Atlantic far faster than ships. The first cable failed after only a few weeks because its electrical performance and insulation could not withstand the demands placed on it. A more successful cable was laid in 1866. The breakthrough showed that global communication would depend not only on clever ideas, but on engineering that survived the real ocean.",
@@ -559,7 +559,8 @@
       "run_number": "98",
       "run_attempt": "1",
       "created_at": "2026-11-22T22:35:33.334390+00:00",
-      "video_id": null
+      "video_id": "TFHmSTEVmWI",
+      "published_at": "2026-11-22T22:35:36.574056+00:00"
     }
   ]
 }
