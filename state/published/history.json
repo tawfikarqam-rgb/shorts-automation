@@ -532,7 +532,7 @@
       "published_at": "2026-11-21T22:18:00.750882+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Eruption That Sent Ash Around the World",
       "topic_key": "the eruption that sent ash around the world",
       "script": "In 1883, the volcanic island of Krakatoa erupted in Indonesia in a series of enormous explosions. The eruption generated tsunamis, devastated nearby coastlines, and sent ash and gases high into the atmosphere. Reports of unusual sunsets appeared far from the eruption zone. The event became one of the best documented major volcanic disasters of its era, showing how a local geological event can have effects across the planet.",
@@ -543,7 +543,8 @@
       "run_number": "97",
       "run_attempt": "1",
       "created_at": "2026-11-22T16:25:32.378693+00:00",
-      "video_id": null
+      "video_id": "qzTm85Qi9Eo",
+      "published_at": "2026-11-22T16:25:35.805685+00:00"
     }
   ]
 }
