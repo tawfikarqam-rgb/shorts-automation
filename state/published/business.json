@@ -47,7 +47,8 @@
     "The Computer Company That Changed Its Business Model",
     "The Sports Drink Brand Built on Event Marketing",
     "The Pizza Chain That Made Ordering a Process",
-    "The Company That Made Renting a Room Feel Normal"
+    "The Company That Made Renting a Room Feel Normal",
+    "How Adobe Changed From Boxed Software to Subscriptions"
   ],
   "entries": [
     {
@@ -544,6 +545,20 @@
       "created_at": "2026-11-22T22:35:37.487212+00:00",
       "video_id": "AGdzOUb_2vs",
       "published_at": "2026-11-22T22:35:41.026398+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "How Adobe Changed From Boxed Software to Subscriptions",
+      "topic_key": "how adobe changed from boxed software to subscriptions",
+      "script": "Adobe moved its major creative software products toward a subscription model through Creative Cloud, replacing the old pattern of occasional boxed upgrades. The transition gave the company more predictable recurring revenue and let customers receive ongoing updates. It also changed how users paid and raised concerns among customers who preferred permanent licenses. The shift shows that changing a business model can improve revenue stability while creating new customer-trust challenges.",
+      "script_sha256": "6f7769a42dea5dd4836fb0519004063f0b5e0a069dfa67e1d614eb8843bd93cf",
+      "video_sha256": "ac953c4bf080400fce608d5290576b2a122160673ffed3499f9e8fbd72e8ab89",
+      "seed_topic": "How Adobe Changed From Boxed Software to Subscriptions",
+      "run_id": "45168868872",
+      "run_number": "99",
+      "run_attempt": "1",
+      "created_at": "2026-11-23T12:02:36.611994+00:00",
+      "video_id": null
     }
   ]
 }
