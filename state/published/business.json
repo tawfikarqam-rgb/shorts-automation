@@ -48,7 +48,8 @@
     "The Sports Drink Brand Built on Event Marketing",
     "The Pizza Chain That Made Ordering a Process",
     "The Company That Made Renting a Room Feel Normal",
-    "How Adobe Changed From Boxed Software to Subscriptions"
+    "How Adobe Changed From Boxed Software to Subscriptions",
+    "The Sticky Note That Began as a Failed Glue"
   ],
   "entries": [
     {
@@ -560,6 +561,20 @@
       "created_at": "2026-11-23T12:02:36.611994+00:00",
       "video_id": "Cp_lYXX6lIQ",
       "published_at": "2026-11-23T12:02:40.764334+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Sticky Note That Began as a Failed Glue",
+      "topic_key": "the sticky note that began as a failed glue",
+      "script": "In 1968, 3M scientist Spencer Silver developed an adhesive that stuck lightly and could be removed without leaving much residue. At first, it seemed to have no obvious use. Years later, colleague Art Fry found a way to use it for bookmarks that stayed in place. The Post-it Note became a major product because an unusual technical discovery met a practical everyday problem. Innovation sometimes depends on connecting ideas across teams.",
+      "script_sha256": "7dbd60dd48e5a7c805b4663aaff5ca66a67ef3d4768dab8d3c0ffdeef6798a91",
+      "video_sha256": "41c9fff39b10b70f406b42ca14587a07c804b110895d5cc90f0200f0f063fc22",
+      "seed_topic": "The Sticky Note That Began as a Failed Glue",
+      "run_id": "45256875342",
+      "run_number": "100",
+      "run_attempt": "1",
+      "created_at": "2026-11-23T20:17:30.273720+00:00",
+      "video_id": null
     }
   ]
 }
