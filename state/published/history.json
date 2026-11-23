@@ -564,7 +564,7 @@
       "published_at": "2026-11-22T22:35:36.574056+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Bridge Built Without Modern Steel",
       "topic_key": "the bridge built without modern steel",
       "script": "The Romans built durable stone bridges across rivers throughout their empire, using arches to distribute weight and foundations designed for local conditions. Some bridges remain in use or survive as major archaeological structures after many centuries. Not every Roman bridge was identical, and repairs and later rebuilding were common. Their legacy is less about one perfect design and more about practical engineering repeated across a huge territory.",
@@ -575,7 +575,8 @@
       "run_number": "99",
       "run_attempt": "1",
       "created_at": "2026-11-23T12:03:57.352399+00:00",
-      "video_id": null
+      "video_id": "rGFoACx68kE",
+      "published_at": "2026-11-23T12:04:02.097370+00:00"
     }
   ]
 }
