@@ -579,7 +579,7 @@
       "published_at": "2026-11-23T20:17:35.799390+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "How IKEA Turned Flat Packs Into a Business Advantage",
       "topic_key": "how ikea turned flat packs into a business advantage",
       "script": "IKEA built much of its model around furniture customers could transport and assemble themselves. Flat-pack design reduced shipping volume and made large-scale retail more practical, while showroom layouts helped shoppers imagine products in their homes. The approach also shifts some work to the customer, so clear instructions and product design matter. The business lesson is that packaging and logistics can be part of the product strategy, not just a delivery detail.",
@@ -590,7 +590,8 @@
       "run_number": "101",
       "run_attempt": "1",
       "created_at": "2026-11-24T19:38:39.406842+00:00",
-      "video_id": null
+      "video_id": "dbQeoCONlTc",
+      "published_at": "2026-11-24T19:38:44.265138+00:00"
     }
   ]
 }
