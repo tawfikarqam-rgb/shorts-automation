@@ -50,7 +50,8 @@
     "The Eruption That Sent Ash Around the World",
     "The Cable That Tried to Connect Two Continents",
     "The Bridge Built Without Modern Steel",
-    "The City That Preserved Its Past in a Cave"
+    "The City That Preserved Its Past in a Cave",
+    "The Ship Trapped in Antarctic Ice"
   ],
   "entries": [
     {
@@ -593,6 +594,20 @@
       "created_at": "2026-11-23T20:16:38.474381+00:00",
       "video_id": "oEUfEi0uBbc",
       "published_at": "2026-11-23T20:16:42.036746+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Ship Trapped in Antarctic Ice",
+      "topic_key": "the ship trapped in antarctic ice",
+      "script": "In 1915, Ernest Shackleton's ship Endurance became trapped in Antarctic sea ice and was eventually crushed. The crew escaped onto the ice and later reached Elephant Island; Shackleton and a small group then made a dangerous boat journey to seek help. Remarkably, all members of the expedition survived. Their rescue was not a single miracle moment but a long sequence of decisions, endurance, and leadership under extreme conditions.",
+      "script_sha256": "fe5a895f1a8138cca3ca418c312ab38ab83baa755f87192abb75f4d1fb90f8a2",
+      "video_sha256": "414607d0cb7f29aa2bc325f0e34e45c9d18d17f7d44f274ca7f1907a9dd787c6",
+      "seed_topic": "The Ship Trapped in Antarctic Ice",
+      "run_id": "45470733571",
+      "run_number": "101",
+      "run_attempt": "1",
+      "created_at": "2026-11-24T19:39:54.027454+00:00",
+      "video_id": null
     }
   ]
 }
