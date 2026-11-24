@@ -49,7 +49,8 @@
     "The Pizza Chain That Made Ordering a Process",
     "The Company That Made Renting a Room Feel Normal",
     "How Adobe Changed From Boxed Software to Subscriptions",
-    "The Sticky Note That Began as a Failed Glue"
+    "The Sticky Note That Began as a Failed Glue",
+    "How IKEA Turned Flat Packs Into a Business Advantage"
   ],
   "entries": [
     {
@@ -576,6 +577,20 @@
       "created_at": "2026-11-23T20:17:30.273720+00:00",
       "video_id": "B5FZQNAHp7Q",
       "published_at": "2026-11-23T20:17:35.799390+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "How IKEA Turned Flat Packs Into a Business Advantage",
+      "topic_key": "how ikea turned flat packs into a business advantage",
+      "script": "IKEA built much of its model around furniture customers could transport and assemble themselves. Flat-pack design reduced shipping volume and made large-scale retail more practical, while showroom layouts helped shoppers imagine products in their homes. The approach also shifts some work to the customer, so clear instructions and product design matter. The business lesson is that packaging and logistics can be part of the product strategy, not just a delivery detail.",
+      "script_sha256": "d437a66e9b3fc7314c54fb1da3d63e9c9faabeb3640a3bb0995bf7110bde6dcf",
+      "video_sha256": "a5ab765c06bfdbb9eca9c93303cb1420eddc0f4bcebd55a5d510827ad7d57c8f",
+      "seed_topic": "How IKEA Turned Flat Packs Into a Business Advantage",
+      "run_id": "45470733571",
+      "run_number": "101",
+      "run_attempt": "1",
+      "created_at": "2026-11-24T19:38:39.406842+00:00",
+      "video_id": null
     }
   ]
 }
