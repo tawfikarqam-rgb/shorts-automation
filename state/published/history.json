@@ -612,7 +612,7 @@
       "published_at": "2026-11-24T19:40:01.387007+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The City That Became a Center of Ancient Paper",
       "topic_key": "the city that became a center of ancient paper",
       "script": "The ancient city of Pergamon in Asia Minor became associated with parchment, a writing material made from prepared animal skin. The word 'parchment' is linked to the city's name, although the material was used in other places too. Parchment was durable and could be folded into book-like formats, helping manuscripts survive. The story is a reminder that technologies for storing information often evolve through practical improvements in materials.",
@@ -623,7 +623,8 @@
       "run_number": "102",
       "run_attempt": "1",
       "created_at": "2026-11-25T18:42:58.564126+00:00",
-      "video_id": null
+      "video_id": "xyvMzJuCkc8",
+      "published_at": "2026-11-25T18:43:01.845872+00:00"
     }
   ]
 }
