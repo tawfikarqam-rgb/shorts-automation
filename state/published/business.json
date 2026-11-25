@@ -50,7 +50,8 @@
     "The Company That Made Renting a Room Feel Normal",
     "How Adobe Changed From Boxed Software to Subscriptions",
     "The Sticky Note That Began as a Failed Glue",
-    "How IKEA Turned Flat Packs Into a Business Advantage"
+    "How IKEA Turned Flat Packs Into a Business Advantage",
+    "The Payment Network That Does Not Lend You Money"
   ],
   "entries": [
     {
@@ -592,6 +593,20 @@
       "created_at": "2026-11-24T19:38:39.406842+00:00",
       "video_id": "dbQeoCONlTc",
       "published_at": "2026-11-24T19:38:44.265138+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Payment Network That Does Not Lend You Money",
+      "topic_key": "the payment network that does not lend you money",
+      "script": "Visa is often mistaken for a bank, but its core role is to operate a payment network that connects consumers, merchants, financial institutions, and processors. Banks typically issue the cards and manage customer credit or deposits, while the network helps authorize and route transactions. The distinction matters because a payment platform can earn value by connecting participants without directly lending to every cardholder.",
+      "script_sha256": "6c50e40b3bd236de0199043cc6b4d9d7b303ed844c96a97e873d64c91a51f80e",
+      "video_sha256": "0462f1b8dbc9a2b9ef1f2693f4455fd0854e56159616052fd614bb9a6f9f2a47",
+      "seed_topic": "The Payment Network That Does Not Lend You Money",
+      "run_id": "45677241950",
+      "run_number": "102",
+      "run_attempt": "1",
+      "created_at": "2026-11-25T18:42:45.758719+00:00",
+      "video_id": null
     }
   ]
 }
