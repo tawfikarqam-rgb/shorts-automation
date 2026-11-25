@@ -51,7 +51,8 @@
     "The Cable That Tried to Connect Two Continents",
     "The Bridge Built Without Modern Steel",
     "The City That Preserved Its Past in a Cave",
-    "The Ship Trapped in Antarctic Ice"
+    "The Ship Trapped in Antarctic Ice",
+    "The City That Became a Center of Ancient Paper"
   ],
   "entries": [
     {
@@ -609,6 +610,20 @@
       "created_at": "2026-11-24T19:39:54.027454+00:00",
       "video_id": "hm6rcO4-dc4",
       "published_at": "2026-11-24T19:40:01.387007+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The City That Became a Center of Ancient Paper",
+      "topic_key": "the city that became a center of ancient paper",
+      "script": "The ancient city of Pergamon in Asia Minor became associated with parchment, a writing material made from prepared animal skin. The word 'parchment' is linked to the city's name, although the material was used in other places too. Parchment was durable and could be folded into book-like formats, helping manuscripts survive. The story is a reminder that technologies for storing information often evolve through practical improvements in materials.",
+      "script_sha256": "c4560d85a884ae5006cb1676b9c04bf5f684057a71d4e14903f0a1e1e35d74f2",
+      "video_sha256": "da7d1e51be3a2b934f34e54efd71ea14bc7730d0f55af57e5bf331f4490afe37",
+      "seed_topic": "The City That Became a Center of Ancient Paper",
+      "run_id": "45677241950",
+      "run_number": "102",
+      "run_attempt": "1",
+      "created_at": "2026-11-25T18:42:58.564126+00:00",
+      "video_id": null
     }
   ]
 }
