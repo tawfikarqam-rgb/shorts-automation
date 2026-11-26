@@ -52,7 +52,8 @@
     "The Bridge Built Without Modern Steel",
     "The City That Preserved Its Past in a Cave",
     "The Ship Trapped in Antarctic Ice",
-    "The City That Became a Center of Ancient Paper"
+    "The City That Became a Center of Ancient Paper",
+    "The Medieval University That Outlasted Empires"
   ],
   "entries": [
     {
@@ -625,6 +626,20 @@
       "created_at": "2026-11-25T18:42:58.564126+00:00",
       "video_id": "xyvMzJuCkc8",
       "published_at": "2026-11-25T18:43:01.845872+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Medieval University That Outlasted Empires",
+      "topic_key": "the medieval university that outlasted empires",
+      "script": "The University of Bologna developed in the late eleventh century and became one of Europe's earliest universities. Students and teachers organized around the study of law, and the institution evolved through changing political systems and centuries of scholarship. Medieval universities were not identical to modern campuses, but they created durable structures for teaching, debate, and recognized qualifications. Their influence can still be seen in how higher education is organized.",
+      "script_sha256": "b00ee108b87df6193f17a89a5018fbf820b811125113e44789a0a8287111479a",
+      "video_sha256": "994e54d62c23003c64f03cef46ef32b1ab939b8d649e3adb941dfe0bc60b0e92",
+      "seed_topic": "The Medieval University That Outlasted Empires",
+      "run_id": "45875701178",
+      "run_number": "103",
+      "run_attempt": "1",
+      "created_at": "2026-11-26T18:29:31.758226+00:00",
+      "video_id": null
     }
   ]
 }
