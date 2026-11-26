@@ -628,7 +628,7 @@
       "published_at": "2026-11-25T18:43:01.845872+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Medieval University That Outlasted Empires",
       "topic_key": "the medieval university that outlasted empires",
       "script": "The University of Bologna developed in the late eleventh century and became one of Europe's earliest universities. Students and teachers organized around the study of law, and the institution evolved through changing political systems and centuries of scholarship. Medieval universities were not identical to modern campuses, but they created durable structures for teaching, debate, and recognized qualifications. Their influence can still be seen in how higher education is organized.",
@@ -639,7 +639,8 @@
       "run_number": "103",
       "run_attempt": "1",
       "created_at": "2026-11-26T18:29:31.758226+00:00",
-      "video_id": null
+      "video_id": "ngEAP8t9ONM",
+      "published_at": "2026-11-26T18:29:35.613950+00:00"
     }
   ]
 }
