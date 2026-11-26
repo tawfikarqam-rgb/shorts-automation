@@ -51,7 +51,8 @@
     "How Adobe Changed From Boxed Software to Subscriptions",
     "The Sticky Note That Began as a Failed Glue",
     "How IKEA Turned Flat Packs Into a Business Advantage",
-    "The Payment Network That Does Not Lend You Money"
+    "The Payment Network That Does Not Lend You Money",
+    "The Online Retailer That Made Fast Delivery a Membership"
   ],
   "entries": [
     {
@@ -608,6 +609,20 @@
       "created_at": "2026-11-25T18:42:45.758719+00:00",
       "video_id": "Pp4ID2FtRdY",
       "published_at": "2026-11-25T18:42:50.212125+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Online Retailer That Made Fast Delivery a Membership",
+      "topic_key": "the online retailer that made fast delivery a membership",
+      "script": "Amazon Prime began as a paid membership offering faster shipping, then expanded to include digital services and other benefits. The bundle gives customers a reason to shop more often on one platform, while the company uses membership revenue and customer loyalty to support its wider retail ecosystem. The strategy is powerful but expensive to operate: delivery speed requires warehouses, logistics, and reliable last-mile networks.",
+      "script_sha256": "d6a9c0a318471f2fe79b3f3fd149a447bdbba940765189a17403677c043a8957",
+      "video_sha256": "9690374d3d7e95e4cd57059d0671bca3c77b4bb5965d95e2c168d859ad5e9ea9",
+      "seed_topic": "The Online Retailer That Made Fast Delivery a Membership",
+      "run_id": "45875701178",
+      "run_number": "103",
+      "run_attempt": "1",
+      "created_at": "2026-11-26T18:34:08.621268+00:00",
+      "video_id": null
     }
   ]
 }
