@@ -611,7 +611,7 @@
       "published_at": "2026-11-25T18:42:50.212125+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Online Retailer That Made Fast Delivery a Membership",
       "topic_key": "the online retailer that made fast delivery a membership",
       "script": "Amazon Prime began as a paid membership offering faster shipping, then expanded to include digital services and other benefits. The bundle gives customers a reason to shop more often on one platform, while the company uses membership revenue and customer loyalty to support its wider retail ecosystem. The strategy is powerful but expensive to operate: delivery speed requires warehouses, logistics, and reliable last-mile networks.",
@@ -622,7 +622,8 @@
       "run_number": "103",
       "run_attempt": "1",
       "created_at": "2026-11-26T18:34:08.621268+00:00",
-      "video_id": null
+      "video_id": "f_fstdDsSXM",
+      "published_at": "2026-11-26T18:34:13.003927+00:00"
     }
   ]
 }
