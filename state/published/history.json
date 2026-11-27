@@ -644,7 +644,7 @@
       "published_at": "2026-11-26T18:29:35.613950+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The City That Built a Modern Sewer System",
       "topic_key": "the city that built a modern sewer system",
       "script": "A severe outbreak of cholera and the polluted River Thames pushed Victorian London to rethink sanitation. Engineer Joseph Bazalgette led the construction of a vast sewer network that carried waste away from crowded districts. The system was built in stages and required enormous tunnels, pumping stations, and public investment. It became a major example of infrastructure that people rarely notice when it works, even though it protects millions.",
@@ -655,7 +655,8 @@
       "run_number": "104",
       "run_attempt": "1",
       "created_at": "2026-11-27T18:19:19.718533+00:00",
-      "video_id": null
+      "video_id": "XBtWVY1nbtc",
+      "published_at": "2026-11-27T18:19:23.951540+00:00"
     }
   ]
 }
