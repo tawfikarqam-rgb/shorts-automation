@@ -627,7 +627,7 @@
       "published_at": "2026-11-26T18:34:13.003927+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Assembly Line That Made Cars More Affordable",
       "topic_key": "the assembly line that made cars more affordable",
       "script": "Henry Ford did not invent the assembly line, but Ford Motor Company refined moving-line production for automobile manufacturing in the early twentieth century. Breaking complex work into repeatable steps helped reduce the time needed to assemble a Model T. The system also required careful coordination of parts, workers, and machinery. The broader lesson is that productivity often comes from redesigning the whole process rather than asking individuals to work faster.",
@@ -638,7 +638,8 @@
       "run_number": "104",
       "run_attempt": "1",
       "created_at": "2026-11-27T18:19:54.270678+00:00",
-      "video_id": null
+      "video_id": "fZbWUpCWcRQ",
+      "published_at": "2026-11-27T18:19:58.316939+00:00"
     }
   ]
 }
