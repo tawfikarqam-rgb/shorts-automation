@@ -643,7 +643,7 @@
       "published_at": "2026-11-27T18:19:58.316939+00:00"
     },
     {
-      "status": "reserved",
+      "status": "published",
       "topic": "The Retailer That Built Loyalty Around Low Prices",
       "topic_key": "the retailer that built loyalty around low prices",
       "script": "Aldi built a discount grocery model around a focused product range, private-label goods, efficient stores, and relatively simple operations. Carrying fewer choices can make purchasing and inventory management easier, while customers trade some brand variety for lower prices. The model is not identical in every country, but the principle is consistent: remove costs customers may not value and protect the parts of the experience they do.",
@@ -654,7 +654,8 @@
       "run_number": "105",
       "run_attempt": "1",
       "created_at": "2026-11-28T17:01:24.066580+00:00",
-      "video_id": null
+      "video_id": "mhTYm-X9D7E",
+      "published_at": "2026-11-28T17:01:28.338328+00:00"
     }
   ]
 }
