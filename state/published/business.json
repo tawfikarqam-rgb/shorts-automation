@@ -53,7 +53,8 @@
     "How IKEA Turned Flat Packs Into a Business Advantage",
     "The Payment Network That Does Not Lend You Money",
     "The Online Retailer That Made Fast Delivery a Membership",
-    "The Assembly Line That Made Cars More Affordable"
+    "The Assembly Line That Made Cars More Affordable",
+    "The Retailer That Built Loyalty Around Low Prices"
   ],
   "entries": [
     {
@@ -640,6 +641,20 @@
       "created_at": "2026-11-27T18:19:54.270678+00:00",
       "video_id": "fZbWUpCWcRQ",
       "published_at": "2026-11-27T18:19:58.316939+00:00"
+    },
+    {
+      "status": "reserved",
+      "topic": "The Retailer That Built Loyalty Around Low Prices",
+      "topic_key": "the retailer that built loyalty around low prices",
+      "script": "Aldi built a discount grocery model around a focused product range, private-label goods, efficient stores, and relatively simple operations. Carrying fewer choices can make purchasing and inventory management easier, while customers trade some brand variety for lower prices. The model is not identical in every country, but the principle is consistent: remove costs customers may not value and protect the parts of the experience they do.",
+      "script_sha256": "4dc907c3c593a6d9c4a734d0834dd9436f7c551cfcc668e0401d38adbc7c7996",
+      "video_sha256": "d53f17e4ae1c9306ddee7d69d299399a800f781ce0392cb183b78e1fea78e089",
+      "seed_topic": "The Retailer That Built Loyalty Around Low Prices",
+      "run_id": "46167461203",
+      "run_number": "105",
+      "run_attempt": "1",
+      "created_at": "2026-11-28T17:01:24.066580+00:00",
+      "video_id": null
     }
   ]
 }
